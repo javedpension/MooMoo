@@ -127,6 +127,9 @@ class Player extends _Vector__WEBPACK_IMPORTED_MODULE_0__["default"] {
         this.targetAngle = 0;
         this.dirPlus = 0;
 
+        this.weapons = [_configurations__WEBPACK_IMPORTED_MODULE_1__.weaponTypes[0]];
+        this.items = [_configurations__WEBPACK_IMPORTED_MODULE_1__.foodTypes[0], _configurations__WEBPACK_IMPORTED_MODULE_1__.buildingTypes[0], _configurations__WEBPACK_IMPORTED_MODULE_1__.buildingTypes[1], _configurations__WEBPACK_IMPORTED_MODULE_1__.buildingTypes[2]];
+
         this.a = 0;
         this.f = 0;
     }
@@ -324,44 +327,6 @@ function renderBoundary(xOffset, yOffset) {
 
 /***/ }),
 
-/***/ "./Game/Render/functions/renderBridge.js":
-/*!***********************************************!*\
-  !*** ./Game/Render/functions/renderBridge.js ***!
-  \***********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ renderBridge)
-/* harmony export */ });
-/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../configurations */ "./Game/configurations.js");
-/* harmony import */ var _render__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../render */ "./Game/Render/render.js");
-/* harmony import */ var _makeImage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./makeImage */ "./Game/Render/functions/makeImage.js");
-
-
-
-
-
-function renderBridge(xOffset, yOffset) {
-    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.save();
-    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.translate(3000 - xOffset, 3000 - yOffset);
-
-    //const scale = 550;
-    //ctx.drawImage(bridgeSprite, -scale, -scale, scale * 2, scale * 2)
-
-    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.beginPath();
-    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.strokeStyle = _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].textOutlineColor;
-    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillStyle = "#cebd5f";
-
-    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillRect(-250, -400, 250, 400);
-    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fill();
-
-    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.restore();
-}
-
-/***/ }),
-
 /***/ "./Game/Render/functions/renderFootSteps.js":
 /*!**************************************************!*\
   !*** ./Game/Render/functions/renderFootSteps.js ***!
@@ -387,17 +352,21 @@ class FootStep {
         this.size = size;
         this.dir = dir;
 
-        this.alpha = 0.8;
+        this.alpha = 0.6;
         this.sizeAlpha = 1;
+        this.waitTime = 1000;
     }
 
     update(delta) {
-        if(this.alpha <= 0) return;
-        this.alpha -= delta / 700;
+        if(this.waitTime > 0) this.waitTime -= delta;
+        else {
+            if(this.alpha <= 0) return;
+            this.alpha -= delta / 700;
 
-        if(this.alpha <= 0) this.alpha = 0;
+            if(this.alpha <= 0) this.alpha = 0;
 
-        this.sizeAlpha += delta / 80;
+            this.sizeAlpha += delta / 80;
+        }
     }
 
     draw(xOffset, yOffset) {
@@ -492,14 +461,14 @@ function getObjectSprite(tmpObj) {
             for (let i = 0; i < 2; i++) {
                 const scale = (() => {
                     if(!i) return tmpObj.scale + 50;
-                    else return tmpObj.scale * 0.5 + 40;
+                    else return tmpObj.scale * 0.5 + 30;
                 }); //tmpObj.scale * (!i ? 1 : 0.5) + 50;
                 (0,_render__WEBPACK_IMPORTED_MODULE_3__.renderStar)(tmpContext, 7, scale(), scale() * 0.7);
                 tmpContext.fillStyle = !biomeID ? (!i ? "#9ebf57" : "#b4db62") : (!i ? "#e3f1f4" : "#fff");
                 tmpContext.fill();
                 if (!i) tmpContext.stroke();
             }
-        } else if (tmpObj.scale === 90) {
+        } else if (tmpObj.scale === 90 || tmpObj.scale === 10) {
             tmpContext.fillStyle = biomeID === 2 ? "#938d77" : "#939393";
             (0,_render__WEBPACK_IMPORTED_MODULE_3__.renderStar)(tmpContext, 3, tmpObj.scale, tmpObj.scale);
             tmpContext.fill();
@@ -509,7 +478,7 @@ function getObjectSprite(tmpObj) {
             (0,_render__WEBPACK_IMPORTED_MODULE_3__.renderStar)(tmpContext, 3, tmpObj.scale * 0.55, tmpObj.scale * 0.65);
             tmpContext.fill();
         } else if (tmpObj.scale === 75) {
-            (0,_render__WEBPACK_IMPORTED_MODULE_3__.renderBlob)(tmpContext, 6, tmpObj.scale, tmpObj.scale * 0.7);
+            (0,_render__WEBPACK_IMPORTED_MODULE_3__.renderBlob)(tmpContext, 6, tmpObj.scale + 10, tmpObj.scale * 0.8);
             tmpContext.fillStyle = biomeID ? "#e3f1f4" : "#89a54c";
             tmpContext.fill();
             tmpContext.stroke();
@@ -826,13 +795,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Utils_randomInt__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Utils/randomInt */ "./Game/Utils/randomInt.js");
 /* harmony import */ var _functions_renderAnimals__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./functions/renderAnimals */ "./Game/Render/functions/renderAnimals.js");
 /* harmony import */ var _functions_renderBoundary__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./functions/renderBoundary */ "./Game/Render/functions/renderBoundary.js");
-/* harmony import */ var _functions_renderBridge__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./functions/renderBridge */ "./Game/Render/functions/renderBridge.js");
-/* harmony import */ var _functions_renderFootSteps__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./functions/renderFootSteps */ "./Game/Render/functions/renderFootSteps.js");
-/* harmony import */ var _functions_renderGameObjects__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./functions/renderGameObjects */ "./Game/Render/functions/renderGameObjects.js");
-/* harmony import */ var _functions_renderGrid__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./functions/renderGrid */ "./Game/Render/functions/renderGrid.js");
-/* harmony import */ var _functions_renderMap__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./functions/renderMap */ "./Game/Render/functions/renderMap.js");
-/* harmony import */ var _functions_renderPlayerInfo__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./functions/renderPlayerInfo */ "./Game/Render/functions/renderPlayerInfo.js");
-/* harmony import */ var _functions_renderPlayers__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./functions/renderPlayers */ "./Game/Render/functions/renderPlayers.js");
+/* harmony import */ var _functions_renderFootSteps__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./functions/renderFootSteps */ "./Game/Render/functions/renderFootSteps.js");
+/* harmony import */ var _functions_renderGameObjects__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./functions/renderGameObjects */ "./Game/Render/functions/renderGameObjects.js");
+/* harmony import */ var _functions_renderGrid__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./functions/renderGrid */ "./Game/Render/functions/renderGrid.js");
+/* harmony import */ var _functions_renderMap__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./functions/renderMap */ "./Game/Render/functions/renderMap.js");
+/* harmony import */ var _functions_renderPlayerInfo__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./functions/renderPlayerInfo */ "./Game/Render/functions/renderPlayerInfo.js");
+/* harmony import */ var _functions_renderPlayers__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./functions/renderPlayers */ "./Game/Render/functions/renderPlayers.js");
 /*
 
 do we really need more then one file to render everything
@@ -848,7 +816,6 @@ maybe import functions from a different file, so it's more organized?
 
 
 //import min from "../Utils/math"
-
 
 
 
@@ -1011,34 +978,31 @@ function render(delta, frameDate) {
             riverPaddingOffset = riverGrow = 1;
         }
 
-        (0,_functions_renderMap__WEBPACK_IMPORTED_MODULE_12__["default"])(xOffset, yOffset, riverPaddingOffset);
+        (0,_functions_renderMap__WEBPACK_IMPORTED_MODULE_11__["default"])(xOffset, yOffset, riverPaddingOffset);
 
-        (0,_functions_renderGrid__WEBPACK_IMPORTED_MODULE_11__["default"])(camera);
+        (0,_functions_renderGrid__WEBPACK_IMPORTED_MODULE_10__["default"])(camera);
 
         ctx.globalAlpha = 1;
         (0,_functions_renderBoundary__WEBPACK_IMPORTED_MODULE_7__["default"])(xOffset, yOffset);
 
-        ctx.globalAlpha = 1;
-        (0,_functions_renderBridge__WEBPACK_IMPORTED_MODULE_8__["default"])(xOffset, yOffset);
-
         ctx.fillStyle = "#000";
-        (0,_functions_renderFootSteps__WEBPACK_IMPORTED_MODULE_9__["default"])(xOffset, yOffset, delta);
+        (0,_functions_renderFootSteps__WEBPACK_IMPORTED_MODULE_8__["default"])(xOffset, yOffset, delta);
     
         ctx.strokeStyle = _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].outlineColor;
         ctx.globalAlpha = 1;
-        (0,_functions_renderPlayers__WEBPACK_IMPORTED_MODULE_14__["default"])(xOffset, yOffset, delta);
+        (0,_functions_renderPlayers__WEBPACK_IMPORTED_MODULE_13__["default"])(xOffset, yOffset, delta);
 
         (0,_functions_renderAnimals__WEBPACK_IMPORTED_MODULE_6__["default"])(xOffset, yOffset);
 
         ctx.globalAlpha = 1;
-        (0,_functions_renderGameObjects__WEBPACK_IMPORTED_MODULE_10__["default"])(xOffset, yOffset, delta);
+        (0,_functions_renderGameObjects__WEBPACK_IMPORTED_MODULE_9__["default"])(xOffset, yOffset, delta);
     
         ctx.beginPath();
         ctx.globalAlpha = 1;
         ctx.fillStyle = `rgba(0, 0, 70, 0.35)`;
         ctx.fillRect(0, 0, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight);
 
-        (0,_functions_renderPlayerInfo__WEBPACK_IMPORTED_MODULE_13__["default"])(xOffset, yOffset, delta);
+        (0,_functions_renderPlayerInfo__WEBPACK_IMPORTED_MODULE_12__["default"])(xOffset, yOffset, delta);
 
         (0,_UI_minimap__WEBPACK_IMPORTED_MODULE_2__["default"])();
     } else {
@@ -1142,6 +1106,7 @@ function addMessage(owner, message) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   actionBar: () => (/* binding */ actionBar),
 /* harmony export */   "default": () => (/* binding */ registerDOMEventHooks),
 /* harmony export */   leaderboard: () => (/* binding */ leaderboard),
 /* harmony export */   loadingText: () => (/* binding */ loadingText),
@@ -1158,6 +1123,7 @@ const mainMenu = document.getElementById("mainMenu");
 const menuCardHolder = document.getElementById("menuCardHolder");
 const nameInput = document.getElementById("nameInput");
 const leaderboard = document.getElementById("leaderboard");
+const actionBar = document.getElementById("actionBar");
 
 function registerDOMEventHooks() {
     document.getElementById("enterGame").addEventListener("click", (event) => {
@@ -1204,6 +1170,66 @@ function renderMinimap(delta) {
     ctx.arc((_main__WEBPACK_IMPORTED_MODULE_1__["default"].player.lerpx / _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale) * minimap.width, (_main__WEBPACK_IMPORTED_MODULE_1__["default"].player.lerpy / _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale) * minimap.height, 4, 0, Math.PI * 2);
     ctx.fill();
 }
+
+/***/ }),
+
+/***/ "./Game/UI/updateActionBar.js":
+/*!************************************!*\
+  !*** ./Game/UI/updateActionBar.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ updateActionBar)
+/* harmony export */ });
+/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../configurations */ "./Game/configurations.js");
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../main */ "./Game/main.js");
+/* harmony import */ var _eventHooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./eventHooks */ "./Game/UI/eventHooks.js");
+
+
+
+
+function updateActionBar(items = [..._main__WEBPACK_IMPORTED_MODULE_1__["default"].player.weapons, ..._main__WEBPACK_IMPORTED_MODULE_1__["default"].player.items]) {
+    _eventHooks__WEBPACK_IMPORTED_MODULE_2__.actionBar.innerHTML = "";
+
+    items.forEach(item => {
+        const actionBarItem = document.createElement("div");
+        actionBarItem.className = "actionBarItems";
+        actionBarItem.id = item.name;
+
+        const canvas = document.createElement("canvas");
+        canvas.width = canvas.height = 66;
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+        canvas.style.zIndex = "99";
+
+        const ctx = canvas.getContext("2d");
+
+        let img = item.img;
+        const scale = item.iPad || 1;
+        const pad = _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].iconPad;
+
+        const imgWidth = canvas.width * scale * pad + 5;
+        const imgHeight = canvas.height * scale * pad + 5;
+
+        const x = (canvas.width - imgWidth) / 2;
+        const y = (canvas.height - imgHeight) / 2;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        if(item.weapon) ctx.rotate(Math.PI / 4 + Math.PI);
+        ctx.translate(-canvas.width / 2, -canvas.height / 2);
+        ctx.drawImage(img, x, y, imgWidth, imgHeight);
+        ctx.restore();
+
+        actionBarItem.appendChild(canvas);
+        _eventHooks__WEBPACK_IMPORTED_MODULE_2__.actionBar.appendChild(actionBarItem);
+    });
+}
+
 
 /***/ }),
 
@@ -1438,6 +1464,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Classes_Player__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Classes/Player */ "./Game/Classes/Player.js");
 /* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../main */ "./Game/main.js");
+/* harmony import */ var _UI_updateActionBar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../UI/updateActionBar */ "./Game/UI/updateActionBar.js");
+
 
 
 
@@ -1449,7 +1477,10 @@ function addPlayer(data) {
     let tmpPlayer = new _Classes_Player__WEBPACK_IMPORTED_MODULE_0__["default"](data[0]);
     _main__WEBPACK_IMPORTED_MODULE_1__["default"].players.push(tmpPlayer);
 
-    if(data[1]) _main__WEBPACK_IMPORTED_MODULE_1__["default"].player = tmpPlayer;
+    if(data[1]) {
+        _main__WEBPACK_IMPORTED_MODULE_1__["default"].player = tmpPlayer;
+        (0,_UI_updateActionBar__WEBPACK_IMPORTED_MODULE_2__["default"])();
+    }
 }
 
 /***/ }),
@@ -1679,14 +1710,38 @@ function updatePlayers(data) {
         player.d2 = data[i].dir;
         player.delta = 0;
 
+        /*
+        let randomOffset = () => (Math.random() - 0.5) * 30;
+
         let footsteps = [
             {
-                x: player.lerpx + 20 * Math.cos((0,_Utils_getDirection__WEBPACK_IMPORTED_MODULE_2__["default"])(player.x, player.y, player.x1, player.y1) + Math.PI / 2),
-                y: player.lerpy + 20 * Math.sin((0,_Utils_getDirection__WEBPACK_IMPORTED_MODULE_2__["default"])(player.x, player.y, player.x1, player.y1) + Math.PI / 2)
+                x: player.lerpx + 20 * Math.cos(getDirection(player.x, player.y, player.x1, player.y1) + Math.PI / 2) +
+                    randomOffset(),
+                y: player.lerpy + 20 * Math.sin(getDirection(player.x, player.y, player.x1, player.y1) + Math.PI / 2) +
+                    randomOffset()
             },
             {
-                x: player.lerpx + 20 * Math.cos((0,_Utils_getDirection__WEBPACK_IMPORTED_MODULE_2__["default"])(player.x, player.y, player.x1, player.y1) - Math.PI / 2),
-                y: player.lerpy + 20 * Math.sin((0,_Utils_getDirection__WEBPACK_IMPORTED_MODULE_2__["default"])(player.x, player.y, player.x1, player.y1) - Math.PI / 2)
+                x: player.lerpx + 20 * Math.cos(getDirection(player.x, player.y, player.x1, player.y1) - Math.PI / 2) +
+                    randomOffset(),
+                y: player.lerpy + 20 * Math.sin(getDirection(player.x, player.y, player.x1, player.y1) - Math.PI / 2) +
+                    randomOffset()
+            }
+        ];
+        */
+
+        let timeFactor = performance.now() * 0.01;
+        let footsteps = [
+            {
+                x: player.lerpx + 20 * Math.cos((0,_Utils_getDirection__WEBPACK_IMPORTED_MODULE_2__["default"])(player.x, player.y, player.x1, player.y1) + Math.PI / 2) +
+                    5 * Math.sin(timeFactor),
+                y: player.lerpy + 20 * Math.sin((0,_Utils_getDirection__WEBPACK_IMPORTED_MODULE_2__["default"])(player.x, player.y, player.x1, player.y1) + Math.PI / 2) +
+                    5 * Math.cos(timeFactor) 
+            },
+            {
+                x: player.lerpx + 20 * Math.cos((0,_Utils_getDirection__WEBPACK_IMPORTED_MODULE_2__["default"])(player.x, player.y, player.x1, player.y1) - Math.PI / 2) +
+                    5 * Math.sin(timeFactor + Math.PI),
+                y: player.lerpy + 20 * Math.sin((0,_Utils_getDirection__WEBPACK_IMPORTED_MODULE_2__["default"])(player.x, player.y, player.x1, player.y1) - Math.PI / 2) +
+                    5 * Math.cos(timeFactor + Math.PI) 
             }
         ];
 
@@ -1826,10 +1881,10 @@ __webpack_require__.r(__webpack_exports__);
     maxPlayerHealth: 100,
     snowBiomeTop: 1000,
     serverUpdateRate: 9,
-    riverWidth: 500,
+    riverWidth: 400,
     riverPadding: 20,
     waveSpeed: 0.0001,
-    waveMax: 1.3,
+    waveMax: 1.2,
     outlineColor: "#525252",
     textOutlineColor: "#3d3f42",
     nameY: 34,
@@ -1838,7 +1893,8 @@ __webpack_require__.r(__webpack_exports__);
     chatCountdown: 4000,
     hitReturnRatio: 0.25,
     hitAngle: Math.PI / 2,
-    wiggleIntensity: 20
+    wiggleIntensity: 20,
+    iconPad: 0.9
 });
 
 const weaponTypes = [{
@@ -1854,7 +1910,8 @@ const weaponTypes = [{
     dmg: 25,
     range: 65,
     gather: 1,
-    speed: 300
+    speed: 300,
+    weapon: true
 }]
 
 const buildingTypes = [{
@@ -1863,6 +1920,8 @@ const buildingTypes = [{
     description: "protects your base from hostile aggressors",
     health: 400,
     scale: 40,
+    weapon: false,
+    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/download%20(1).png?v=1735784972950"),
     hitResistance: 80, // it's kind of like a shield, the shield will slowly regenerate over time, and the building health won't be affected unless the shield is down
 },
 {
@@ -1871,7 +1930,19 @@ const buildingTypes = [{
     description: "fortifies your base, knocks back hostile aggressors",
     health: 300,
     scale: 42,
+    weapon: false,
+    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/download.png?v=1735784909353"),
     hitResistance: 20
+},
+{
+    id: 2,
+    name: "basic windmill",
+    description: "generates gold over time",
+    health: 400,
+    scale: 50,
+    weapon: false,
+    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/download%20(3).png?v=1735785211807"),
+    hitResistance: 120
 }];
 
 const animalTypes = [
@@ -1902,13 +1973,16 @@ const animalTypes = [
 const foodTypes = [{
     id: 0,
     name: "apple",
-    heal: 10
+    heal: 10,
+    weapon: false,
+    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/download%20(2).png?v=1735785023935")
 },
 {
     id: 1,
     name: "fly honeysuckle",
     heal: 60,
-    slowEffect: 6000 // slowdown effect after eating (value is ms)
+    slowEffect: 6000, // slowdown effect after eating (value is ms)
+    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/Apple-1-Modified.webp?v=1735782332913")
 },
 {
     id: 2,
@@ -1980,7 +2054,9 @@ class GameManager {
         this.moveDirection = null;
 
         this.servers = {
-            test: "wss://servertest-1-83we.onrender.com",
+            testus: "wss://servertest-1-83we.onrender.com",
+            testusor: "https://servertest-3.onrender.com",
+            testeu: "wss://servertest-2.onrender.com",
             miami: "wss://laughing-rotary-phone-4jw6qgq6w4pv3w6j-8080.app.github.dev/",
             eu: "wss://opulent-chainsaw-jjq9r4r9q6xv2pv5x-8080.app.github.dev/",
             asia: "wss://shiny-happiness-v6rgv6pp9rjjc6xrg-8080.app.github.dev/",
@@ -2103,20 +2179,22 @@ class KeyHandler {
             }
         }
 
-        switch(keyCode) {
-            case 88: // "x"
-                Game.webSocket.wsSend("h", 0);
-                console.warn("lock dir");
-                Game.lockDir = !Game.lockDir;
-                break;
+        if(this.chat.style.display == "none") {
+            switch(keyCode) {
+                case 88: // "x"
+                    Game.webSocket.wsSend("h", 0);
+                    console.warn("lock dir");
+                    Game.lockDir = !Game.lockDir;
+                    break;
 
-            case 69:
-                Game.webSocket.wsSend("h", 1);
-                console.warn("okok");
+                case 69:
+                    Game.webSocket.wsSend("h", 1);
+                    console.warn("okok");
 
-                break;
-            
-            default: break;
+                    break;
+                
+                default: break;
+            }
         }
     }
 
