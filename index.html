@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap"
+      rel="stylesheet"
+    />
+    <title>MOOOOO</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    /*
+    #gameCanvas {
+      width: 1920px;
+      height: 1080px;
+    }
+    */
+
+    #chatbox {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      width: 500px;
+      height: 60px;
+      background: rgba(0, 0, 0, 0.2);
+      font: 32px Hammersmith One;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      outline: none;
+      padding-left: 8px;
+      display: none;
+    }
+
+    #chatbox:focus {
+      outline: none;
+    }
+    #pingDisplay {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translate(-50%, -10px);
+
+      color: #fff;
+      font: 18px Hammersmith One;
+    }
+
+    #minimap {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    #actionBar {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      height: 80px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .actionBarItems {
+      width: 66px;
+      height: 66px;
+      background: rgba(0, 0, 0, 0.2);
+
+      cursor: pointer;
+    }
+
+    #leaderboard {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 220px;
+
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    #ageDisplay {
+      position: absolute;
+      bottom: 90px;
+      width: 100%;
+      height: 60px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    #ageText {
+      color: #fff;
+      font: 24px Hammersmith One;
+    }
+
+    #ageBarBody {
+      background: rgba(0, 0, 0, 0.2);
+
+      width: 400px;
+      height: 20px;
+      border-radius: 4px;
+    }
+
+    #chatLog {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 500px;
+      height: 300px;
+      max-height: 300;
+      overflow-y: scroll;
+
+      background: rgba(0, 0, 0, 0.2);
+
+      padding: 8px;
+    }
+
+    .chatElm {
+      font: 22px Hammersmith One;
+      color: #fff;
+    }
+  </style>
+  <body>
+    <div id="mainMenu">
+      <div id="menuContainer">
+        <div id="gameName">MOOMOO.io</div>
+        <div id="loadingText">Loading...</div>
+        <div id="menuCardHolder" style="display: block">
+          <div
+            class="menuCard adMenuCard"
+            style="max-width: 300px; max-height: 250px"
+            id="adCard"
+          >
+            <div
+              align="center"
+              id="/21823819281/frvr-frvr-moomoo-display-banner-frvr_moomoo_300x250"
+            ></div>
+          </div>
+          <div style="display: inline-block">
+            <div class="menuCard" id="setupCard">
+              <input id="nameInput" placeholder="Enter Name" maxlength="15" />
+              <altcha-widget
+                id="altcha"
+                challengeurl="https://api.moomoo.io/verify"
+                hidefooter
+                auto="onfocus"
+              ></altcha-widget>
+              <br />
+              <div id="enterGame" class="menuButton">
+                <span>Enter Game</span>
+              </div>
+            </div>
+            <div
+              id="promoImgHolder"
+              class="menuCard"
+              style="display: block; margin-top: 16px; padding-bottom: 12px"
+              id="setupCard"
+            >
+              <img
+                id="promoImg"
+                src="./img/promotion/banner_4.png"
+                style="width: 300px; cursor: pointer"
+              />
+            </div>
+          </div>
+          <div id="rightCardHolder">
+            <div class="menuCard" id="guideCard">
+              <div class="menuHeader">Servers</div>
+              <select id="serverBrowser">
+                <option disabled>Player Count: 0</option>
+
+                <option value="test">Test US East [0/40]</option>
+                <option value="miami">US East [0/40]</option>
+                <option value="scilicon">US West [0/40]</option>
+                <option value="eu">EU West [0/40]</option>
+                <option value="asia">Asia [0/40]</option>
+                <option value="dev">Dev Server [-]</option>
+              </select>
+              <div id="altServer"></div>
+              <div class="menuHeader" style="margin-top: 10px">
+                Select Color
+              </div>
+              <div id="skinColorHolder"></div>
+              <div class="menuHeader" style="margin-top: 10px">How To Play</div>
+              <div class="menuText">
+                Collect resources around the map to build a village. Your
+                Windmills generate gold over time. But make sure to protect them
+                from other players.
+              </div>
+              <div class="menuHeader">Controls</div>
+              <div id="desktopInstructions" class="menuText">
+                Movement: W, A, S, D<br />Look: Mouse<br />Gather/Attack: Mouse
+                or Space<br />Auto Attack: E<br />Select Item: 1-9 or Click<br />Quick
+                Select Food: Q<br />Lock Rotation: X<br />Ping Minimap: R<br />Add
+                Map Marker: C<br />Chat: Enter Key<br />Close Windows: ESC
+              </div>
+              <div id="mobileInstructions" class="menuText">
+                Movement: Drag on left side of screen<br />Gather/Attack: Drag
+                on right side of screen<br />Select Item: Touch item at
+                bottom<br />Ping Minimap: Touch map<br />
+              </div>
+              <div class="menuHeader">Settings</div>
+              <div class="settingRadio">
+                <input id="nativeResolution" type="checkbox" /> Use Native
+                Resolution
+              </div>
+              <div class="settingRadio">
+                <input id="showPing" type="checkbox" /> Show Ping
+              </div>
+              <div class="menuText">
+                Created by
+                <a
+                  href="https://github.com/javedpension"
+                  target="_blank"
+                  class="menuLink"
+                  >JavedPension</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          id="wideAdCard"
+          class="menuCard adMenuCard"
+          style="
+            max-width: 728px;
+            max-height: 90px;
+            display: inline-block;
+            margin-top: 10px;
+          "
+        >
+          <div
+            align="center"
+            id="/21823819281/frvr-frvr-moomoo-display-banner-frvr_moomoo_728x90"
+          ></div>
+        </div>
+      </div>
+      <div id="settingsButton" class="ytLink">
+        <i
+          class="material-icons"
+          style="font-size: 30px; vertical-align: middle"
+          >&#xE8B8;</i
+        >
+        <span>Settings</span>
+      </div>
+      <div id="partyButton" class="inParty">
+        <span></span>
+        <i
+          class="material-icons"
+          style="font-size: 30px; vertical-align: middle"
+          >&#xE8D3;</i
+        >
+      </div>
+      <div id="joinPartyButton" class="ytLink">
+        <span>Join Party</span>
+        <i
+          class="material-icons"
+          style="font-size: 30px; vertical-align: middle"
+          >&#xE0DA;</i
+        >
+      </div>
+      <div id="linksContainer2">
+        <a href="./docs/versions.txt" target="_blank" class="menuLink"
+          >v1.0.0</a
+        >
+        |
+        <a href="https://discord.gg/ghb76kP7Pa" target="_blank" class="menuLink"
+          >Discord</a
+        >
+        |
+        <a
+          href="https://frvr.com/legal#TermsofService"
+          target="_blank"
+          class="menuLink"
+          >Terms</a
+        >
+        |
+        <a
+          href="https://frvr.com/legal#PrivacyPolicy"
+          target="_blank"
+          class="menuLink"
+          >Privacy</a
+        >
+      </div>
+    </div>
+
+    <canvas id="gameCanvas" width="1920" height="1080"></canvas>
+
+    <input
+      id="chatbox"
+      width="500px"
+      height="60px"
+      type="text"
+      maxlength="40"
+    />
+
+    <div id="pingDisplay">Not connected</div>
+
+    <canvas id="minimap" width="150" height="150"></canvas>
+    <div id="actionBar">
+      <div class="actionBarItems">a</div>
+      <div class="actionBarItems">a</div>
+      <div class="actionBarItems">a</div>
+      <div class="actionBarItems">a</div>
+      <div class="actionBarItems">a</div>
+    </div>
+
+    <div id="leaderboard"></div>
+
+    <div id="ageDisplay">
+      <div id="ageText">AGE 1</div>
+      <div id="ageBarBody"></div>
+    </div>
+
+    <div id="chatLog"></div>
+  </body>
+
+  <script src="script.js"></script>
+</html>
