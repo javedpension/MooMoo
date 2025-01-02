@@ -10,6 +10,24 @@
     <title>MOOOOO</title>
 
     <link rel="stylesheet" href="style.css" />
+    <link rel="canonical" href="https://javedpension.github.io/MooMoo/" />
+    <meta
+      name="description"
+      content="A clone of the popular io game, MooMoo.io!"
+    />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:title" content="MooMoo.io" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://javedpension.github.io/MooMoo/" />
+    <meta
+      property="og:description"
+      content="A clone of the popular io game, MooMoo.io!"
+    />
+    <meta
+      property="og:image"
+      content="https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/cow.png?v=1735595433355"
+    />
+    <meta name="twitter:card" content="summary" />
   </head>
 
   <style>
@@ -122,8 +140,8 @@
       position: absolute;
       top: 20px;
       left: 20px;
-      width: 500px;
-      height: 300px;
+      width: 300px;
+      height: 200px;
       max-height: 300;
       overflow-y: scroll;
 
@@ -133,7 +151,7 @@
     }
 
     .chatElm {
-      font: 22px Hammersmith One;
+      font: 16px Hammersmith One;
       color: #fff;
     }
   </style>
@@ -186,12 +204,14 @@
               <select id="serverBrowser">
                 <option disabled>Player Count: 0</option>
 
-                <option value="test">Test US East [0/40]</option>
                 <option value="miami">US East [0/40]</option>
                 <option value="scilicon">US West [0/40]</option>
                 <option value="eu">EU West [0/40]</option>
                 <option value="asia">Asia [0/40]</option>
                 <option value="dev">Dev Server [-]</option>
+                <option value="testus">Test US East Virgina [0/40]</option>
+                <option value="testusor">Test US East Oregon [0/40]</option>
+                <option value="testeu">Test EU FRANK [0/40]</option>
               </select>
               <div id="altServer"></div>
               <div class="menuHeader" style="margin-top: 10px">
@@ -315,11 +335,13 @@
 
     <canvas id="minimap" width="150" height="150"></canvas>
     <div id="actionBar">
+      <!--
       <div class="actionBarItems">a</div>
       <div class="actionBarItems">a</div>
       <div class="actionBarItems">a</div>
       <div class="actionBarItems">a</div>
       <div class="actionBarItems">a</div>
+-->
     </div>
 
     <div id="leaderboard"></div>
