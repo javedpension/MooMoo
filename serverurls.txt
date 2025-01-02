@@ -1,5 +1,0 @@
-miami: wss://laughing-rotary-phone-4jw6qgq6w4pv3w6j-8080.app.github.dev/
-eu: https://opulent-chainsaw-jjq9r4r9q6xv2pv5x-8080.app.github.dev/
-
-
-old glitch: https://glitch.com/edit/#!/curious-petal-watchmaker
