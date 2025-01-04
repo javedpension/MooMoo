@@ -128,14 +128,6 @@
       font: 24px Hammersmith One;
     }
 
-    #ageBarBody {
-      background: rgba(0, 0, 0, 0.2);
-
-      width: 400px;
-      height: 20px;
-      border-radius: 4px;
-    }
-
     #chatLog {
       position: absolute;
       top: 20px;
@@ -204,10 +196,6 @@
               <select id="serverBrowser">
                 <option disabled>Player Count: 0</option>
 
-                <option value="miami">US East [0/40]</option>
-                <option value="scilicon">US West [0/40]</option>
-                <option value="eu">EU West [0/40]</option>
-                <option value="asia">Asia [0/40]</option>
                 <option value="dev">Dev Server [-]</option>
                 <option value="testus">Test US East Virgina [0/40]</option>
                 <option value="testusor">Test US East Oregon [0/40]</option>
@@ -298,7 +286,7 @@
       </div>
       <div id="linksContainer2">
         <a href="./docs/versions.txt" target="_blank" class="menuLink"
-          >v1.0.0</a
+          >v1.0.1</a
         >
         |
         <a href="https://discord.gg/ghb76kP7Pa" target="_blank" class="menuLink"
@@ -348,7 +336,10 @@
 
     <div id="ageDisplay">
       <div id="ageText">AGE 1</div>
-      <div id="ageBarBody"></div>
+      <div id="ageBar">
+      <div id="ageBarBody">
+        
+        </div></div>
     </div>
 
     <div id="chatLog"></div>

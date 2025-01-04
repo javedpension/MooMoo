@@ -57,13 +57,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Building extends _Vector__WEBPACK_IMPORTED_MODULE_1__["default"] {
-    constructor({sid, type, name, x, y, scale}) {
+    constructor({sid, type, name, x, y, scale, data, dir}) {
         super({x: x, y: y})
 
         this.sid = sid;
 
         this.type = type;
-        this.data = _configurations__WEBPACK_IMPORTED_MODULE_0__.buildingTypes[type];
+        this.data = data; // buildingTypes[type];
 
         this.x = x;
         this.y = y;
@@ -72,9 +72,16 @@ class Building extends _Vector__WEBPACK_IMPORTED_MODULE_1__["default"] {
 
         this.name = name || this.data.name;
         this.scale = scale;
+
+        this.spin = this.name.includes("mill");
+        this.spinDir = dir;
+
+        console.log(sid, type, name, x, y, scale, data, dir)
+       // this.isItem = this.data.isItem;
     }
 
     update(delta) {
+        if(this.spin) this.spinDir += delta * 0.0012;
         if(this.xWiggle) this.xWiggle *= Math.pow(0.99, delta);
         if(this.yWiggle) this.yWiggle *= Math.pow(0.99, delta);
     }
@@ -127,11 +134,24 @@ class Player extends _Vector__WEBPACK_IMPORTED_MODULE_0__["default"] {
         this.targetAngle = 0;
         this.dirPlus = 0;
 
+        this.alive = true;
+
         this.weapons = [_configurations__WEBPACK_IMPORTED_MODULE_1__.weaponTypes[0]];
+        this.weaponIndex = this.weapons[0];
+
         this.items = [_configurations__WEBPACK_IMPORTED_MODULE_1__.foodTypes[0], _configurations__WEBPACK_IMPORTED_MODULE_1__.buildingTypes[0], _configurations__WEBPACK_IMPORTED_MODULE_1__.buildingTypes[1], _configurations__WEBPACK_IMPORTED_MODULE_1__.buildingTypes[2]];
+
+        this.xp = 0;
+        this.maxXP = 300;
+        this.age = 1;
 
         this.a = 0;
         this.f = 0;
+    }
+
+    resetStuff() {
+        this.weapons = [_configurations__WEBPACK_IMPORTED_MODULE_1__.weaponTypes[0]];
+        this.items = [_configurations__WEBPACK_IMPORTED_MODULE_1__.foodTypes[0], _configurations__WEBPACK_IMPORTED_MODULE_1__.buildingTypes[0], _configurations__WEBPACK_IMPORTED_MODULE_1__.buildingTypes[1], _configurations__WEBPACK_IMPORTED_MODULE_1__.buildingTypes[2]];  
     }
 
     changeHealth(value) {
@@ -267,7 +287,7 @@ function renderAnimals(xOffset, yOffset) {
 
             _render__WEBPACK_IMPORTED_MODULE_1__.ctx.save();
             _render__WEBPACK_IMPORTED_MODULE_1__.ctx.rotate(tmp.dir);
-            _render__WEBPACK_IMPORTED_MODULE_1__.ctx.translate(tmp.x, tmp.y);
+            _render__WEBPACK_IMPORTED_MODULE_1__.ctx.translate(tmp.x - xOffset, tmp.y - yOffset);
             //ctx.rotate(tmp.dir - (Math.PI / 2));
 
             const scale = tmp.data.scale * 1.2 * (tmp.spriteMlt || 1);
@@ -417,6 +437,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../main */ "./Game/main.js");
 /* harmony import */ var _Utils_randomInt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Utils/randomInt */ "./Game/Utils/randomInt.js");
 /* harmony import */ var _render__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../render */ "./Game/Render/render.js");
+/* harmony import */ var _makeImage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./makeImage */ "./Game/Render/functions/makeImage.js");
+
 
 
 
@@ -431,9 +453,19 @@ function addGameObjects(xOffset, yOffset, delta) {
 
         _render__WEBPACK_IMPORTED_MODULE_3__.ctx.save();
         _render__WEBPACK_IMPORTED_MODULE_3__.ctx.translate(object.x + object.xWiggle - xOffset, object.y + object.yWiggle - yOffset);
+        _render__WEBPACK_IMPORTED_MODULE_3__.ctx.rotate(object.spinDir);
+        
+        if(object?.data?.isItem) {
+            const sprite = _configurations__WEBPACK_IMPORTED_MODULE_0__.buildingTypes.find(type => type.id == object.data.id);
+            _render__WEBPACK_IMPORTED_MODULE_3__.ctx.drawImage(sprite.img, -( sprite.scale), -( sprite.scale), sprite.scale * 2, sprite.scale * 2);
 
-        const sprite = getObjectSprite(object);
-        _render__WEBPACK_IMPORTED_MODULE_3__.ctx.drawImage(sprite, -(sprite.width / 2), -(sprite.height / 2));
+            //ctx.fillStyle = "red";
+            //ctx.arc(0, 0, 50, 0, Math.PI * 2);
+            //ctx.fill()
+        } else {
+            const sprite = getObjectSprite(object, xOffset, yOffset);
+            _render__WEBPACK_IMPORTED_MODULE_3__.ctx.drawImage(sprite, -(sprite.width / 2), -(sprite.height / 2));
+        }
 
         _render__WEBPACK_IMPORTED_MODULE_3__.ctx.restore();
     }
@@ -581,6 +613,35 @@ function renderMap(xOffset, yOffset, riverPaddingOffset) {
     //ctx.fillRect(0, 0, configurations.maxScreenWidth, configurations.maxScreenHeight);
     _render__WEBPACK_IMPORTED_MODULE_1__.ctx.globalAlpha = 1;
 
+    //ctx.translate(xOffset, yOffset);
+
+    /*
+    ctx.save();
+    ctx.translate(xOffset, yOffset);
+
+    // snow
+    ctx.fillStyle = colors.winter;
+    ctx.fillRect(0, 0, configurations.mapScale, configurations.snowBiomeTop);
+
+    // grassland up
+    ctx.fillStyle = colors.grasslands;
+    ctx.fillRect(0, configurations.snowBiomeTop, configurations.mapScale, (configurations.mapScale / 2) - configurations.snowBiomeTop - (configurations.riverWidth / 2));
+
+    // liver
+    ctx.fillStyle = `rgba(180, 205, 240)`;
+    ctx.fillRect(0, (configurations.mapScale / 2) - (configurations.riverWidth / 2), configurations.mapScale, configurations.riverWidth);
+
+    // grassland down
+    ctx.fillStyle = colors.autumn;
+    ctx.fillRect(0, (configurations.mapScale / 2) + (configurations.riverWidth / 2), configurations.mapScale, (configurations.mapScale / 2) - configurations.snowBiomeTop - (configurations.riverWidth / 2));
+
+    // desert
+    ctx.fillStyle = colors.desert;
+    ctx.fillRect(0, (configurations.mapScale - configurations.snowBiomeTop), configurations.mapScale, configurations.snowBiomeTop);
+
+    ctx.restore();
+
+*/
     if (_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].snowBiomeTop - yOffset <= 0 && _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale - _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].snowBiomeTop - yOffset >= _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight) {
         _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillStyle = _configurations__WEBPACK_IMPORTED_MODULE_0__.colors.grasslands;
         _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillRect(0, 0, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight);
@@ -638,7 +699,7 @@ function renderPlayerInfo(xOffset, yOffset, delta) {
     _render__WEBPACK_IMPORTED_MODULE_2__.ctx.globalAlpha = 1;
 
     for(let i = _main__WEBPACK_IMPORTED_MODULE_1__["default"].players.length; i--;) {
-        if(tmpObj = _main__WEBPACK_IMPORTED_MODULE_1__["default"].players[i]) {
+        if(tmpObj = _main__WEBPACK_IMPORTED_MODULE_1__["default"].players[i]/*, tmpObj.alive*/) {
             _render__WEBPACK_IMPORTED_MODULE_2__.ctx.font = "30px Hammersmith One";
             _render__WEBPACK_IMPORTED_MODULE_2__.ctx.fillStyle = "#fff";
             _render__WEBPACK_IMPORTED_MODULE_2__.ctx.textBaseline = "middle";
@@ -713,7 +774,7 @@ __webpack_require__.r(__webpack_exports__);
 function renderPlayers(xOffset, yOffset, delta) {
     let tmpObj;
     for(let i = _main__WEBPACK_IMPORTED_MODULE_1__["default"].players.length; i--;) {
-        if(tmpObj = _main__WEBPACK_IMPORTED_MODULE_1__["default"].players[i]) {
+        if(tmpObj = _main__WEBPACK_IMPORTED_MODULE_1__["default"].players[i]/*, tmpObj.alive*/) {
             tmpObj.animate(delta);
 
             _render__WEBPACK_IMPORTED_MODULE_4__.ctx.beginPath();
@@ -735,21 +796,92 @@ function renderPlayer(tmpObj) {
     , n = /*tmpObj.buildIndex < 0*/ true && _configurations__WEBPACK_IMPORTED_MODULE_0__.weaponTypes[0].hndS || 1
     , s = /*tmpObj.buildIndex < 0*/ true && _configurations__WEBPACK_IMPORTED_MODULE_0__.weaponTypes[0].hndD || 1;
 
-    let weapon = _configurations__WEBPACK_IMPORTED_MODULE_0__.weaponTypes[0];
-    //if(/*tmpObj.buildIndex < 0 &&*/ !weapon.aboveHand) {
-        // render weapons
+    if(tmpObj.weaponIndex.weapon) {
+        let weapon = _configurations__WEBPACK_IMPORTED_MODULE_0__.weaponTypes[0];
 
-    //}
+        (0,_renderWeapon__WEBPACK_IMPORTED_MODULE_5__["default"])(weapon, tmpObj.scale, 0, _render__WEBPACK_IMPORTED_MODULE_4__.ctx);
+    } else if(tmpObj.weaponIndex.heal) {
+        let src = _configurations__WEBPACK_IMPORTED_MODULE_0__.foodTypes.find(type => type.id == tmpObj.weaponIndex.id);
 
-    (0,_renderWeapon__WEBPACK_IMPORTED_MODULE_5__["default"])(weapon, tmpObj.scale, 0, _render__WEBPACK_IMPORTED_MODULE_4__.ctx);
+        //ctx.fillStyle = "red";
+        //ctx.arc(src.scale, src.scale, 50, 0, Math.PI * 2)
+        //ctx.fill()
+        (0,_renderWeapon__WEBPACK_IMPORTED_MODULE_5__.renderItem)(src, tmpObj.scale + (src.scale / 2) + src.holdOffset, 0, _render__WEBPACK_IMPORTED_MODULE_4__.ctx);
+    } else {
+        let src = _configurations__WEBPACK_IMPORTED_MODULE_0__.buildingTypes.find(type => type.id == tmpObj.weaponIndex.id);
+
+        //ctx.fillStyle = "red";
+        //ctx.arc(src.scale, src.scale, 50, 0, Math.PI * 2)
+        //ctx.fill()
+        (0,_renderWeapon__WEBPACK_IMPORTED_MODULE_5__.renderItem)(src, tmpObj.scale + (src.scale / 2) + src.holdOffset - src.placeOffset, 0, _render__WEBPACK_IMPORTED_MODULE_4__.ctx);
+    }
 
     _render__WEBPACK_IMPORTED_MODULE_4__.ctx.fillStyle = "#bf8f54"; //config.skinColors[tmpObj.skinColor];
     (0,_Utils_renderCircle__WEBPACK_IMPORTED_MODULE_2__["default"])(tmpObj.scale * Math.cos(i), tmpObj.scale * Math.sin(i), 14);
     (0,_Utils_renderCircle__WEBPACK_IMPORTED_MODULE_2__["default"])(tmpObj.scale * /*s*/1 * Math.cos(-i * /*n*/1), tmpObj.scale * /*s*/1 * Math.sin(-i * /*n*/1), 14);
 
     (0,_Utils_renderCircle__WEBPACK_IMPORTED_MODULE_2__["default"])(0, 0, tmpObj.scale, _render__WEBPACK_IMPORTED_MODULE_4__.ctx);
-
 }
+
+/***/ }),
+
+/***/ "./Game/Render/functions/renderTexts.js":
+/*!**********************************************!*\
+  !*** ./Game/Render/functions/renderTexts.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _render__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../render */ "./Game/Render/render.js");
+
+
+class Text {
+    constructor(x, y, text, size, color, life) {
+        Object.assign(this, {x, y, text, size, color, life});
+    }
+
+    update(delta) {
+        this.life -= delta;
+
+        if(this.life <= 0) return;
+
+        this.y -= delta * 0.18;
+    }
+
+    render(xOffset, yOffset) {
+        if(this.life <= 0) return
+        _render__WEBPACK_IMPORTED_MODULE_0__.ctx.beginPath();
+        _render__WEBPACK_IMPORTED_MODULE_0__.ctx.fillStyle = this.color;
+        _render__WEBPACK_IMPORTED_MODULE_0__.ctx.font = this.size + "px Hammersmith One";
+        _render__WEBPACK_IMPORTED_MODULE_0__.ctx.fillText(this.text, this.x - xOffset, this.y - yOffset);
+    }
+}
+
+class TextManager {
+    #texts = []
+    addText(x, y, text, size, color, life) {
+        this.#texts.push(new Text(x, y, text, size, color, life));
+    }
+
+    renderTexts(xOffset, yOffset, delta) {
+        this.#texts.filter(text => text.life >= 0);
+
+        let text;
+        for(let i = this.#texts.length; i--;) {
+            if(text = this.#texts[i]) {
+                text.update(delta);
+                text.render(xOffset, yOffset);
+            }
+        }
+    }
+}
+
+const textManager = new TextManager();
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (textManager);
 
 /***/ }),
 
@@ -762,11 +894,15 @@ function renderPlayer(tmpObj) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ renderWeapon)
+/* harmony export */   "default": () => (/* binding */ renderWeapon),
+/* harmony export */   renderItem: () => (/* binding */ renderItem)
 /* harmony export */ });
-let weaponSprites = {};
 function renderWeapon(weapon, x, y, ctx) {
     ctx.drawImage(weapon.img, x + weapon.xOff - (weapon.length / 2), y + weapon.yOff - (weapon.width / 2), weapon.length, weapon.width);
+}
+
+function renderItem(item, x, y, ctx) {
+    ctx.drawImage(item.img, x - (item.scale), y - (item.scale), item.scale * 2, item.scale * 2);
 }
 
 /***/ }),
@@ -801,6 +937,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _functions_renderMap__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./functions/renderMap */ "./Game/Render/functions/renderMap.js");
 /* harmony import */ var _functions_renderPlayerInfo__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./functions/renderPlayerInfo */ "./Game/Render/functions/renderPlayerInfo.js");
 /* harmony import */ var _functions_renderPlayers__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./functions/renderPlayers */ "./Game/Render/functions/renderPlayers.js");
+/* harmony import */ var _functions_renderTexts__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./functions/renderTexts */ "./Game/Render/functions/renderTexts.js");
 /*
 
 do we really need more then one file to render everything
@@ -816,6 +953,7 @@ maybe import functions from a different file, so it's more organized?
 
 
 //import min from "../Utils/math"
+
 
 
 
@@ -919,22 +1057,31 @@ let camera = {
     x: _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale / 2,
     y: _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale / 2
 };
+function dist(v1, v2, mult = 1) {
+    return (v1 - v2) / mult;
+};
 function render(delta, frameDate) {
     //ctx.clearRect(0, 0, configurations.maxScreenWidth, configurations.maxScreenWidth);
 
     if(_main__WEBPACK_IMPORTED_MODULE_1__["default"].player) {
-        let distance = (0,_Utils_getDistance__WEBPACK_IMPORTED_MODULE_4__["default"])(camera.x, camera.y, _main__WEBPACK_IMPORTED_MODULE_1__["default"].player.lerpx, _main__WEBPACK_IMPORTED_MODULE_1__["default"].player.lerpy);
-        let direction = (0,_Utils_getDirection__WEBPACK_IMPORTED_MODULE_3__["default"])(_main__WEBPACK_IMPORTED_MODULE_1__["default"].player.lerpx, _main__WEBPACK_IMPORTED_MODULE_1__["default"].player.lerpy, camera.x, camera.y) - Math.PI;
+        /*
+        let distance = getDistance(camera.x, camera.y, Game.player.lerpx, Game.player.lerpy);
+        let direction = getDirection(Game.player.lerpx, Game.player.lerpy, camera.x, camera.y) - Math.PI;
 
         let increment = Math.min(distance * 0.0045 * delta, distance);
 
-        if (distance > 0.05) {
-            camera.x += increment * Math.cos(direction);
-            camera.y += increment * Math.sin(direction);
-        } else {
-            camera.x = _main__WEBPACK_IMPORTED_MODULE_1__["default"].player.lerpx;
-            camera.y = _main__WEBPACK_IMPORTED_MODULE_1__["default"].player.lerpy;
-        }
+        //if (distance > 0.05) {
+            //camera.x += increment * Math.cos(direction);
+            //camera.y += increment * Math.sin(direction);
+        //} else {
+        //    camera.x = Game.player.lerpx;
+        //    camera.y = Game.player.lerpy;
+        //}
+        */
+
+        // credit ueheua, op master of all
+        camera.x += dist(_main__WEBPACK_IMPORTED_MODULE_1__["default"].player.lerpx, camera.x, 200 / delta);
+        camera.y += dist(_main__WEBPACK_IMPORTED_MODULE_1__["default"].player.lerpy, camera.y, 200 / delta);
 
         let tmpObj;
         let timeSinceTick = frameDate - (1000 / _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].serverUpdateRate)
@@ -1003,6 +1150,8 @@ function render(delta, frameDate) {
         ctx.fillRect(0, 0, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight);
 
         (0,_functions_renderPlayerInfo__WEBPACK_IMPORTED_MODULE_12__["default"])(xOffset, yOffset, delta);
+
+        _functions_renderTexts__WEBPACK_IMPORTED_MODULE_14__["default"].renderTexts(xOffset, yOffset, delta);
 
         (0,_UI_minimap__WEBPACK_IMPORTED_MODULE_2__["default"])();
     } else {
@@ -1107,6 +1256,10 @@ function addMessage(owner, message) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   actionBar: () => (/* binding */ actionBar),
+/* harmony export */   ageBar: () => (/* binding */ ageBar),
+/* harmony export */   ageBarBody: () => (/* binding */ ageBarBody),
+/* harmony export */   ageText: () => (/* binding */ ageText),
+/* harmony export */   deathText: () => (/* binding */ deathText),
 /* harmony export */   "default": () => (/* binding */ registerDOMEventHooks),
 /* harmony export */   leaderboard: () => (/* binding */ leaderboard),
 /* harmony export */   loadingText: () => (/* binding */ loadingText),
@@ -1124,6 +1277,10 @@ const menuCardHolder = document.getElementById("menuCardHolder");
 const nameInput = document.getElementById("nameInput");
 const leaderboard = document.getElementById("leaderboard");
 const actionBar = document.getElementById("actionBar");
+const deathText = document.getElementById("");
+const ageBar = document.getElementById("ageBar");
+const ageBarBody = document.getElementById("ageBarBody");
+const ageText = document.getElementById("ageText");
 
 function registerDOMEventHooks() {
     document.getElementById("enterGame").addEventListener("click", (event) => {
@@ -1173,6 +1330,34 @@ function renderMinimap(delta) {
 
 /***/ }),
 
+/***/ "./Game/UI/playerDied.js":
+/*!*******************************!*\
+  !*** ./Game/UI/playerDied.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ playerDied)
+/* harmony export */ });
+/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../configurations */ "./Game/configurations.js");
+/* harmony import */ var _eventHooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./eventHooks */ "./Game/UI/eventHooks.js");
+
+
+
+let deathFontSize = 99999;
+function playerDied() {
+    _eventHooks__WEBPACK_IMPORTED_MODULE_1__.deathText.style.display = "block",
+    _eventHooks__WEBPACK_IMPORTED_MODULE_1__.deathText.style.fontSize = "0px",
+    deathFontSize = 0,
+    setTimeout(function() {
+        _eventHooks__WEBPACK_IMPORTED_MODULE_1__.deathText.style.display = "none";
+    }, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].deathFadeout);
+}
+
+/***/ }),
+
 /***/ "./Game/UI/updateActionBar.js":
 /*!************************************!*\
   !*** ./Game/UI/updateActionBar.js ***!
@@ -1198,6 +1383,10 @@ function updateActionBar(items = [..._main__WEBPACK_IMPORTED_MODULE_1__["default
         const actionBarItem = document.createElement("div");
         actionBarItem.className = "actionBarItems";
         actionBarItem.id = item.name;
+
+        actionBarItem.onclick = function() {
+            _main__WEBPACK_IMPORTED_MODULE_1__["default"].webSocket.wsSend("s", item.id, item?.weapon ? "weapon" : (item?.heal ? "food" : "item"));
+        }
 
         const canvas = document.createElement("canvas");
         canvas.width = canvas.height = 66;
@@ -1230,6 +1419,48 @@ function updateActionBar(items = [..._main__WEBPACK_IMPORTED_MODULE_1__["default
     });
 }
 
+
+/***/ }),
+
+/***/ "./Game/UI/updateAge.js":
+/*!******************************!*\
+  !*** ./Game/UI/updateAge.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ updateAge)
+/* harmony export */ });
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../main */ "./Game/main.js");
+/* harmony import */ var _eventHooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./eventHooks */ "./Game/UI/eventHooks.js");
+
+
+
+function updateAge([xp]) {
+    // ok so default xp will be 300
+    // every age max xp will increas eby like 1.2x
+
+    _main__WEBPACK_IMPORTED_MODULE_0__["default"].player.xp += xp;
+
+    if(_main__WEBPACK_IMPORTED_MODULE_0__["default"].player.xp >= _main__WEBPACK_IMPORTED_MODULE_0__["default"].player.maxXP) {
+        _main__WEBPACK_IMPORTED_MODULE_0__["default"].player.xp = 0;
+        _main__WEBPACK_IMPORTED_MODULE_0__["default"].player.maxXP *= 1.2;
+
+        if(_main__WEBPACK_IMPORTED_MODULE_0__["default"].player.age < 21) {
+            _main__WEBPACK_IMPORTED_MODULE_0__["default"].player.age++;
+
+            _eventHooks__WEBPACK_IMPORTED_MODULE_1__.ageText.innerHTML = `AGE ${_main__WEBPACK_IMPORTED_MODULE_0__["default"].player.age}`;
+        } else {
+            _eventHooks__WEBPACK_IMPORTED_MODULE_1__.ageText.innerHTML = "MAX AGE";
+        }
+    } else {
+        _main__WEBPACK_IMPORTED_MODULE_0__["default"].player.xp += xp;
+
+        _eventHooks__WEBPACK_IMPORTED_MODULE_1__.ageBarBody.style.width = ((_main__WEBPACK_IMPORTED_MODULE_0__["default"].player.xp / _main__WEBPACK_IMPORTED_MODULE_0__["default"].player.maxXP) * 100) + "px";
+    }
+}
 
 /***/ }),
 
@@ -1266,7 +1497,7 @@ function updateLeaderboard(data) {
             </div>
 
             <div id="leaderScore" style="font-size: 22px; color: #fff;">
-                ${(0,_Utils_kFormat__WEBPACK_IMPORTED_MODULE_1__["default"])(1234)}
+                ${(0,_Utils_kFormat__WEBPACK_IMPORTED_MODULE_1__["default"])(data[i].gold)}
             </div>
         </div>
         `;
@@ -1443,10 +1674,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function addGameObjects(data) {
-    for(let i = 0; i < data[0].length; i++) {
-        let d = new _Classes_Building__WEBPACK_IMPORTED_MODULE_0__["default"](data[0][i]);
-        _main__WEBPACK_IMPORTED_MODULE_1__["default"].buildings.push(d);
-    }
+    /*for(let i = 0; i < data[0].length; i++) {
+        let d = new Building(data[0][i]);
+        Game.buildings.push(d);
+
+        console.warn(Game.buildings.find(a => a.sid == data[0][i].sid))
+    }*/
+
+        for(let datas of data[0]) {
+            let tmp = new _Classes_Building__WEBPACK_IMPORTED_MODULE_0__["default"](datas);
+            _main__WEBPACK_IMPORTED_MODULE_1__["default"].buildings.push(tmp);
+        }
 }
 
 /***/ }),
@@ -1469,15 +1707,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function addPlayer(data) {
-    console.warn(data)
+function addPlayer([playerData, isMe]) {
+    console.warn(playerData, isMe)
     
-    if(typeof data !== 'object') throw new TypeError("Param 'data' is not of Object");
+    let tmpPlayer = _main__WEBPACK_IMPORTED_MODULE_1__["default"].getPlayerBySid(playerData.sid);
 
-    let tmpPlayer = new _Classes_Player__WEBPACK_IMPORTED_MODULE_0__["default"](data[0]);
-    _main__WEBPACK_IMPORTED_MODULE_1__["default"].players.push(tmpPlayer);
+    if(!tmpPlayer) {
+        tmpPlayer = new _Classes_Player__WEBPACK_IMPORTED_MODULE_0__["default"](playerData);
+        _main__WEBPACK_IMPORTED_MODULE_1__["default"].players.push(tmpPlayer);
+    } else {
+        tmpPlayer.x = playerData.x;
+        tmpPlayer.y = playerData.y;
+        tmpPlayer.alive = true;
+        tmpPlayer.resetStuff();
+    }
 
-    if(data[1]) {
+    if(isMe) {
         _main__WEBPACK_IMPORTED_MODULE_1__["default"].player = tmpPlayer;
         (0,_UI_updateActionBar__WEBPACK_IMPORTED_MODULE_2__["default"])();
     }
@@ -1505,14 +1750,10 @@ __webpack_require__.r(__webpack_exports__);
 
 function gatherAnimation([sid, index, hitObject]) {
     // hit object for later
-    console.log(sid, index, hitObject)
-
     let tmpObj = _main__WEBPACK_IMPORTED_MODULE_1__["default"].getPlayerBySid(sid);
 
     if(tmpObj) {
         tmpObj.startAnimation(hitObject.length);
-
-        console.log(hitObject)
 
         let tmp;
         for(let i = hitObject.length; i--;) {
@@ -1522,6 +1763,26 @@ function gatherAnimation([sid, index, hitObject]) {
             }
         }
     }
+}
+
+/***/ }),
+
+/***/ "./Game/WebSocket/hooks/eventHooks/killObject.js":
+/*!*******************************************************!*\
+  !*** ./Game/WebSocket/hooks/eventHooks/killObject.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ killObject)
+/* harmony export */ });
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../main */ "./Game/main.js");
+
+
+function killObject([sid]) {
+    _main__WEBPACK_IMPORTED_MODULE_0__["default"].buildings.splice(_main__WEBPACK_IMPORTED_MODULE_0__["default"].buildings.indexOf(_main__WEBPACK_IMPORTED_MODULE_0__["default"].getBuildingBySid(sid)), 1);
 }
 
 /***/ }),
@@ -1537,12 +1798,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ pingSocketResponse)
 /* harmony export */ });
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../main */ "./Game/main.js");
+
 
 
 function pingSocketResponse(time) {
     let ping = Date.now() - time[0];
 
-    document.getElementById("pingDisplay").innerHTML = `Ping: ${ping}ms`;
+    document.getElementById("pingDisplay").innerHTML = `Ping: ${ping}ms Objects ${_main__WEBPACK_IMPORTED_MODULE_0__["default"].buildings.length}`;
 }
 
 /***/ }),
@@ -1566,10 +1829,92 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function receiveChat(data) {
-    _main__WEBPACK_IMPORTED_MODULE_1__["default"].getPlayerBySid(data[0]).chatMessage = data[1];
+    _main__WEBPACK_IMPORTED_MODULE_1__["default"].getPlayerBySid(data[0]).chatMessage = replaceEmojis(data[1]);
     _main__WEBPACK_IMPORTED_MODULE_1__["default"].getPlayerBySid(data[0]).chatCountdown = _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].chatCountdown;
 
-    (0,_UI_chatLog__WEBPACK_IMPORTED_MODULE_2__["default"])(_main__WEBPACK_IMPORTED_MODULE_1__["default"].getPlayerBySid(data[0]).name || "unknown", data[1])
+    (0,_UI_chatLog__WEBPACK_IMPORTED_MODULE_2__["default"])(_main__WEBPACK_IMPORTED_MODULE_1__["default"].getPlayerBySid(data[0]).name || "unknown", replaceEmojis(data[1]))
+}
+
+function replaceEmojis(text) {
+    const emojiMap = {
+        ':smile:': '😄',
+        ':sob:': '😭',
+        ':heart:': '❤️',
+        ':thumbsup:': '👍',
+        ':fire:': '🔥',
+        ':laughing:': '😂',
+        ':clap:': '👏',
+        ':wink:': '😉',
+        ':sunglasses:': '😎',
+        ':thinking:': '🤔',
+        ':grin:': '😀',
+        ':star:': '⭐',
+        ':check:': '✔️',
+        ':x:': '❌',
+        ':warning:': '⚠️',
+        ':sparkles:': '✨',
+        ':100:': '💯',
+        ':pray:': '🙏',
+        ':wave:': '👋',
+        ':ok:': '👌',
+        ':poop:': '💩',
+        ':shit:': '💩',
+        ':kiss:': '😘',
+        ':sleeping:': '😴',
+        ':angry:': '😠',
+        ':neutral:': '😐',
+        ':confused:': '😕',
+        ':shocked:': '😲',
+        ':party:': '🥳',
+        ':drool:': '🤤',
+        ':money:': '🤑',
+        ':alien:': '👽',
+        ':robot:': '🤖',
+        ':cat:': '🐱',
+        ':dog:': '🐶',
+        ':unicorn:': '🦄',
+        ':sun:': '☀️',
+        ':moon:': '🌙',
+        ':cloud:': '☁️',
+        ':rainbow:': '🌈',
+        ':coffee:': '☕',
+        ':pizza:': '🍕',
+        ':burger:': '🍔',
+        ':fries:': '🍟',
+        ':cake:': '🎂',
+        ':gift:': '🎁',
+        ':balloon:': '🎈',
+        ':muscle:': '💪',
+        ':eyes:': '👀',
+        ':skull:': '💀',
+        ':ghost:': '👻',
+        ':zombie:': '🧟',
+        ':vampire:': '🧛',
+        ':angel:': '😇',
+        ':devil:': '😈',
+        ':hug:': '🤗',
+        ':writing:': '✍️',
+        ':phone:': '📞',
+        ':laptop:': '💻',
+        ':hourglass:': '⏳',
+        ':lock:': '🔒',
+        ':unlock:': '🔓',
+        ':key:': '🔑',
+        ':music:': '🎵',
+        ':microphone:': '🎤',
+        ':camera:': '📷',
+        ':video:': '📹',
+        ':tv:': '📺',
+        ':game:': '🎮',
+        ':airplane:': '✈️',
+        ':car:': '🚗',
+        ':train:': '🚆',
+        ':rocket:': '🚀',
+        ':medal:': '🏅',
+        ':trophy:': '🏆',
+    };
+
+    return text.replace(/:\w+:/g, match => emojiMap[match] || match);
 }
 
 /***/ }),
@@ -1657,6 +2002,41 @@ function updateAI(data) {
 
 /***/ }),
 
+/***/ "./Game/WebSocket/hooks/eventHooks/updateHealth.js":
+/*!*********************************************************!*\
+  !*** ./Game/WebSocket/hooks/eventHooks/updateHealth.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ updateHealth)
+/* harmony export */ });
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../main */ "./Game/main.js");
+/* harmony import */ var _Render_functions_renderTexts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Render/functions/renderTexts */ "./Game/Render/functions/renderTexts.js");
+/* harmony import */ var _UI_playerDied__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../UI/playerDied */ "./Game/UI/playerDied.js");
+
+
+
+
+
+function updateHealth([sid, value]) {
+    let player = _main__WEBPACK_IMPORTED_MODULE_0__["default"].getPlayerBySid(sid);
+    
+    player.health += value;
+
+    if(player.health <= 0) player.alive = false;
+
+    _Render_functions_renderTexts__WEBPACK_IMPORTED_MODULE_1__["default"].addText(player.lerpx, player.lerpy, Math.abs(value), 50, value < 0 ? "#fff" : "#8ecc51", 500);
+
+    if(player.sid == _main__WEBPACK_IMPORTED_MODULE_0__["default"].player.sid) {
+        (0,_UI_playerDied__WEBPACK_IMPORTED_MODULE_2__["default"])();
+    }
+}
+
+/***/ }),
+
 /***/ "./Game/WebSocket/hooks/eventHooks/updatePlayers.js":
 /*!**********************************************************!*\
   !*** ./Game/WebSocket/hooks/eventHooks/updatePlayers.js ***!
@@ -1709,6 +2089,7 @@ function updatePlayers(data) {
         player.d1 = (player.d2 === undefined) ? data[i].dir : player.d2;
         player.d2 = data[i].dir;
         player.delta = 0;
+        player.weaponIndex = data[i].weaponIndex; // also declares weapon?? shit this will be fucking annoying
 
         /*
         let randomOffset = () => (Math.random() - 0.5) * 30;
@@ -1770,8 +2151,8 @@ function updatePlayers(data) {
 
     //addFootStep(Game.player.lerpx, Game.player.lerpy, 10);
 
-    _main__WEBPACK_IMPORTED_MODULE_0__["default"].webSocket.wsSend("m", _main__WEBPACK_IMPORTED_MODULE_0__.keyHandler.angle);
-    if(!_main__WEBPACK_IMPORTED_MODULE_0__["default"].lockDir) _main__WEBPACK_IMPORTED_MODULE_0__["default"].webSocket.wsSend("d", getAimDir());
+    //if(lastDir != getAimDir()) 
+    _main__WEBPACK_IMPORTED_MODULE_0__["default"].webSocket.wsSend("d", getAimDir());
 }
 
 let lastDir;
@@ -1850,15 +2231,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   weaponTypes: () => (/* binding */ weaponTypes)
 /* harmony export */ });
 /* harmony import */ var _Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Render/functions/makeImage */ "./Game/Render/functions/makeImage.js");
-/* harmony import */ var _UI_updateLeaderboard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UI/updateLeaderboard */ "./Game/UI/updateLeaderboard.js");
-/* harmony import */ var _WebSocket_hooks_eventHooks_addGameObjects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/addGameObjects */ "./Game/WebSocket/hooks/eventHooks/addGameObjects.js");
-/* harmony import */ var _WebSocket_hooks_eventHooks_addPlayer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/addPlayer */ "./Game/WebSocket/hooks/eventHooks/addPlayer.js");
-/* harmony import */ var _WebSocket_hooks_eventHooks_gatherAnimation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/gatherAnimation */ "./Game/WebSocket/hooks/eventHooks/gatherAnimation.js");
-/* harmony import */ var _WebSocket_hooks_eventHooks_pingSocketResponse__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/pingSocketResponse */ "./Game/WebSocket/hooks/eventHooks/pingSocketResponse.js");
-/* harmony import */ var _WebSocket_hooks_eventHooks_receiveChat__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/receiveChat */ "./Game/WebSocket/hooks/eventHooks/receiveChat.js");
-/* harmony import */ var _WebSocket_hooks_eventHooks_removePlayer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/removePlayer */ "./Game/WebSocket/hooks/eventHooks/removePlayer.js");
-/* harmony import */ var _WebSocket_hooks_eventHooks_updateAI__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/updateAI */ "./Game/WebSocket/hooks/eventHooks/updateAI.js");
-/* harmony import */ var _WebSocket_hooks_eventHooks_updatePlayers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/updatePlayers */ "./Game/WebSocket/hooks/eventHooks/updatePlayers.js");
+/* harmony import */ var _UI_updateAge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UI/updateAge */ "./Game/UI/updateAge.js");
+/* harmony import */ var _UI_updateLeaderboard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UI/updateLeaderboard */ "./Game/UI/updateLeaderboard.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_addGameObjects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/addGameObjects */ "./Game/WebSocket/hooks/eventHooks/addGameObjects.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_addPlayer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/addPlayer */ "./Game/WebSocket/hooks/eventHooks/addPlayer.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_gatherAnimation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/gatherAnimation */ "./Game/WebSocket/hooks/eventHooks/gatherAnimation.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_killObject__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/killObject */ "./Game/WebSocket/hooks/eventHooks/killObject.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_pingSocketResponse__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/pingSocketResponse */ "./Game/WebSocket/hooks/eventHooks/pingSocketResponse.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_receiveChat__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/receiveChat */ "./Game/WebSocket/hooks/eventHooks/receiveChat.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_removePlayer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/removePlayer */ "./Game/WebSocket/hooks/eventHooks/removePlayer.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_updateAI__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/updateAI */ "./Game/WebSocket/hooks/eventHooks/updateAI.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_updateHealth__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/updateHealth */ "./Game/WebSocket/hooks/eventHooks/updateHealth.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_updatePlayers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/updatePlayers */ "./Game/WebSocket/hooks/eventHooks/updatePlayers.js");
+
+
+
 
 
 
@@ -1911,7 +2298,8 @@ const weaponTypes = [{
     range: 65,
     gather: 1,
     speed: 300,
-    weapon: true
+    weapon: true,
+    gameID: 0
 }]
 
 const buildingTypes = [{
@@ -1919,9 +2307,12 @@ const buildingTypes = [{
     name: "wall",
     description: "protects your base from hostile aggressors",
     health: 400,
-    scale: 40,
+    scale: 55,
     weapon: false,
-    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/download%20(1).png?v=1735784972950"),
+    isItem: true,
+    holdOffset: 20,
+    placeOffset: -5,
+    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/3_wood_wall.svg?v=1735857908118"),
     hitResistance: 80, // it's kind of like a shield, the shield will slowly regenerate over time, and the building health won't be affected unless the shield is down
 },
 {
@@ -1929,9 +2320,12 @@ const buildingTypes = [{
     name: "baby spikes",
     description: "fortifies your base, knocks back hostile aggressors",
     health: 300,
-    scale: 42,
+    scale: 50,
+    holdOffset: 14,
+    placeOffset: -5,
     weapon: false,
-    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/download.png?v=1735784909353"),
+    isItem: true,
+    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/Untitled%20(1).svg?v=1735910950877"),
     hitResistance: 20
 },
 {
@@ -1939,9 +2333,13 @@ const buildingTypes = [{
     name: "basic windmill",
     description: "generates gold over time",
     health: 400,
-    scale: 50,
+    scale: 75,
+    holdOffset: 20,
+    placeOffset: 5,
     weapon: false,
-    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/download%20(3).png?v=1735785211807"),
+    isItem: true,
+    ///img: makeImage("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/moomoorocktransparent.svg?v=1735932074001"),
+    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/mill.svg?v=1735857620463"),
     hitResistance: 120
 }];
 
@@ -1974,8 +2372,10 @@ const foodTypes = [{
     id: 0,
     name: "apple",
     heal: 10,
+    scale: 22,
+    holdOffset: 15,
     weapon: false,
-    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/download%20(2).png?v=1735785023935")
+    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/0_apple.svg?v=1735858017502")
 },
 {
     id: 1,
@@ -1993,15 +2393,18 @@ const foodTypes = [{
 }]
 
 const packetMap = {
-    1: _WebSocket_hooks_eventHooks_updatePlayers__WEBPACK_IMPORTED_MODULE_9__["default"],
-    2: _WebSocket_hooks_eventHooks_addPlayer__WEBPACK_IMPORTED_MODULE_3__["default"],
-    "r": _WebSocket_hooks_eventHooks_removePlayer__WEBPACK_IMPORTED_MODULE_7__["default"],
-    6: _WebSocket_hooks_eventHooks_receiveChat__WEBPACK_IMPORTED_MODULE_6__["default"],
-    0: _WebSocket_hooks_eventHooks_pingSocketResponse__WEBPACK_IMPORTED_MODULE_5__["default"],
-    "a": _WebSocket_hooks_eventHooks_updateAI__WEBPACK_IMPORTED_MODULE_8__["default"],
-    "l": _UI_updateLeaderboard__WEBPACK_IMPORTED_MODULE_1__["default"],
-    "g": _WebSocket_hooks_eventHooks_addGameObjects__WEBPACK_IMPORTED_MODULE_2__["default"],
-    "h": _WebSocket_hooks_eventHooks_gatherAnimation__WEBPACK_IMPORTED_MODULE_4__["default"]
+    1: _WebSocket_hooks_eventHooks_updatePlayers__WEBPACK_IMPORTED_MODULE_12__["default"],
+    2: _WebSocket_hooks_eventHooks_addPlayer__WEBPACK_IMPORTED_MODULE_4__["default"],
+    "r": _WebSocket_hooks_eventHooks_removePlayer__WEBPACK_IMPORTED_MODULE_9__["default"],
+    6: _WebSocket_hooks_eventHooks_receiveChat__WEBPACK_IMPORTED_MODULE_8__["default"],
+    0: _WebSocket_hooks_eventHooks_pingSocketResponse__WEBPACK_IMPORTED_MODULE_7__["default"],
+    "a": _WebSocket_hooks_eventHooks_updateAI__WEBPACK_IMPORTED_MODULE_10__["default"],
+    "l": _UI_updateLeaderboard__WEBPACK_IMPORTED_MODULE_2__["default"],
+    "g": _WebSocket_hooks_eventHooks_addGameObjects__WEBPACK_IMPORTED_MODULE_3__["default"],
+    "h": _WebSocket_hooks_eventHooks_gatherAnimation__WEBPACK_IMPORTED_MODULE_5__["default"],
+    "o": _WebSocket_hooks_eventHooks_updateHealth__WEBPACK_IMPORTED_MODULE_11__["default"],
+    "d": _WebSocket_hooks_eventHooks_killObject__WEBPACK_IMPORTED_MODULE_6__["default"],
+    "x": _UI_updateAge__WEBPACK_IMPORTED_MODULE_1__["default"]
 };
 
 const colors = {
@@ -2033,6 +2436,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _WebSocket_main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WebSocket/main */ "./Game/WebSocket/main.js");
 /* harmony import */ var _UI_chatLog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UI/chatLog */ "./Game/UI/chatLog.js");
 /* harmony import */ var _UI_eventHooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UI/eventHooks */ "./Game/UI/eventHooks.js");
+/* harmony import */ var _Render_functions_renderTexts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Render/functions/renderTexts */ "./Game/Render/functions/renderTexts.js");
+
 
 
 
@@ -2158,6 +2563,9 @@ class KeyHandler {
 
         this.chatToggle = false;
         this.chat = document.getElementById("chatbox");
+        this.chat.style.display = "none";
+
+        this.oldIndexData = {};
     }
 
     handleKeyDown(keyCode) {
@@ -2187,14 +2595,47 @@ class KeyHandler {
                     Game.lockDir = !Game.lockDir;
                     break;
 
-                case 69:
+                case 69: // "e"
                     Game.webSocket.wsSend("h", 1);
                     console.warn("okok");
 
+                    _Render_functions_renderTexts__WEBPACK_IMPORTED_MODULE_4__["default"].addText(Game.player.lerpx, Game.player.lerpy, "works", 60, "#fff", 900);
+
                     break;
                 
-                default: break;
+                case 81: // "q"
+                    Game.webSocket.wsSend("s", Game.player.items[0].id, "food");
+
+                    break;
+
+                case 32:
+                    
+                    if (Game.player.weaponIndex.weapon) {
+                        Game.webSocket.wsSend("h", 1);
+                    } else if(Game.player.weaponIndex.food) {
+                        Game.webSocket.wsSend("p", "food");
+                    } else {
+                        this.didPlaceObject = true;
+                        Game.webSocket.wsSend("p", Game.player.weaponIndex.id);
+                    }
+
+                    this.oldIndexData = Game.player.weaponIndex;
+
+                    break;
+
+                default: this.handleSelection(keyCode);
             }
+        }
+    }
+
+    handleSelection(keyCode) {
+        const weaponIndex = keyCode - 49;
+        const itemIndex = weaponIndex - Game.player.weapons.length;
+    
+        if (Game.player.weapons[weaponIndex] != null) {
+            Game.webSocket.wsSend("s", Game.player.weapons[weaponIndex].id, "weapon");
+        } else if (Game.player.items[itemIndex] != null) {
+            Game.webSocket.wsSend("s", Game.player.items[itemIndex].id, itemIndex == 0 ? "food" : "item");
         }
     }
 
@@ -2203,23 +2644,37 @@ class KeyHandler {
             delete this.moveKeysPressed[keyCode];
         }
         this.updateAngle();
+
+        switch(keyCode) {
+            case 32:
+                    
+            if (this.oldIndexData.weapon) {
+                Game.webSocket.wsSend("h", 1);
+            }
+
+            this.oldIndexData = {}
+
+            break;
+        }
     }
 
     updateAngle() {
         let moveX = 0;
         let moveY = 0;
-
+    
         for (let keyCode in this.moveKeysPressed) {
             const direction = this.moveKey[keyCode];
             moveX += direction[0];
             moveY += direction[1];
         }
-
-        if (Object.keys(this.moveKeysPressed).length === 0) {
+    
+        if (moveX === 0 && moveY === 0) {
             this.angle = undefined;
         } else {
             this.angle = Math.atan2(moveY, moveX);
         }
+    
+        Game.webSocket.wsSend("m", this.angle);
     }
 }
 
@@ -2233,7 +2688,7 @@ class Mouse {
         this.mouseDown = {
             left: false,
             right: false,
-            middle: false
+            middle: false,
         };
 
         document.addEventListener("mousemove", (event) => {
@@ -2241,8 +2696,10 @@ class Mouse {
             this.mouseY = event.clientY;
         });
 
-        document.addEventListener("mousedown", (event) => this.handleMouseDown(event));
-        document.addEventListener("mouseup", (event) => this.handleMouseUp(event));
+        _Render_render__WEBPACK_IMPORTED_MODULE_0__.ctx.canvas.addEventListener("mousedown", (event) => this.handleMouseDown(event));
+        _Render_render__WEBPACK_IMPORTED_MODULE_0__.ctx.canvas.addEventListener("mouseup", (event) => this.handleMouseUp(event));
+
+        this.dataOnClick = {};
     }
 
     handleMouseDown(event) {
@@ -2254,7 +2711,15 @@ class Mouse {
             this.mouseDown.right = true;
         }
 
-        Game.webSocket.wsSend("h", 1);
+        if (Game.player.weaponIndex.weapon) {
+            Game.webSocket.wsSend("h", 1);
+        } else if(Game.player.weaponIndex.food) {
+            Game.webSocket.wsSend("p", "food");
+        } else {
+            Game.webSocket.wsSend("p", Game.player.weaponIndex.id);
+        }
+
+        this.dataOnClick = Game.player.weaponIndex;
     }
 
     handleMouseUp(event) {
@@ -2266,7 +2731,10 @@ class Mouse {
             this.mouseDown.right = false;
         }
 
-        Game.webSocket.wsSend("h", 1);
+        if (this.dataOnClick.weapon) {
+            Game.webSocket.wsSend("h", 1);
+            this.dataOnClick = {};
+        }
     }
 }
 
