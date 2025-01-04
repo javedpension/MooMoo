@@ -1,2 +1,5743 @@
-/*! For license information please see bundle.js.LICENSE.txt */
-(()=>{var e={611:e=>{!function(t){e.exports=t;var n="listeners",r={on:function(e,t){return o(this,e).push(t),this},once:function(e,t){var n=this;return r.originalListener=t,o(n,e).push(r),n;function r(){a.call(n,e,r),t.apply(this,arguments)}},off:a,emit:function(e,t){var n=this,r=o(n,e,!0);if(!r)return!1;var i=arguments.length;if(1===i)r.forEach((function(e){e.call(n)}));else if(2===i)r.forEach((function(e){e.call(n,t)}));else{var a=Array.prototype.slice.call(arguments,1);r.forEach((function(e){e.apply(n,a)}))}return!!r.length}};function i(e){for(var t in r)e[t]=r[t];return e}function a(e,t){var r,i=this;if(arguments.length){if(t){if(r=o(i,e,!0)){if(!(r=r.filter((function(e){return e!==t&&e.originalListener!==t}))).length)return a.call(i,e);i[n][e]=r}}else if((r=i[n])&&(delete r[e],!Object.keys(r).length))return a.call(i)}else delete i[n];return i}function o(e,t,r){if(!r||e[n]){var i=e[n]||(e[n]={});return i[t]||(i[t]=[])}}i(t.prototype),t.mixin=i}((function e(){if(!(this instanceof e))return new e}))},251:(e,t)=>{t.read=function(e,t,n,r,i){var a,o,s=8*i-r-1,l=(1<<s)-1,c=l>>1,f=-7,h=n?i-1:0,u=n?-1:1,d=e[t+h];for(h+=u,a=d&(1<<-f)-1,d>>=-f,f+=s;f>0;a=256*a+e[t+h],h+=u,f-=8);for(o=a&(1<<-f)-1,a>>=-f,f+=r;f>0;o=256*o+e[t+h],h+=u,f-=8);if(0===a)a=1-c;else{if(a===l)return o?NaN:1/0*(d?-1:1);o+=Math.pow(2,r),a-=c}return(d?-1:1)*o*Math.pow(2,a-r)},t.write=function(e,t,n,r,i,a){var o,s,l,c=8*a-i-1,f=(1<<c)-1,h=f>>1,u=23===i?Math.pow(2,-24)-Math.pow(2,-77):0,d=r?0:a-1,p=r?1:-1,y=t<0||0===t&&1/t<0?1:0;for(t=Math.abs(t),isNaN(t)||t===1/0?(s=isNaN(t)?1:0,o=f):(o=Math.floor(Math.log(t)/Math.LN2),t*(l=Math.pow(2,-o))<1&&(o--,l*=2),(t+=o+h>=1?u/l:u*Math.pow(2,1-h))*l>=2&&(o++,l/=2),o+h>=f?(s=0,o=f):o+h>=1?(s=(t*l-1)*Math.pow(2,i),o+=h):(s=t*Math.pow(2,h-1)*Math.pow(2,i),o=0));i>=8;e[n+d]=255&s,d+=p,s/=256,i-=8);for(o=o<<i|s,c+=i;c>0;e[n+d]=255&o,d+=p,o/=256,c-=8);e[n+d-p]|=128*y}},305:function(e,t){!function(e){var t,n="undefined",r=n!==typeof Buffer&&Buffer,i=n!==typeof Uint8Array&&Uint8Array,a=n!==typeof ArrayBuffer&&ArrayBuffer,o=[0,0,0,0,0,0,0,0],s=Array.isArray||function(e){return!!e&&"[object Array]"==Object.prototype.toString.call(e)},l=4294967296;function c(s,c,v){var b=c?0:4,S=c?4:0,E=c?0:3,k=c?1:2,B=c?2:1,A=c?3:0,P=c?m:w,I=c?g:x,M=R.prototype,U="is"+s,T="_"+U;return M.buffer=void 0,M.offset=0,M[T]=!0,M.toNumber=W,M.toString=function(e){var t=this.buffer,n=this.offset,r=C(t,n+b),i=C(t,n+S),a="",o=!v&&2147483648&r;for(o&&(r=~r,i=l-i),e=e||10;;){var s=r%e*l+i;if(r=Math.floor(r/e),i=Math.floor(s/e),a=(s%e).toString(e)+a,!r&&!i)break}return o&&(a="-"+a),a},M.toJSON=W,M.toArray=f,r&&(M.toBuffer=h),i&&(M.toArrayBuffer=u),R[U]=function(e){return!(!e||!e[T])},e[s]=R,R;function R(e,r,s,c){return this instanceof R?function(e,r,s,c,f){i&&a&&(r instanceof a&&(r=new i(r)),c instanceof a&&(c=new i(c))),r||s||c||t?(d(r,s)||(f=s,c=r,s=0,r=new(t||Array)(8)),e.buffer=r,e.offset=s|=0,n!==typeof c&&("string"==typeof c?function(e,t,n,r){var i=0,a=n.length,o=0,s=0;"-"===n[0]&&i++;for(var c=i;i<a;){var f=parseInt(n[i++],r);if(!(f>=0))break;s=s*r+f,o=o*r+Math.floor(s/l),s%=l}c&&(o=~o,s?s=l-s:o++),D(e,t+b,o),D(e,t+S,s)}(r,s,c,f||10):d(c,f)?p(r,s,c,f):"number"==typeof f?(D(r,s+b,c),D(r,s+S,f)):c>0?P(r,s,c):c<0?I(r,s,c):p(r,s,o,0))):e.buffer=y(o,0)}(this,e,r,s,c):new R(e,r,s,c)}function W(){var e=this.buffer,t=this.offset,n=C(e,t+b),r=C(e,t+S);return v||(n|=0),n?n*l+r:r}function D(e,t,n){e[t+A]=255&n,n>>=8,e[t+B]=255&n,n>>=8,e[t+k]=255&n,n>>=8,e[t+E]=255&n}function C(e,t){return 16777216*e[t+E]+(e[t+k]<<16)+(e[t+B]<<8)+e[t+A]}}function f(e){var n=this.buffer,r=this.offset;return t=null,!1!==e&&0===r&&8===n.length&&s(n)?n:y(n,r)}function h(e){var n=this.buffer,i=this.offset;if(t=r,!1!==e&&0===i&&8===n.length&&Buffer.isBuffer(n))return n;var a=new r(8);return p(a,0,n,i),a}function u(e){var n=this.buffer,r=this.offset,o=n.buffer;if(t=i,!1!==e&&0===r&&o instanceof a&&8===o.byteLength)return o;var s=new i(8);return p(s,0,n,r),s.buffer}function d(e,t){var n=e&&e.length;return t|=0,n&&t+8<=n&&"string"!=typeof e[t]}function p(e,t,n,r){t|=0,r|=0;for(var i=0;i<8;i++)e[t++]=255&n[r++]}function y(e,t){return Array.prototype.slice.call(e,t,t+8)}function m(e,t,n){for(var r=t+8;r>t;)e[--r]=255&n,n/=256}function g(e,t,n){var r=t+8;for(n++;r>t;)e[--r]=255&-n^255,n/=256}function w(e,t,n){for(var r=t+8;t<r;)e[t++]=255&n,n/=256}function x(e,t,n){var r=t+8;for(n++;t<r;)e[t++]=255&-n^255,n/=256}c("Uint64BE",!0,!0),c("Int64BE",!0,!1),c("Uint64LE",!1,!0),c("Int64LE",!1,!1)}("string"!=typeof t.nodeName?t:this||{})},634:e=>{var t={}.toString;e.exports=Array.isArray||function(e){return"[object Array]"==t.call(e)}},830:(e,t,n)=>{t.encode=n(870).encode,t.decode=n(402).decode,t.Encoder=n(158).Encoder,t.Decoder=n(762).Decoder,t.createCodec=n(325).createCodec,t.codec=n(884).codec},924:function(e){function t(e){return e&&e.isBuffer&&e}e.exports=t("undefined"!=typeof Buffer&&Buffer)||t(this.Buffer)||t("undefined"!=typeof window&&window.Buffer)||this.Buffer},179:(e,t)=>{t.copy=function(e,t,n,r){var i;n||(n=0),r||0===r||(r=this.length),t||(t=0);var a=r-n;if(e===this&&n<t&&t<r)for(i=a-1;i>=0;i--)e[i+t]=this[i+n];else for(i=0;i<a;i++)e[i+t]=this[i+n];return a},t.toString=function(e,t,n){var r=this,i=0|t;n||(n=r.length);for(var a="",o=0;i<n;)(o=r[i++])<128?a+=String.fromCharCode(o):(192==(224&o)?o=(31&o)<<6|63&r[i++]:224==(240&o)?o=(15&o)<<12|(63&r[i++])<<6|63&r[i++]:240==(248&o)&&(o=(7&o)<<18|(63&r[i++])<<12|(63&r[i++])<<6|63&r[i++]),o>=65536?(o-=65536,a+=String.fromCharCode(55296+(o>>>10),56320+(1023&o))):a+=String.fromCharCode(o));return a},t.write=function(e,t){for(var n=this,r=t||(t|=0),i=e.length,a=0,o=0;o<i;)(a=e.charCodeAt(o++))<128?n[r++]=a:a<2048?(n[r++]=192|a>>>6,n[r++]=128|63&a):a<55296||a>57343?(n[r++]=224|a>>>12,n[r++]=128|a>>>6&63,n[r++]=128|63&a):(a=65536+(a-55296<<10|e.charCodeAt(o++)-56320),n[r++]=240|a>>>18,n[r++]=128|a>>>12&63,n[r++]=128|a>>>6&63,n[r++]=128|63&a);return r-t}},964:(e,t,n)=>{var r=n(204),i=e.exports=a(0);function a(e){return new Array(e)}i.alloc=a,i.concat=r.concat,i.from=function(e){if(!r.isBuffer(e)&&r.isView(e))e=r.Uint8Array.from(e);else if(r.isArrayBuffer(e))e=new Uint8Array(e);else{if("string"==typeof e)return r.from.call(i,e);if("number"==typeof e)throw new TypeError('"value" argument must not be a number')}return Array.prototype.slice.call(e)}},847:(e,t,n)=>{var r=n(204),i=r.global,a=e.exports=r.hasBuffer?o(0):[];function o(e){return new i(e)}a.alloc=r.hasBuffer&&i.alloc||o,a.concat=r.concat,a.from=function(e){if(!r.isBuffer(e)&&r.isView(e))e=r.Uint8Array.from(e);else if(r.isArrayBuffer(e))e=new Uint8Array(e);else{if("string"==typeof e)return r.from.call(a,e);if("number"==typeof e)throw new TypeError('"value" argument must not be a number')}return i.from&&1!==i.from.length?i.from(e):new i(e)}},43:(e,t,n)=>{var r,i=n(179);t.copy=c,t.slice=f,t.toString=function(e,t,n){return(!s&&a.isBuffer(this)?this.toString:i.toString).apply(this,arguments)},t.write=(r="write",function(){return(this[r]||i[r]).apply(this,arguments)});var a=n(204),o=a.global,s=a.hasBuffer&&"TYPED_ARRAY_SUPPORT"in o,l=s&&!o.TYPED_ARRAY_SUPPORT;function c(e,t,n,r){var o=a.isBuffer(this),s=a.isBuffer(e);if(o&&s)return this.copy(e,t,n,r);if(l||o||s||!a.isView(this)||!a.isView(e))return i.copy.call(this,e,t,n,r);var c=n||null!=r?f.call(this,n,r):this;return e.set(c,t),c.length}function f(e,t){var n=this.slice||!l&&this.subarray;if(n)return n.call(this,e,t);var r=a.alloc.call(this,t-e);return c.call(this,r,0,e,t),r}},188:(e,t,n)=>{var r=n(204),i=e.exports=r.hasArrayBuffer?a(0):[];function a(e){return new Uint8Array(e)}i.alloc=a,i.concat=r.concat,i.from=function(e){if(r.isView(e)){var t=e.byteOffset,n=e.byteLength;(e=e.buffer).byteLength!==n&&(e.slice?e=e.slice(t,t+n):(e=new Uint8Array(e)).byteLength!==n&&(e=Array.prototype.slice.call(e,t,t+n)))}else{if("string"==typeof e)return r.from.call(i,e);if("number"==typeof e)throw new TypeError('"value" argument must not be a number')}return new Uint8Array(e)}},204:(e,t,n)=>{var r=t.global=n(924),i=t.hasBuffer=r&&!!r.isBuffer,a=t.hasArrayBuffer="undefined"!=typeof ArrayBuffer,o=t.isArray=n(634);t.isArrayBuffer=a?function(e){return e instanceof ArrayBuffer||p(e)}:g;var s=t.isBuffer=i?r.isBuffer:g,l=t.isView=a?ArrayBuffer.isView||w("ArrayBuffer","buffer"):g;t.alloc=d,t.concat=function(e,n){n||(n=0,Array.prototype.forEach.call(e,(function(e){n+=e.length})));var r=this!==t&&this||e[0],i=d.call(r,n),a=0;return Array.prototype.forEach.call(e,(function(e){a+=u.copy.call(e,i,a)})),i},t.from=function(e){return"string"==typeof e?y.call(this,e):m(this).from(e)};var c=t.Array=n(964),f=t.Buffer=n(847),h=t.Uint8Array=n(188),u=t.prototype=n(43);function d(e){return m(this).alloc(e)}var p=w("ArrayBuffer");function y(e){var t=3*e.length,n=d.call(this,t),r=u.write.call(n,e);return t!==r&&(n=u.slice.call(n,0,r)),n}function m(e){return s(e)?f:l(e)?h:o(e)?c:i?f:a?h:c}function g(){return!1}function w(e,t){return e="[object "+e+"]",function(n){return null!=n&&{}.toString.call(t?n[t]:n)===e}}},704:(e,t,n)=>{var r=n(634);t.createCodec=s,t.install=function(e){for(var t in e)a.prototype[t]=o(a.prototype[t],e[t])},t.filter=function(e){return r(e)?function(e){return e=e.slice(),function(n){return e.reduce(t,n)};function t(e,t){return t(e)}}(e):e};var i=n(204);function a(e){if(!(this instanceof a))return new a(e);this.options=e,this.init()}function o(e,t){return e&&t?function(){return e.apply(this,arguments),t.apply(this,arguments)}:e||t}function s(e){return new a(e)}a.prototype.init=function(){var e=this.options;return e&&e.uint8array&&(this.bufferish=i.Uint8Array),this},t.preset=s({preset:!0})},884:(e,t,n)=>{n(294),n(897),t.codec={preset:n(704).preset}},785:(e,t,n)=>{t.n=i;var r=n(294).preset;function i(e){if(!(this instanceof i))return new i(e);if(e&&(this.options=e,e.codec)){var t=this.codec=e.codec;t.bufferish&&(this.bufferish=t.bufferish)}}n(614).I.mixin(i.prototype),i.prototype.codec=r,i.prototype.fetch=function(){return this.codec.decode(this)}},402:(e,t,n)=>{t.decode=function(e,t){var n=new r(t);return n.write(e),n.read()};var r=n(785).n},762:(e,t,n)=>{t.Decoder=a;var r=n(611),i=n(785).n;function a(e){if(!(this instanceof a))return new a(e);i.call(this,e)}a.prototype=new i,r.mixin(a.prototype),a.prototype.decode=function(e){arguments.length&&this.write(e),this.flush()},a.prototype.push=function(e){this.emit("data",e)},a.prototype.end=function(e){this.decode(e),this.emit("end")}},357:(e,t,n)=>{t.D=i;var r=n(897).preset;function i(e){if(!(this instanceof i))return new i(e);if(e&&(this.options=e,e.codec)){var t=this.codec=e.codec;t.bufferish&&(this.bufferish=t.bufferish)}}n(614).w.mixin(i.prototype),i.prototype.codec=r,i.prototype.write=function(e){this.codec.encode(this,e)}},870:(e,t,n)=>{t.encode=function(e,t){var n=new r(t);return n.write(e),n.read()};var r=n(357).D},158:(e,t,n)=>{t.Encoder=a;var r=n(611),i=n(357).D;function a(e){if(!(this instanceof a))return new a(e);i.call(this,e)}a.prototype=new i,r.mixin(a.prototype),a.prototype.encode=function(e){this.write(e),this.emit("data",this.read())},a.prototype.end=function(e){arguments.length&&this.encode(e),this.flush(),this.emit("end")}},816:(e,t,n)=>{t.u=function e(t,n){if(!(this instanceof e))return new e(t,n);this.buffer=r.from(t),this.type=n};var r=n(204)},236:(e,t,n)=>{t.setExtPackers=function(e){e.addExtPacker(14,Error,[h,l]),e.addExtPacker(1,EvalError,[h,l]),e.addExtPacker(2,RangeError,[h,l]),e.addExtPacker(3,ReferenceError,[h,l]),e.addExtPacker(4,SyntaxError,[h,l]),e.addExtPacker(5,TypeError,[h,l]),e.addExtPacker(6,URIError,[h,l]),e.addExtPacker(10,RegExp,[f,l]),e.addExtPacker(11,Boolean,[c,l]),e.addExtPacker(12,String,[c,l]),e.addExtPacker(13,Date,[Number,l]),e.addExtPacker(15,Number,[c,l]),"undefined"!=typeof Uint8Array&&(e.addExtPacker(17,Int8Array,o),e.addExtPacker(18,Uint8Array,o),e.addExtPacker(19,Int16Array,o),e.addExtPacker(20,Uint16Array,o),e.addExtPacker(21,Int32Array,o),e.addExtPacker(22,Uint32Array,o),e.addExtPacker(23,Float32Array,o),"undefined"!=typeof Float64Array&&e.addExtPacker(24,Float64Array,o),"undefined"!=typeof Uint8ClampedArray&&e.addExtPacker(25,Uint8ClampedArray,o),e.addExtPacker(26,ArrayBuffer,o),e.addExtPacker(29,DataView,o)),i.hasBuffer&&e.addExtPacker(27,a,i.from)};var r,i=n(204),a=i.global,o=i.Uint8Array.from,s={name:1,message:1,stack:1,columnNumber:1,fileName:1,lineNumber:1};function l(e){return r||(r=n(870).encode),r(e)}function c(e){return e.valueOf()}function f(e){(e=RegExp.prototype.toString.call(e).split("/")).shift();var t=[e.pop()];return t.unshift(e.join("/")),t}function h(e){var t={};for(var n in s)t[n]=e[n];return t}},623:(e,t,n)=>{t.setExtUnpackers=function(e){e.addExtUnpacker(14,[s,c(Error)]),e.addExtUnpacker(1,[s,c(EvalError)]),e.addExtUnpacker(2,[s,c(RangeError)]),e.addExtUnpacker(3,[s,c(ReferenceError)]),e.addExtUnpacker(4,[s,c(SyntaxError)]),e.addExtUnpacker(5,[s,c(TypeError)]),e.addExtUnpacker(6,[s,c(URIError)]),e.addExtUnpacker(10,[s,l]),e.addExtUnpacker(11,[s,f(Boolean)]),e.addExtUnpacker(12,[s,f(String)]),e.addExtUnpacker(13,[s,f(Date)]),e.addExtUnpacker(15,[s,f(Number)]),"undefined"!=typeof Uint8Array&&(e.addExtUnpacker(17,f(Int8Array)),e.addExtUnpacker(18,f(Uint8Array)),e.addExtUnpacker(19,[h,f(Int16Array)]),e.addExtUnpacker(20,[h,f(Uint16Array)]),e.addExtUnpacker(21,[h,f(Int32Array)]),e.addExtUnpacker(22,[h,f(Uint32Array)]),e.addExtUnpacker(23,[h,f(Float32Array)]),"undefined"!=typeof Float64Array&&e.addExtUnpacker(24,[h,f(Float64Array)]),"undefined"!=typeof Uint8ClampedArray&&e.addExtUnpacker(25,f(Uint8ClampedArray)),e.addExtUnpacker(26,h),e.addExtUnpacker(29,[h,f(DataView)])),i.hasBuffer&&e.addExtUnpacker(27,f(a))};var r,i=n(204),a=i.global,o={name:1,message:1,stack:1,columnNumber:1,fileName:1,lineNumber:1};function s(e){return r||(r=n(402).decode),r(e)}function l(e){return RegExp.apply(null,e)}function c(e){return function(t){var n=new e;for(var r in o)n[r]=t[r];return n}}function f(e){return function(t){return new e(t)}}function h(e){return new Uint8Array(e).buffer}},325:(e,t,n)=>{n(294),n(897),t.createCodec=n(704).createCodec},614:(e,t,n)=>{t.I=a,t.w=o;var r=n(204),i="BUFFER_SHORTAGE";function a(){if(!(this instanceof a))return new a}function o(){if(!(this instanceof o))return new o}function s(){return this.buffers&&this.buffers.length?(this.flush(),this.pull()):this.fetch()}function l(e){(this.buffers||(this.buffers=[])).push(e)}function c(e){return function(t){for(var n in e)t[n]=e[n];return t}}a.mixin=c({bufferish:r,write:function(e){var t=this.offset?r.prototype.slice.call(this.buffer,this.offset):this.buffer;this.buffer=t?e?this.bufferish.concat([t,e]):t:e,this.offset=0},fetch:function(){throw new Error("method not implemented: fetch()")},flush:function(){for(;this.offset<this.buffer.length;){var e,t=this.offset;try{e=this.fetch()}catch(e){if(e&&e.message!=i)throw e;this.offset=t;break}this.push(e)}},push:l,pull:function(){return(this.buffers||(this.buffers=[])).shift()},read:s,reserve:function(e){var t=this.offset,n=t+e;if(n>this.buffer.length)throw new Error(i);return this.offset=n,t},offset:0}),a.mixin(a.prototype),o.mixin=c({bufferish:r,write:function(){throw new Error("method not implemented: write()")},fetch:function(){var e=this.start;if(e<this.offset){var t=this.start=this.offset;return r.prototype.slice.call(this.buffer,e,t)}},flush:function(){for(;this.start<this.offset;){var e=this.fetch();e&&this.push(e)}},push:l,pull:function(){var e=this.buffers||(this.buffers=[]),t=e.length>1?this.bufferish.concat(e):e[0];return e.length=0,t},read:s,reserve:function(e){var t=0|e;if(this.buffer){var n=this.buffer.length,r=0|this.offset,i=r+t;if(i<n)return this.offset=i,r;this.flush(),e=Math.max(e,Math.min(2*n,this.maxBufferSize))}return e=Math.max(e,this.minBufferSize),this.buffer=this.bufferish.alloc(e),this.start=0,this.offset=t,0},send:function(e){var t=e.length;if(t>this.minBufferSize)this.flush(),this.push(e);else{var n=this.reserve(t);r.prototype.copy.call(e,this.buffer,n)}},maxBufferSize:65536,minBufferSize:2048,offset:0,start:0}),o.mixin(o.prototype)},294:(e,t,n)=>{var r=n(816).u,i=n(623),a=n(970).readUint8,o=n(4),s=n(704);function l(){var e=this.options;return this.decode=function(e){var t=o.getReadToken(e);return function(e){var n=a(e),r=t[n];if(!r)throw new Error("Invalid type: "+(n?"0x"+n.toString(16):n));return r(e)}}(e),e&&e.preset&&i.setExtUnpackers(this),this}s.install({addExtUnpacker:function(e,t){(this.extUnpackers||(this.extUnpackers=[]))[e]=s.filter(t)},getExtUnpacker:function(e){return(this.extUnpackers||(this.extUnpackers=[]))[e]||function(t){return new r(t,e)}},init:l}),t.preset=l.call(s.preset)},970:(e,t,n)=>{var r=n(251),i=n(305),a=i.Uint64BE,o=i.Int64BE;t.getReadFormat=function(e){var t=s.hasArrayBuffer&&e&&e.binarraybuffer,n=e&&e.int64;return{map:c&&e&&e.usemap?u:h,array:d,str:p,bin:t?m:y,ext:g,uint8:w,uint16:v,uint32:S,uint64:k(8,n?P:B),int8:x,int16:b,int32:E,int64:k(8,n?I:A),float32:k(4,M),float64:k(8,U)}},t.readUint8=w;var s=n(204),l=n(43),c="undefined"!=typeof Map,f=!0;function h(e,t){var n,r={},i=new Array(t),a=new Array(t),o=e.codec.decode;for(n=0;n<t;n++)i[n]=o(e),a[n]=o(e);for(n=0;n<t;n++)r[i[n]]=a[n];return r}function u(e,t){var n,r=new Map,i=new Array(t),a=new Array(t),o=e.codec.decode;for(n=0;n<t;n++)i[n]=o(e),a[n]=o(e);for(n=0;n<t;n++)r.set(i[n],a[n]);return r}function d(e,t){for(var n=new Array(t),r=e.codec.decode,i=0;i<t;i++)n[i]=r(e);return n}function p(e,t){var n=e.reserve(t),r=n+t;return l.toString.call(e.buffer,"utf-8",n,r)}function y(e,t){var n=e.reserve(t),r=n+t,i=l.slice.call(e.buffer,n,r);return s.from(i)}function m(e,t){var n=e.reserve(t),r=n+t,i=l.slice.call(e.buffer,n,r);return s.Uint8Array.from(i).buffer}function g(e,t){var n=e.reserve(t+1),r=e.buffer[n++],i=n+t,a=e.codec.getExtUnpacker(r);if(!a)throw new Error("Invalid ext type: "+(r?"0x"+r.toString(16):r));return a(l.slice.call(e.buffer,n,i))}function w(e){var t=e.reserve(1);return e.buffer[t]}function x(e){var t=e.reserve(1),n=e.buffer[t];return 128&n?n-256:n}function v(e){var t=e.reserve(2),n=e.buffer;return n[t++]<<8|n[t]}function b(e){var t=e.reserve(2),n=e.buffer,r=n[t++]<<8|n[t];return 32768&r?r-65536:r}function S(e){var t=e.reserve(4),n=e.buffer;return 16777216*n[t++]+(n[t++]<<16)+(n[t++]<<8)+n[t]}function E(e){var t=e.reserve(4),n=e.buffer;return n[t++]<<24|n[t++]<<16|n[t++]<<8|n[t]}function k(e,t){return function(n){var r=n.reserve(e);return t.call(n.buffer,r,f)}}function B(e){return new a(this,e).toNumber()}function A(e){return new o(this,e).toNumber()}function P(e){return new a(this,e)}function I(e){return new o(this,e)}function M(e){return r.read(this,e,!1,23,4)}function U(e){return r.read(this,e,!1,52,8)}},4:(e,t,n)=>{var r=n(970);function i(e){var t,n=new Array(256);for(t=0;t<=127;t++)n[t]=a(t);for(t=128;t<=143;t++)n[t]=s(t-128,e.map);for(t=144;t<=159;t++)n[t]=s(t-144,e.array);for(t=160;t<=191;t++)n[t]=s(t-160,e.str);for(n[192]=a(null),n[193]=null,n[194]=a(!1),n[195]=a(!0),n[196]=o(e.uint8,e.bin),n[197]=o(e.uint16,e.bin),n[198]=o(e.uint32,e.bin),n[199]=o(e.uint8,e.ext),n[200]=o(e.uint16,e.ext),n[201]=o(e.uint32,e.ext),n[202]=e.float32,n[203]=e.float64,n[204]=e.uint8,n[205]=e.uint16,n[206]=e.uint32,n[207]=e.uint64,n[208]=e.int8,n[209]=e.int16,n[210]=e.int32,n[211]=e.int64,n[212]=s(1,e.ext),n[213]=s(2,e.ext),n[214]=s(4,e.ext),n[215]=s(8,e.ext),n[216]=s(16,e.ext),n[217]=o(e.uint8,e.str),n[218]=o(e.uint16,e.str),n[219]=o(e.uint32,e.str),n[220]=o(e.uint16,e.array),n[221]=o(e.uint32,e.array),n[222]=o(e.uint16,e.map),n[223]=o(e.uint32,e.map),t=224;t<=255;t++)n[t]=a(t-256);return n}function a(e){return function(){return e}}function o(e,t){return function(n){var r=e(n);return t(n,r)}}function s(e,t){return function(n){return t(n,e)}}t.getReadToken=function(e){var t=r.getReadFormat(e);return e&&e.useraw?function(e){var t,n=i(e).slice();for(n[217]=n[196],n[218]=n[197],n[219]=n[198],t=160;t<=191;t++)n[t]=s(t-160,e.bin);return n}(t):i(t)}},897:(e,t,n)=>{var r=n(816).u,i=n(236),a=n(398),o=n(704);function s(){var e=this.options;return this.encode=function(e){var t=a.getWriteType(e);return function(e,n){var r=t[typeof n];if(!r)throw new Error('Unsupported type "'+typeof n+'": '+n);r(e,n)}}(e),e&&e.preset&&i.setExtPackers(this),this}o.install({addExtPacker:function(e,t,n){n=o.filter(n);var i=t.name;function a(t){return n&&(t=n(t)),new r(t,e)}i&&"Object"!==i?(this.extPackers||(this.extPackers={}))[i]=a:(this.extEncoderList||(this.extEncoderList=[])).unshift([t,a])},getExtPacker:function(e){var t=this.extPackers||(this.extPackers={}),n=e.constructor,r=n&&n.name&&t[n.name];if(r)return r;for(var i=this.extEncoderList||(this.extEncoderList=[]),a=i.length,o=0;o<a;o++){var s=i[o];if(n===s[0])return s[1]}},init:s}),t.preset=s.call(o.preset)},685:(e,t,n)=>{var r=n(251),i=n(305),a=i.Uint64BE,o=i.Int64BE,s=n(40).h,l=n(204),c=l.global,f=l.hasBuffer&&"TYPED_ARRAY_SUPPORT"in c&&!c.TYPED_ARRAY_SUPPORT,h=l.hasBuffer&&c.prototype||{};function u(){var e=s.slice();return e[196]=d(196),e[197]=p(197),e[198]=y(198),e[199]=d(199),e[200]=p(200),e[201]=y(201),e[202]=m(202,4,h.writeFloatBE||x,!0),e[203]=m(203,8,h.writeDoubleBE||v,!0),e[204]=d(204),e[205]=p(205),e[206]=y(206),e[207]=m(207,8,g),e[208]=d(208),e[209]=p(209),e[210]=y(210),e[211]=m(211,8,w),e[217]=d(217),e[218]=p(218),e[219]=y(219),e[220]=p(220),e[221]=y(221),e[222]=p(222),e[223]=y(223),e}function d(e){return function(t,n){var r=t.reserve(2),i=t.buffer;i[r++]=e,i[r]=n}}function p(e){return function(t,n){var r=t.reserve(3),i=t.buffer;i[r++]=e,i[r++]=n>>>8,i[r]=n}}function y(e){return function(t,n){var r=t.reserve(5),i=t.buffer;i[r++]=e,i[r++]=n>>>24,i[r++]=n>>>16,i[r++]=n>>>8,i[r]=n}}function m(e,t,n,r){return function(i,a){var o=i.reserve(t+1);i.buffer[o++]=e,n.call(i.buffer,a,o,r)}}function g(e,t){new a(this,t,e)}function w(e,t){new o(this,t,e)}function x(e,t){r.write(this,e,t,!1,23,4)}function v(e,t){r.write(this,e,t,!1,52,8)}t.getWriteToken=function(e){return e&&e.uint8array?((t=u())[202]=m(202,4,x),t[203]=m(203,8,v),t):f||l.hasBuffer&&e&&e.safe?function(){var e=s.slice();return e[196]=m(196,1,c.prototype.writeUInt8),e[197]=m(197,2,c.prototype.writeUInt16BE),e[198]=m(198,4,c.prototype.writeUInt32BE),e[199]=m(199,1,c.prototype.writeUInt8),e[200]=m(200,2,c.prototype.writeUInt16BE),e[201]=m(201,4,c.prototype.writeUInt32BE),e[202]=m(202,4,c.prototype.writeFloatBE),e[203]=m(203,8,c.prototype.writeDoubleBE),e[204]=m(204,1,c.prototype.writeUInt8),e[205]=m(205,2,c.prototype.writeUInt16BE),e[206]=m(206,4,c.prototype.writeUInt32BE),e[207]=m(207,8,g),e[208]=m(208,1,c.prototype.writeInt8),e[209]=m(209,2,c.prototype.writeInt16BE),e[210]=m(210,4,c.prototype.writeInt32BE),e[211]=m(211,8,w),e[217]=m(217,1,c.prototype.writeUInt8),e[218]=m(218,2,c.prototype.writeUInt16BE),e[219]=m(219,4,c.prototype.writeUInt32BE),e[220]=m(220,2,c.prototype.writeUInt16BE),e[221]=m(221,4,c.prototype.writeUInt32BE),e[222]=m(222,2,c.prototype.writeUInt16BE),e[223]=m(223,4,c.prototype.writeUInt32BE),e}():u();var t}},398:(e,t,n)=>{var r=n(634),i=n(305),a=i.Uint64BE,o=i.Int64BE,s=n(204),l=n(43),c=n(685),f=n(40).h,h=n(816).u,u="undefined"!=typeof Uint8Array,d="undefined"!=typeof Map,p=[];p[1]=212,p[2]=213,p[4]=214,p[8]=215,p[16]=216,t.getWriteType=function(e){var t,n=c.getWriteToken(e),i=e&&e.useraw,y=u&&e&&e.binarraybuffer,m=y?s.isArrayBuffer:s.isBuffer,g=y?function(e,t){b(e,new Uint8Array(t))}:b,w=d&&e&&e.usemap?function(e,t){if(!(t instanceof Map))return S(e,t);var r=t.size;n[r<16?128+r:r<=65535?222:223](e,r);var i=e.codec.encode;t.forEach((function(t,n,r){i(e,n),i(e,t)}))}:S;return{boolean:function(e,t){n[t?195:194](e,t)},function:v,number:function(e,t){var r=0|t;t===r?n[-32<=r&&r<=127?255&r:0<=r?r<=255?204:r<=65535?205:206:-128<=r?208:-32768<=r?209:210](e,r):n[203](e,t)},object:i?function(e,t){if(m(t))return function(e,t){var r=t.length;n[r<32?160+r:r<=65535?218:219](e,r),e.send(t)}(e,t);x(e,t)}:x,string:(t=i?function(e){return e<32?1:e<=65535?3:5}:function(e){return e<32?1:e<=255?2:e<=65535?3:5},function(e,r){var i=r.length,a=5+3*i;e.offset=e.reserve(a);var o=e.buffer,s=t(i),c=e.offset+s;i=l.write.call(o,r,c);var f=t(i);if(s!==f){var h=c+f-s,u=c+i;l.copy.call(o,o,h,c,u)}n[1===f?160+i:f<=3?215+f:219](e,i),e.offset+=i}),symbol:v,undefined:v};function x(e,t){if(null===t)return v(e,t);if(m(t))return g(e,t);if(r(t))return function(e,t){var r=t.length;n[r<16?144+r:r<=65535?220:221](e,r);for(var i=e.codec.encode,a=0;a<r;a++)i(e,t[a])}(e,t);if(a.isUint64BE(t))return function(e,t){n[207](e,t.toArray())}(e,t);if(o.isInt64BE(t))return function(e,t){n[211](e,t.toArray())}(e,t);var i=e.codec.getExtPacker(t);if(i&&(t=i(t)),t instanceof h)return function(e,t){var r=t.buffer,i=r.length,a=p[i]||(i<255?199:i<=65535?200:201);n[a](e,i),f[t.type](e),e.send(r)}(e,t);w(e,t)}function v(e,t){n[192](e,t)}function b(e,t){var r=t.length;n[r<255?196:r<=65535?197:198](e,r),e.send(t)}function S(e,t){var r=Object.keys(t),i=r.length;n[i<16?128+i:i<=65535?222:223](e,i);var a=e.codec.encode;r.forEach((function(n){a(e,n),a(e,t[n])}))}}},40:(e,t)=>{for(var n=t.h=new Array(256),r=0;r<=255;r++)n[r]=i(r);function i(e){return function(t){var n=t.reserve(1);t.buffer[n]=e}}}},t={};function n(r){var i=t[r];if(void 0!==i)return i.exports;var a=t[r]={exports:{}};return e[r].call(a.exports,a,a.exports,n),a.exports}n.d=(e,t)=>{for(var r in t)n.o(t,r)&&!n.o(e,r)&&Object.defineProperty(e,r,{enumerable:!0,get:t[r]})},n.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t);var r={};(()=>{"use strict";function e(e){let t=new Image;return t.onload=function(){this.isLoaded=!0},t.src=e,t}n.d(r,{Ay:()=>he,jv:()=>pe});const t=document.getElementById("serverBrowser"),i=document.getElementById("loadingText"),a=document.getElementById("mainMenu"),o=document.getElementById("menuCardHolder"),s=document.getElementById("nameInput"),l=document.getElementById("leaderboard"),c=document.getElementById("actionBar"),f=document.getElementById(""),h=(document.getElementById("ageBar"),document.getElementById("ageBarBody")),u=document.getElementById("ageText");function d(e){if("number"!=typeof e)throw new TypeError("value passed to kFormat is not number",e);return e>=1e6?(e/1e6).toFixed(1)+"m":e>=1e3?(e/1e3).toFixed(1)+"k":e}class p{constructor(e){this.x=e.x,this.y=e.y,this.x1=this.x,this.y1=this.y,this.lastx=this.x,this.lasty=this.y,this.lerpx=this.x,this.lerpy=this.y,this.lastlerpx=this.lerpx,this.lastlerpy=this.lerpy,this.xVel=this.x,this.yVel=this.y,this.xAccel=this.x,this.yAccel=this.y}}class y extends p{constructor({sid:e,type:t,name:n,x:r,y:i,scale:a,data:o,dir:s}){super({x:r,y:i}),this.sid=e,this.type=t,this.data=o,this.x=r,this.y=i,this.xWiggle=0,this.yWiggle=0,this.name=n||this.data.name,this.scale=a,this.spin=this.name.includes("mill"),this.spinDir=s,console.log(e,t,n,r,i,a,o,s)}update(e){this.spin&&(this.spinDir+=.0012*e),this.xWiggle&&(this.xWiggle*=Math.pow(.99,e)),this.yWiggle&&(this.yWiggle*=Math.pow(.99,e))}}class m extends p{constructor(e){super(e),this.sid=e.sid,this.health=D.maxPlayerHealth,this.maxHealth=this.health,this.t2=0,this.t1=0,this.delta=0,this.d2=0,this.d1=0,this.dir=0,this.outOfRange=!1,this.rightFoot=!1,this.scale=35,this.name=e.name,this.animTime=0,this.animSpeed=0,this.targetAngle=0,this.dirPlus=0,this.alive=!0,this.weapons=[C[0]],this.weaponIndex=this.weapons[0],this.items=[L[0],O[0],O[1],O[2]],this.xp=0,this.maxXP=300,this.age=1,this.a=0,this.f=0}resetStuff(){this.weapons=[C[0]],this.items=[L[0],O[0],O[1],O[2]]}changeHealth(e){this.health+=e}spawn(e){}startAnimation(e){this.animTime=this.animSpeed=300,this.targetAngle=e?-D.hitAngle:-Math.PI,this.b=0,this.$=0}animate(e){this.animTime>0&&(this.animTime-=e,this.animTime<=0?(this.animTime=0,this.dirPlus=0,this.a=0,this.f=0):0==this.f?(this.a+=e/(this.animSpeed*D.hitReturnRatio),this.dirPlus=g(0,this.targetAngle,Math.min(1,this.a)),this.a>=1&&(this.a=1,this.f=1)):(this.a-=e/(this.animSpeed*(1-D.hitReturnRatio)),this.dirPlus=g(0,this.targetAngle,Math.max(0,this.a))))}}function g(e,t,n){return e+(t-e)*n}function w(e,t,n,r){return Math.atan2(r-t,n-e)}class x{constructor(e,t,n,r){this.x=e,this.y=t,this.size=n,this.dir=r,this.alpha=.6,this.sizeAlpha=1,this.waitTime=1e3}update(e){if(this.waitTime>0)this.waitTime-=e;else{if(this.alpha<=0)return;this.alpha-=e/700,this.alpha<=0&&(this.alpha=0),this.sizeAlpha+=e/80}}draw(e,t){Q.beginPath(),Q.fillStyle="#000",Q.globalAlpha=this.alpha,Q.arc(this.x-e,this.y-t,this.size,0,2*Math.PI),Q.fill()}}let v=[];function b(e,t,n){v.push(new x(e,t,n))}let S=0;var E=Date.now();let k=0;function B(){return he.lockDir?lastDir:Math.atan2(pe.mouseY-window.innerHeight/2,pe.mouseX-window.innerWidth/2)}const A=document.getElementById("chatLog");function P(e,t){let n=`${e}: ${t}`,r=document.createElement("p");r.className="chatElm",r.innerText=n,A.appendChild(r),A.scrollTop=A.scrollHeight}function I(e){const t={":smile:":"😄",":sob:":"😭",":heart:":"❤️",":thumbsup:":"👍",":fire:":"🔥",":laughing:":"😂",":clap:":"👏",":wink:":"😉",":sunglasses:":"😎",":thinking:":"🤔",":grin:":"😀",":star:":"⭐",":check:":"✔️",":x:":"❌",":warning:":"⚠️",":sparkles:":"✨",":100:":"💯",":pray:":"🙏",":wave:":"👋",":ok:":"👌",":poop:":"💩",":shit:":"💩",":kiss:":"😘",":sleeping:":"😴",":angry:":"😠",":neutral:":"😐",":confused:":"😕",":shocked:":"😲",":party:":"🥳",":drool:":"🤤",":money:":"🤑",":alien:":"👽",":robot:":"🤖",":cat:":"🐱",":dog:":"🐶",":unicorn:":"🦄",":sun:":"☀️",":moon:":"🌙",":cloud:":"☁️",":rainbow:":"🌈",":coffee:":"☕",":pizza:":"🍕",":burger:":"🍔",":fries:":"🍟",":cake:":"🎂",":gift:":"🎁",":balloon:":"🎈",":muscle:":"💪",":eyes:":"👀",":skull:":"💀",":ghost:":"👻",":zombie:":"🧟",":vampire:":"🧛",":angel:":"😇",":devil:":"😈",":hug:":"🤗",":writing:":"✍️",":phone:":"📞",":laptop:":"💻",":hourglass:":"⏳",":lock:":"🔒",":unlock:":"🔓",":key:":"🔑",":music:":"🎵",":microphone:":"🎤",":camera:":"📷",":video:":"📹",":tv:":"📺",":game:":"🎮",":airplane:":"✈️",":car:":"🚗",":train:":"🚆",":rocket:":"🚀",":medal:":"🏅",":trophy:":"🏆"};return e.replace(/:\w+:/g,(e=>t[e]||e))}class M extends p{constructor(e,t,n,r){super({x:0,y:0}),this.id=e,this.type=t,this.data=H[t],this.img=this.data.img,this.health=this.data.health,this.dir=0,this.name=this.data.name,this.weight=this.data.weight,this.turnSpeed=this.data.turnSpeed,this.drop=this.data.drop,this.name=this.data.name}}class U{constructor(e,t,n,r,i,a){Object.assign(this,{x:e,y:t,text:n,size:r,color:i,life:a})}update(e){this.life-=e,this.life<=0||(this.y-=.18*e)}render(e,t){this.life<=0||(Q.beginPath(),Q.fillStyle=this.color,Q.font=this.size+"px Hammersmith One",Q.fillText(this.text,this.x-e,this.y-t))}}const T=new class{#e=[];addText(e,t,n,r,i,a){this.#e.push(new U(e,t,n,r,i,a))}renderTexts(e,t,n){let r;this.#e.filter((e=>e.life>=0));for(let i=this.#e.length;i--;)(r=this.#e[i])&&(r.update(n),r.render(e,t))}},R=T;let W=99999;const D={mapScale:6e3,maxNameLength:15,maxChatLength:40,playerScale:35,lineWidth:5.5,maxScreenWidth:1920,maxScreenHeight:1080,maxPlayerHealth:100,snowBiomeTop:1e3,serverUpdateRate:9,riverWidth:400,riverPadding:20,waveSpeed:1e-4,waveMax:1.2,outlineColor:"#525252",textOutlineColor:"#3d3f42",nameY:34,healthBarWidth:55,healthBarPad:4.5,chatCountdown:4e3,hitReturnRatio:.25,hitAngle:Math.PI/2,wiggleIntensity:20,iconPad:.9},C=[{id:0,type:0,name:"tool hammer",desc:"tool for gathering all resources",img:e("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/hammer_1.png"),length:140,width:140,xOff:-3,yOff:18,dmg:25,range:65,gather:1,speed:300,weapon:!0,gameID:0}],O=[{id:0,name:"wall",description:"protects your base from hostile aggressors",health:400,scale:55,weapon:!1,isItem:!0,holdOffset:20,placeOffset:-5,img:e("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/3_wood_wall.svg?v=1735857908118"),hitResistance:80},{id:1,name:"baby spikes",description:"fortifies your base, knocks back hostile aggressors",health:300,scale:50,holdOffset:14,placeOffset:-5,weapon:!1,isItem:!0,img:e("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/Untitled%20(1).svg?v=1735910950877"),hitResistance:20},{id:2,name:"basic windmill",description:"generates gold over time",health:400,scale:75,holdOffset:20,placeOffset:5,weapon:!1,isItem:!0,img:e("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/mill.svg?v=1735857620463"),hitResistance:120}],H=[{id:0,img:e("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/cow.png"),killScore:150,health:500,weightM:.8,speed:95e-5,turnSpeed:.001,scale:72,drop:["food",50]},{id:1,img:e("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/pig.png"),killScore:200,health:800,weightM:.6,speed:85e-5,turnSpeed:.001,scale:72,drop:["food",80]}],L=[{id:0,name:"apple",heal:10,scale:22,holdOffset:15,weapon:!1,img:e("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/0_apple.svg?v=1735858017502")},{id:1,name:"fly honeysuckle",heal:60,slowEffect:6e3,img:e("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/Apple-1-Modified.webp?v=1735782332913")},{id:2,name:"pork",heal:20,poisonEffect:5e3,haram:!0}],j={1:function(e){let t;S++;for(let e=he.players.length;e--;)(t=he.players[e])&&(t.outOfRange=!0);for(let t=0;t<e.length;t++){let n=he.getPlayerBySid(e[t].sid);n.outOfRange=!1,n.x=e[t].x,n.y=e[t].y,n.x1=n.lerpx,n.y1=n.lerpy,n.t1=void 0===n.t2?Date.now():n.t2,n.t2=Date.now(),n.d1=void 0===n.d2?e[t].dir:n.d2,n.d2=e[t].dir,n.delta=0,n.weaponIndex=e[t].weaponIndex;let r=.01*performance.now(),i=[{x:n.lerpx+20*Math.cos(w(n.x,n.y,n.x1,n.y1)+Math.PI/2)+5*Math.sin(r),y:n.lerpy+20*Math.sin(w(n.x,n.y,n.x1,n.y1)+Math.PI/2)+5*Math.cos(r)},{x:n.lerpx+20*Math.cos(w(n.x,n.y,n.x1,n.y1)-Math.PI/2)+5*Math.sin(r+Math.PI),y:n.lerpy+20*Math.sin(w(n.x,n.y,n.x1,n.y1)-Math.PI/2)+5*Math.cos(r+Math.PI)}];n.rightFoot?b(i[1].x,i[1].y,10):b(i[0].x,i[0].y,10),n.rightFoot=!n.rightFoot}S%15==0&&(E=Date.now(),he.webSocket.wsSend("0"));let n=B();n!==k&&(k=n,he.webSocket.wsSend("d",B()))},2:function([e,t]){console.warn(e,t);let n=he.getPlayerBySid(e.sid);n?(n.x=e.x,n.y=e.y,n.alive=!0,n.resetStuff()):(n=new m(e),he.players.push(n)),t&&(he.player=n,function(e=[...he.player.weapons,...he.player.items]){c.innerHTML="",e.forEach((e=>{const t=document.createElement("div");t.className="actionBarItems",t.id=e.name,t.onclick=function(){he.webSocket.wsSend("s",e.id,e?.weapon?"weapon":e?.heal?"food":"item")};const n=document.createElement("canvas");n.width=n.height=66,n.style.width="100%",n.style.height="100%",n.style.zIndex="99";const r=n.getContext("2d");let i=e.img;const a=e.iPad||1,o=D.iconPad,s=n.width*a*o+5,l=n.height*a*o+5,f=(n.width-s)/2,h=(n.height-l)/2;r.clearRect(0,0,n.width,n.height),r.save(),r.translate(n.width/2,n.height/2),e.weapon&&r.rotate(Math.PI/4+Math.PI),r.translate(-n.width/2,-n.height/2),r.drawImage(i,f,h,s,l),r.restore(),t.appendChild(n),c.appendChild(t)}))}())},r:function(e){let t=e[0],n=he.getPlayerBySid(t);if(!n)return void console.error(`player with sid ${t} not found`);let r=he.players.indexOf(n);-1!==r?he.players.splice(r,1):console.error(`player with sid ${t} not found in the players array`)},6:function(e){he.getPlayerBySid(e[0]).chatMessage=I(e[1]),he.getPlayerBySid(e[0]).chatCountdown=D.chatCountdown,P(he.getPlayerBySid(e[0]).name||"unknown",I(e[1]))},0:function(){let e=Date.now()-E;document.getElementById("pingDisplay").innerHTML=`Ping: ${e}ms Objects ${he.buildings.length}`},a:function(e){for(let t=0;t<e.length;t++){let n=he.getAnimalBySid(e[t].sid);n?(n.x1=n.lerpx,n.y1=n.lerpy,n.x=e[t].x,n.y=e[t].y,n.t1=void 0===n.t2?Date.now():n.t2,n.t2=Date.now(),n.d1=void 0===n.d2?e[t].dir:n.d2,n.d2=e[t].dir,n.delta=0):(n=new M(e[t].sid,e[t].type||1,e[t].x,e[t].y),n.sid=e[t].sid,n.x=e[t].x,n.y=e[t].y,n.d2=e[t].dir,n.health=e[t].health,he.animals.push(n))}},l:function(e){l.innerHTML='\n    <div style="font-size: 30px;">Leaderboard</div>\n    ';for(let t=0;t<e.length;t++)l.innerHTML+=`\n        <div id="leaderHolder" style="display: flex; justify-content: space-between; align-items: center;">\n            <div id="leaderboardItem" style="font-size: 22px; color: ${e[t].sid==he.player.sid?"#fff":"rgba(255, 255, 255, 0.5)"}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 75%;">\n                ${t+1}. [${e[t].sid}] ${e[t].name}\n            </div>\n\n            <div id="leaderScore" style="font-size: 22px; color: #fff;">\n                ${d(e[t].gold)}\n            </div>\n        </div>\n        `},g:function(e){for(let t of e[0]){let e=new y(t);he.buildings.push(e)}},h:function([e,t,n]){let r=he.getPlayerBySid(e);if(r){let e;r.startAnimation(n.length);for(let t=n.length;t--;)(e=he.getBuildingBySid(n[t].sid))&&(e.xWiggle+=D.wiggleIntensity*Math.cos(w(he.player.lerpx,he.player.lerpy,e.x,e.y)),e.yWiggle+=D.wiggleIntensity*Math.sin(w(he.player.lerpx,he.player.lerpy,e.x,e.y)))}},o:function([e,t]){let n=he.getPlayerBySid(e);n.health+=t,n.health<=0&&(n.alive=!1),R.addText(n.lerpx,n.lerpy,Math.abs(t),50,t<0?"#fff":"#8ecc51",500),n.sid==he.player.sid&&(f.style.display="block",f.style.fontSize="0px",W=0,setTimeout((function(){f.style.display="none"}),D.deathFadeout))},d:function([e]){he.buildings.splice(he.buildings.indexOf(he.getBuildingBySid(e)),1)},x:function([e]){he.player.xp+=e,he.player.xp>=he.player.maxXP?(he.player.xp=0,he.player.maxXP*=1.2,he.player.age<21?(he.player.age++,u.innerHTML=`AGE ${he.player.age}`):u.innerHTML="MAX AGE"):(he.player.xp+=e,h.style.width=he.player.xp/he.player.maxXP*100+"px")}},N="#b6db66",$="#fff",z="#dbc666",F=document.getElementById("minimap"),Y=F.getContext("2d");function _(e,t){return~~(Math.random()*(t-e+1))+e}let K={};function V(e){let t=e.y>=D.mapScale-D.snowBiomeTop?2:e.y<=D.snowBiomeTop?1:0,n=K[`${"bush"==e.name?e.name+""+e.y:e.name}${t}`];if(!n){let r=document.createElement("canvas"),i=2.5*e.scale+50;r.width=r.height=i;let a=r.getContext("2d");if(a.translate(i/2,i/2),a.rotate(Math.PI/2),a.strokeStyle=D.outlineColor,a.lineWidth=D.lineWidth,100===e.scale)for(let n=0;n<2;n++){const r=()=>n?.5*e.scale+30:e.scale+50;oe(a,7,r(),.7*r()),a.fillStyle=t?n?"#fff":"#e3f1f4":n?"#b4db62":"#9ebf57",a.fill(),n||a.stroke()}else if(90===e.scale||10===e.scale)a.fillStyle=2===t?"#938d77":"#939393",oe(a,3,e.scale,e.scale),a.fill(),a.stroke(),a.fillStyle=2===t?"#b2ab90":"#bcbcbc",oe(a,3,.55*e.scale,.65*e.scale),a.fill();else if(75===e.scale){!function(e,t,n,r){let i,a=Math.PI/2*3,o=Math.PI/6;e.beginPath(),e.moveTo(0,-r);for(let t=0;t<6;t++)i=_(n+.9,1.2*n),e.quadraticCurveTo(Math.cos(a+o)*i,Math.sin(a+o)*i,Math.cos(a+2*o)*r,Math.sin(a+2*o)*r),a+=2*o;e.lineTo(0,-r),e.closePath()}(a,0,e.scale+10,.8*e.scale),a.fillStyle=t?"#e3f1f4":"#89a54c",a.fill(),a.stroke(),a.fillStyle=t?"#6a64af":"#c15555";const n=4,r=2*Math.PI/n;for(let t=0;t<n;t++){const n=_(e.scale/3.5,e.scale/2.3);se(n*Math.cos(r*t),n*Math.sin(r*t),_(10,12),a)}}else 250===e.scale&&(a.fillStyle="#e0c655",oe(a,3,e.scale,e.scale),a.fill(),a.stroke(),a.fillStyle="#ebdca3",oe(a,3,.55*e.scale,.65*e.scale),a.fill());K[`${"bush"==e.name?e.name+""+e.y:e.name}${t}`]=r,n=r}return n}function X(e,t,n,r=Q,i=!0,a=!0){r.beginPath(),r.arc(e,t,n,0,2*Math.PI),i&&r.fill(),a&&r.stroke()}function q(e,t,n,r){r.drawImage(e.img,t-e.scale,n-e.scale,2*e.scale,2*e.scale)}function G(e){Q.lineWidth=5.5,Q.lineJoin="miter";const t=Math.PI/4*(C[0].armS||1);if(C[0].hndS,C[0].hndD,e.weaponIndex.weapon)!function(e,t,n,r){r.drawImage(e.img,t+e.xOff-e.length/2,0+e.yOff-e.width/2,e.length,e.width)}(C[0],e.scale,0,Q);else if(e.weaponIndex.heal){let t=L.find((t=>t.id==e.weaponIndex.id));q(t,e.scale+t.scale/2+t.holdOffset,0,Q)}else{let t=O.find((t=>t.id==e.weaponIndex.id));q(t,e.scale+t.scale/2+t.holdOffset-t.placeOffset,0,Q)}Q.fillStyle="#bf8f54",X(e.scale*Math.cos(t),e.scale*Math.sin(t),14),X(1*e.scale*Math.cos(1*-t),1*e.scale*Math.sin(1*-t),14),X(0,0,e.scale,Q)}const J=document.getElementById("gameCanvas"),Q=J.getContext("2d");Math.lerpAngle=function(e,t,n){Math.abs(t-e)>Math.PI&&(e>t?t+=2*Math.PI:e+=2*Math.PI);let r=t+(e-t)*n;return r>=0&&r<=2*Math.PI?r:r%(2*Math.PI)},CanvasRenderingContext2D.prototype.roundRect=function(e,t,n,r,i){return n<2*i&&(i=n/2),r<2*i&&(i=r/2),i<0&&(i=0),this.beginPath(),this.moveTo(e+i,t),this.arcTo(e+n,t,e+n,t+r,i),this.arcTo(e+n,t+r,e,t+r,i),this.arcTo(e,t+r,e,t,i),this.arcTo(e,t,e+n,t,i),this.closePath(),this},window.addEventListener("resize",(()=>{let e=window.innerWidth,t=window.innerHeight;J.width=e,J.height=t,J.style.width=`${e}px`,J.style.height=`${t}px`;let n=Math.max(e/D.maxScreenWidth,t/D.maxScreenHeight);Q.setTransform(n,0,0,n,(e-D.maxScreenWidth*n)/2,(t-D.maxScreenHeight*n)/2)})),window.onload=function(){let e=window.innerWidth,t=window.innerHeight;J.width=e,J.height=t,J.style.width=`${e}px`,J.style.height=`${t}px`;let n=Math.max(e/D.maxScreenWidth,t/D.maxScreenHeight);Q.setTransform(n,0,0,n,(e-D.maxScreenWidth*n)/2,(t-D.maxScreenHeight*n)/2)},J.style=`\n  width: ${window.innerWidth};\n  height: ${window.innerHeight};\n`;let Z,ee=0,te=0,ne=1,re={x:D.mapScale/2,y:D.mapScale/2};function ie(e,t,n=1){return(e-t)/n}function ae(e,t,n,r){const i=D.riverWidth+r,a=D.mapScale/2-t-i/2;a<D.maxScreenHeight&&a+i>0&&n.fillRect(0,a,D.maxScreenWidth,i)}function oe(e,t,n,r){let i,a,o=Math.PI/2*3,s=Math.PI/t;e.beginPath(),e.moveTo(0,-n);for(let l=0;l<t;l++)i=Math.cos(o)*n,a=Math.sin(o)*n,e.lineTo(i,a),o+=s,i=Math.cos(o)*r,a=Math.sin(o)*r,e.lineTo(i,a),o+=s;e.lineTo(0,-n),e.closePath()}function se(e,t,n,r,i,a){(r=r||mainContext).beginPath(),r.arc(e,t,n,0,2*Math.PI),a||r.fill(),i||r.stroke()}var le=n(830);class ce extends WebSocket{constructor(e,t){super(e,t),this.wsSend=function(e,...t){let n=[e,...t];this.send(new Uint8Array(le.encode(n)))},this.onopen=function(){this.wsSend("0",Date.now())},this.onmessage=function(e){!function(e){if("string"!=typeof e[0][0])throw new TypeError("packet type is not of String");if("function"!=typeof j[e[0][0]])throw new Error("function type does not exist for packet type",e);j[e[0][0]](e[0][1])}(e=(0,le.decode)(new Uint8Array(e.data)))},this.onerror=function(e){console.error(e),alert("failed to connect to server. check the console and join the discord server to report this issue.")}}}const fe=new class{constructor(){this.players=[],this.buildings=[],this.animals=[],this.projectiles=[],this.player=null,this.moveDirection=null,this.servers={testus:"wss://servertest-1-83we.onrender.com",testusor:"https://servertest-3.onrender.com",testeu:"wss://servertest-2.onrender.com",miami:"wss://laughing-rotary-phone-4jw6qgq6w4pv3w6j-8080.app.github.dev/",eu:"wss://opulent-chainsaw-jjq9r4r9q6xv2pv5x-8080.app.github.dev/",asia:"wss://shiny-happiness-v6rgv6pp9rjjc6xrg-8080.app.github.dev/",scilicon:"wss://fictional-chainsaw-wr597rvvpqxg39r55-8080.app.github.dev/",dev:"wss://curious-petal-watchmaker.glitch.me"},this.serverURL=this.servers.dev,this.webSocket=null,this.lockDir=!1}changeRegion(e){this.serverURL=this.servers[e]}spawn(){this.webSocket=new ce(this.serverURL),this.webSocket.binaryType="arraybuffer",this.webSocket.onopen=()=>{this.webSocket.wsSend("sp",s.value),a.style.display="none"},P("Game","spawning in "+this.serverURL)}getPlayerBySid(e){return this.players.find((t=>t.sid==e))}getBuildingBySid(e){return this.buildings.find((t=>t.sid==e))}getAnimalBySid(e){return this.animals.find((t=>t.sid==e))}close(e){console.warn(e),alert(e)}},he=fe;let ue=Date.now(),de=Date.now();!function e(){de=Date.now(),function(e,t){if(he.player){let n;re.x+=ie(he.player.lerpx,re.x,200/e),re.y+=ie(he.player.lerpy,re.y,200/e);let r=t-1e3/D.serverUpdateRate;for(let t=he.players.length+he.animals.length;t--;)if(n=he.players[t]||he.animals[t-he.players.length])if(n.lastlerpx=n.lerpx,n.lastlerpy=n.lerpy,n.outOfRange)n.lerpx=n.x,n.lerpy=n.y;else{let t=n.t2-n.t1,i=(r-n.t1)/t;const a=170;n.delta+=e;let o=Math.min(1.7,n.delta/a),s=n.x-n.x1;n.lerpx=n.x1+s*o,s=n.y-n.y1,n.lerpy=n.y1+s*o,n.dir=Math.lerpAngle(n.d2,n.d1,Math.min(1.2,i))}Z=re.x-D.maxScreenWidth/2,ee=re.y-D.maxScreenHeight/2,te+=ne*D.waveSpeed*e,te>=D.waveMax?(te=D.waveMax,ne=-1):te<=1&&(te=ne=1),function(e,t,n){Q.globalAlpha=1,D.snowBiomeTop-t<=0&&D.mapScale-D.snowBiomeTop-t>=D.maxScreenHeight?(Q.fillStyle=N,Q.fillRect(0,0,D.maxScreenWidth,D.maxScreenHeight)):D.mapScale-D.snowBiomeTop-t<=0?(Q.fillStyle=z,Q.fillRect(0,0,D.maxScreenWidth,D.maxScreenHeight)):D.snowBiomeTop-t>=D.maxScreenHeight?(Q.fillStyle=$,Q.fillRect(0,0,D.maxScreenWidth,D.maxScreenHeight)):D.snowBiomeTop-t>=0?(Q.fillStyle=$,Q.fillRect(0,0,D.maxScreenWidth,D.snowBiomeTop-t),Q.fillStyle=N,Q.fillRect(0,D.snowBiomeTop-t,D.maxScreenWidth,D.maxScreenHeight-(D.snowBiomeTop-t))):(Q.fillStyle=N,Q.fillRect(0,0,D.maxScreenWidth,D.mapScale-D.snowBiomeTop-t),Q.fillStyle=z,Q.fillRect(0,D.mapScale-D.snowBiomeTop-t,D.maxScreenWidth,D.maxScreenHeight-(D.mapScale-D.snowBiomeTop-t))),Q.fillStyle="#dbc666",ae(0,t,Q,D.riverWidth),Q.fillStyle="#91b2db",ae(0,t,Q,1e3*(n-1)*n,(D.riverWidth,D.riverPadding))}(0,ee,te),function(e){Q.lineWidth=4,Q.globalAlpha=.06,Q.fillStyle="#000",Q.beginPath();for(let t=-e.x;t<D.maxScreenWidth;t+=60)t>0&&(Q.moveTo(t,0),Q.lineTo(t,D.maxScreenHeight));for(let t=-e.y;t<D.maxScreenHeight;t+=60)t>0&&(Q.moveTo(0,t),Q.lineTo(D.maxScreenWidth,t));Q.stroke(),Q.globalAlpha=1}(re),Q.globalAlpha=1,function(e,t){if(Q.fillStyle="#000",Q.globalAlpha=.15,e<=0&&Q.fillRect(0,0,-e,D.maxScreenHeight),D.mapScale-e<=D.maxScreenWidth){let n=Math.max(0,-t);Q.fillRect(D.mapScale-e,n,D.maxScreenWidth-(D.mapScale-e),D.maxScreenHeight-n)}if(t<=0&&Q.fillRect(-e,0,D.maxScreenWidth+e,-t),D.mapScale-t<=D.maxScreenHeight){let n=Math.max(0,-e),r=0;D.mapScale-e<=D.maxScreenWidth&&(r=D.maxScreenWidth-(D.mapScale-e)),Q.fillRect(n,D.mapScale-t,D.maxScreenWidth-n-r,D.maxScreenHeight-(D.mapScale-t))}}(Z,ee),Q.fillStyle="#000",function(e,t,n){let r;v=v.filter((e=>e.alpha>0));for(let i=v.length;i--;)(r=v[i])&&(r.update(n),r.draw(e,t));Q.globalAlpha=1}(Z,ee,e),Q.strokeStyle=D.outlineColor,Q.globalAlpha=1,function(e,t,n){let r;for(let i=he.players.length;i--;)(r=he.players[i])&&(r.animate(n),Q.beginPath(),Q.save(),Q.globalAlpha=1,Q.translate(r.lerpx-e,r.lerpy-t),Q.rotate((r.sid==he.player.sid?B():r.dir)+r.dirPlus),G(r),Q.restore())}(Z,ee,e),function(e,t){let n;for(let r=he.animals.length;r--;)if(n=he.animals[r]){Q.save(),Q.rotate(n.dir),Q.translate(n.x-e,n.y-t);const r=1.2*n.data.scale*(n.spriteMlt||1);Q.drawImage(n.data.img,-r,-r,2*r,2*r),Q.restore()}}(Z,ee),Q.globalAlpha=1,function(e,t,n){for(let r=he.buildings.length;r--;){const i=he.buildings[r];if(i){if(i.update(n),Q.save(),Q.translate(i.x+i.xWiggle-e,i.y+i.yWiggle-t),Q.rotate(i.spinDir),i?.data?.isItem){const e=O.find((e=>e.id==i.data.id));Q.drawImage(e.img,-e.scale,-e.scale,2*e.scale,2*e.scale)}else{const e=V(i);Q.drawImage(e,-e.width/2,-e.height/2)}Q.restore()}}}(Z,ee,e),Q.beginPath(),Q.globalAlpha=1,Q.fillStyle="rgba(0, 0, 70, 0.35)",Q.fillRect(0,0,D.maxScreenWidth,D.maxScreenHeight),function(e,t,n){let r;Q.strokeStyle=D.textOutlineColor,Q.globalAlpha=1;for(let i=he.players.length;i--;)if((r=he.players[i])&&(Q.font="30px Hammersmith One",Q.fillStyle="#fff",Q.textBaseline="middle",Q.textAlign="center",Q.lineWidth=8,Q.lineJoin="round",Q.strokeText("["+r.sid+"] "+r.name,r.lerpx-e,r.lerpy-t-r.scale-D.nameY),Q.fillText("["+r.sid+"] "+r.name,r.lerpx-e,r.lerpy-t-r.scale-D.nameY),r.health>0&&(Q.fillStyle=D.textOutlineColor,Q.roundRect(r.lerpx-e-D.healthBarWidth-D.healthBarPad,r.lerpy-t+r.scale+D.nameY,2*D.healthBarWidth+2*D.healthBarPad,17,8),Q.fill(),Q.fillStyle=r.sid==he.player.sid?"#8ecc51":"#cc5151",Q.roundRect(r.lerpx-e-D.healthBarWidth,r.lerpy-t+r.scale+D.nameY+D.healthBarPad,2*D.healthBarWidth*(r.health/r.maxHealth),17-2*D.healthBarPad,7),Q.fill()),!r.outOfRange&&r.chatCountdown>0)){r.chatCountdown=Math.max(r.chatCountdown-n,0),Q.font="32px Hammersmith One";let i=Q.measureText(r.chatMessage);Q.textBaseline="middle",Q.textAlign="center";let a=r.lerpx-e,o=r.lerpy-t-r.scale-90,s=47,l=i.width+17;Q.fillStyle="rgba(0, 0, 0, 0.2)",Q.roundRect(a-l/2,o-s/2,l,s,6),Q.fill(),Q.fillStyle="#fff",Q.fillText(r.chatMessage,a,o)}}(Z,ee,e),R.renderTexts(Z,ee,e),function(){let e=Y;e.clearRect(0,0,F.width,F.height),e.beginPath(),e.fillStyle="#fff",e.arc(he.player.lerpx/D.mapScale*F.width,he.player.lerpy/D.mapScale*F.height,4,0,2*Math.PI),e.fill()}()}else re.x=D.mapScale/2,re.y=D.mapScale/2}(de-ue,de),ue=de,requestAnimationFrame(e)}(),new class{constructor(){document.addEventListener("keydown",(e=>{this.handleKeyDown(e.keyCode)})),document.addEventListener("keyup",(e=>{this.handleKeyUp(e.keyCode)})),this.moveKey={87:[0,-1],38:[0,-1],83:[0,1],40:[0,1],65:[-1,0],37:[-1,0],68:[1,0],39:[1,0]},this.moveKeysPressed={},this.angle=void 0,this.chatToggle=!1,this.chat=document.getElementById("chatbox"),this.chat.style.display="none",this.oldIndexData={}}handleKeyDown(e){if(this.moveKey[e]&&!this.chatToggle&&(this.moveKeysPressed[e]=!0),[87,65,83,68].includes(e)&&this.updateAngle(),13==e&&(this.chatToggle?(fe.webSocket.wsSend("6",this.chat.value),this.chat.value="",this.chat.style.display="none",this.chatToggle=!1):(this.chat.style.display="block",this.chatToggle=!0,this.chat.focus())),"none"==this.chat.style.display)switch(e){case 88:fe.webSocket.wsSend("h",0),console.warn("lock dir"),fe.lockDir=!fe.lockDir;break;case 69:fe.webSocket.wsSend("h",1),console.warn("okok"),R.addText(fe.player.lerpx,fe.player.lerpy,"works",60,"#fff",900);break;case 81:fe.webSocket.wsSend("s",fe.player.items[0].id,"food");break;case 32:fe.player.weaponIndex.weapon?fe.webSocket.wsSend("h",1):fe.player.weaponIndex.food?fe.webSocket.wsSend("p","food"):(this.didPlaceObject=!0,fe.webSocket.wsSend("p",fe.player.weaponIndex.id)),this.oldIndexData=fe.player.weaponIndex;break;default:this.handleSelection(e)}}handleSelection(e){const t=e-49,n=t-fe.player.weapons.length;null!=fe.player.weapons[t]?fe.webSocket.wsSend("s",fe.player.weapons[t].id,"weapon"):null!=fe.player.items[n]&&fe.webSocket.wsSend("s",fe.player.items[n].id,0==n?"food":"item")}handleKeyUp(e){this.moveKey[e]&&delete this.moveKeysPressed[e],[87,65,83,68].includes(e)&&this.updateAngle(),32===e&&(this.oldIndexData.weapon&&fe.webSocket.wsSend("h",1),this.oldIndexData={})}updateAngle(){let e=0,t=0;for(let n in this.moveKeysPressed){const r=this.moveKey[n];e+=r[0],t+=r[1]}this.angle=0===e&&0===t?void 0:Math.atan2(t,e),fe.webSocket.wsSend("m",this.angle)}};const pe=new class{constructor(){this.mouseX=0,this.mouseY=0,this.mouseDown={left:!1,right:!1,middle:!1},document.addEventListener("mousemove",(e=>{this.mouseX=e.clientX,this.mouseY=e.clientY})),Q.canvas.addEventListener("mousedown",(e=>this.handleMouseDown(e))),Q.canvas.addEventListener("mouseup",(e=>this.handleMouseUp(e))),this.dataOnClick={}}handleMouseDown(e){0===e.button?this.mouseDown.left=!0:1===e.button?this.mouseDown.middle=!0:2===e.button&&(this.mouseDown.right=!0),fe.player.weaponIndex.weapon?fe.webSocket.wsSend("h",1):fe.player.weaponIndex.food?fe.webSocket.wsSend("p","food"):fe.webSocket.wsSend("p",fe.player.weaponIndex.id),this.dataOnClick=fe.player.weaponIndex}handleMouseUp(e){0===e.button?this.mouseDown.left=!1:1===e.button?this.mouseDown.middle=!1:2===e.button&&(this.mouseDown.right=!1),this.dataOnClick.weapon&&(fe.webSocket.wsSend("h",1),this.dataOnClick={})}};document.getElementById("enterGame").addEventListener("click",(e=>{he.changeRegion(t.value||"miami"),he.spawn(),i.style.display="block",o.style.display="none"})),window.oncontextmenu=e=>e.preventDefault()})()})();
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./Game/Classes/Animal.js":
+/*!********************************!*\
+  !*** ./Game/Classes/Animal.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Animal)
+/* harmony export */ });
+/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../configurations */ "./Game/configurations.js");
+/* harmony import */ var _Vector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Vector */ "./Game/Classes/Vector.js");
+
+
+
+class Animal extends _Vector__WEBPACK_IMPORTED_MODULE_1__["default"] {
+    constructor(sid, type, x, y) {
+        super({x: 0, y: 0});
+
+        this.id = sid;
+        
+        this.type = type;
+        this.data = _configurations__WEBPACK_IMPORTED_MODULE_0__.animalTypes[type];
+
+        this.img = this.data.img;
+        this.health = this.data.health;
+        this.dir = 0;
+        this.name = this.data.name;
+        this.weight = this.data.weight;
+        this.turnSpeed = this.data.turnSpeed;
+        this.drop = this.data.drop;
+
+        this.name = this.data.name;
+    }
+}
+
+/***/ }),
+
+/***/ "./Game/Classes/Building.js":
+/*!**********************************!*\
+  !*** ./Game/Classes/Building.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Building)
+/* harmony export */ });
+/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../configurations */ "./Game/configurations.js");
+/* harmony import */ var _Vector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Vector */ "./Game/Classes/Vector.js");
+
+
+
+class Building extends _Vector__WEBPACK_IMPORTED_MODULE_1__["default"] {
+    constructor({sid, type, name, x, y, scale, data, dir}) {
+        super({x: x, y: y})
+
+        this.sid = sid;
+
+        this.type = type;
+        this.data = data; // buildingTypes[type];
+
+        this.x = x;
+        this.y = y;
+        this.xWiggle = 0;
+        this.yWiggle = 0;
+
+        this.name = name || this.data.name;
+        this.scale = scale;
+
+        this.spin = this.name.includes("mill");
+        this.spinDir = dir;
+
+       // this.isItem = this.data.isItem;
+    }
+
+    update(delta) {
+        if(this.spin) this.spinDir += delta * 0.0012;
+        if(this.xWiggle) this.xWiggle *= Math.pow(0.99, delta);
+        if(this.yWiggle) this.yWiggle *= Math.pow(0.99, delta);
+    }
+}
+
+/***/ }),
+
+/***/ "./Game/Classes/Player.js":
+/*!********************************!*\
+  !*** ./Game/Classes/Player.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Player)
+/* harmony export */ });
+/* harmony import */ var _Vector__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Vector */ "./Game/Classes/Vector.js");
+/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../configurations */ "./Game/configurations.js");
+
+
+
+class Player extends _Vector__WEBPACK_IMPORTED_MODULE_0__["default"] {
+    constructor(data) {
+        super(data);
+
+        this.sid = data.sid;
+        
+        this.health = _configurations__WEBPACK_IMPORTED_MODULE_1__["default"].maxPlayerHealth;
+        this.maxHealth = this.health;
+
+        this.t2 = 0;
+        this.t1 = 0;
+        this.delta = 0;
+        this.d2 = 0;
+        this.d1 = 0;
+        this.dir = 0;
+
+        this.outOfRange = false;
+
+        this.rightFoot = false;
+
+        this.scale = 35;
+
+        this.name = data.name;
+
+        this.animTime = 0;
+        this.animSpeed = 0;
+        this.targetAngle = 0;
+        this.dirPlus = 0;
+
+        this.alive = true;
+
+        this.weapons = [_configurations__WEBPACK_IMPORTED_MODULE_1__.weaponTypes[0]];
+        this.weaponIndex = this.weapons[0];
+
+        this.items = [_configurations__WEBPACK_IMPORTED_MODULE_1__.foodTypes[0], _configurations__WEBPACK_IMPORTED_MODULE_1__.buildingTypes[0], _configurations__WEBPACK_IMPORTED_MODULE_1__.buildingTypes[1], _configurations__WEBPACK_IMPORTED_MODULE_1__.buildingTypes[2]];
+
+        this.xp = 0;
+        this.maxXP = 300;
+        this.age = 1;
+
+        this.a = 0;
+        this.f = 0;
+    }
+
+    resetStuff() {
+        this.weapons = [_configurations__WEBPACK_IMPORTED_MODULE_1__.weaponTypes[0]];
+        this.items = [_configurations__WEBPACK_IMPORTED_MODULE_1__.foodTypes[0], _configurations__WEBPACK_IMPORTED_MODULE_1__.buildingTypes[0], _configurations__WEBPACK_IMPORTED_MODULE_1__.buildingTypes[1], _configurations__WEBPACK_IMPORTED_MODULE_1__.buildingTypes[2]];  
+    }
+
+    changeHealth(value) {
+        this.health += value;
+    }
+
+    spawn(resources) {
+
+    }
+
+    startAnimation(hitObject) {
+        this.animTime = this.animSpeed = 300; //List.weapons[index].speed;
+
+        this.targetAngle = hitObject ? -_configurations__WEBPACK_IMPORTED_MODULE_1__["default"].hitAngle : -Math.PI;
+        this.b = 0;
+        this.$ = 0;
+    }
+
+    animate(delta) {
+        if(this.animTime > 0) {
+            this.animTime -= delta;
+
+            if(this.animTime <= 0) {
+                this.animTime = 0;
+                this.dirPlus = 0;
+                this.a = 0;
+                this.f = 0;
+            } else {
+                if(this.f == 0) {
+                    this.a += delta / (this.animSpeed * _configurations__WEBPACK_IMPORTED_MODULE_1__["default"].hitReturnRatio);
+                    this.dirPlus = lerp(0, this.targetAngle, Math.min(1, this.a));
+
+                    if(this.a >= 1) {
+                        this.a = 1;
+                        this.f = 1;
+                    }
+                } else {
+                    this.a -= delta / (this.animSpeed * (1 - _configurations__WEBPACK_IMPORTED_MODULE_1__["default"].hitReturnRatio));
+                    this.dirPlus = lerp(0, this.targetAngle, Math.max(0, this.a));
+                }
+            }
+        }
+    }
+}
+
+function lerp(e, t, i) {
+    return e + (t - e) * i
+}
+
+/***/ }),
+
+/***/ "./Game/Classes/Vector.js":
+/*!********************************!*\
+  !*** ./Game/Classes/Vector.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Vector)
+/* harmony export */ });
+class Vector {
+    constructor(data) {
+        this.x = data.x;
+        this.y = data.y;
+        this.x1 = this.x;
+        this.y1 = this.y;
+        this.lastx = this.x;
+        this.lasty = this.y;
+
+        this.lerpx = this.x;
+        this.lerpy = this.y;
+        this.lastlerpx = this.lerpx;
+        this.lastlerpy = this.lerpy;
+
+        this.xVel = this.x;
+        this.yVel = this.y;
+        this.xAccel = this.x;
+        this.yAccel = this.y;
+    }
+}
+
+/***/ }),
+
+/***/ "./Game/Render/functions/makeImage.js":
+/*!********************************************!*\
+  !*** ./Game/Render/functions/makeImage.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ makeImage)
+/* harmony export */ });
+
+
+function makeImage(src) {
+    let img = new Image();
+    img.onload = function() {
+        this.isLoaded = true;
+    };
+    img.src = src;
+
+    return img;
+}
+
+/***/ }),
+
+/***/ "./Game/Render/functions/renderAnimals.js":
+/*!************************************************!*\
+  !*** ./Game/Render/functions/renderAnimals.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ renderAnimals)
+/* harmony export */ });
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../main */ "./Game/main.js");
+/* harmony import */ var _render__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../render */ "./Game/Render/render.js");
+
+
+
+
+function renderAnimals(xOffset, yOffset) {
+    let tmp;
+    for(let i = _main__WEBPACK_IMPORTED_MODULE_0__["default"].animals.length; i--;) {
+        if(tmp = _main__WEBPACK_IMPORTED_MODULE_0__["default"].animals[i]) {
+            //tmp.animate(dekta);
+
+            _render__WEBPACK_IMPORTED_MODULE_1__.ctx.save();
+            _render__WEBPACK_IMPORTED_MODULE_1__.ctx.rotate(tmp.dir);
+            _render__WEBPACK_IMPORTED_MODULE_1__.ctx.translate(tmp.x - xOffset, tmp.y - yOffset);
+            //ctx.rotate(tmp.dir - (Math.PI / 2));
+
+            const scale = tmp.data.scale * 1.2 * (tmp.spriteMlt || 1);
+            _render__WEBPACK_IMPORTED_MODULE_1__.ctx.drawImage(tmp.data.img, -scale, -scale, scale * 2, scale * 2)
+    
+            _render__WEBPACK_IMPORTED_MODULE_1__.ctx.restore();
+
+            /*
+            ctx.beginPath();
+            ctx.fillStyle = "#ff0000";
+            ctx.arc(tmp.x - xOffset, tmp.y - yOffset, 50, 0, Math.PI * 2);
+            ctx.fill();
+            */
+        }
+    }
+}
+
+/***/ }),
+
+/***/ "./Game/Render/functions/renderBoundary.js":
+/*!*************************************************!*\
+  !*** ./Game/Render/functions/renderBoundary.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ renderBoundary)
+/* harmony export */ });
+/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../configurations */ "./Game/configurations.js");
+/* harmony import */ var _render__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../render */ "./Game/Render/render.js");
+
+
+
+function renderBoundary(xOffset, yOffset) {
+    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillStyle = "#000";
+    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.globalAlpha = 0.15;
+    if(xOffset <= 0) _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillRect(0, 0, -xOffset, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight);
+    if(_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale - xOffset <= _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth) {
+        let size = Math.max(0, -yOffset);
+        _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillRect(_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale - xOffset, size, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth - (_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale - xOffset), _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight - size);
+    }
+
+    if(yOffset <= 0) _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillRect(-xOffset, 0, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth + xOffset, -yOffset);
+    if(_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale - yOffset <= _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight) {
+        let size = Math.max(0, -xOffset);
+        let a = 0;
+
+        if(_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale - xOffset <= _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth) {
+            a = _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth - (_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale - xOffset);
+        }
+
+        _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillRect(size, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale - yOffset, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth - size - a, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight - (_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale - yOffset));
+    }
+}
+
+/***/ }),
+
+/***/ "./Game/Render/functions/renderFootSteps.js":
+/*!**************************************************!*\
+  !*** ./Game/Render/functions/renderFootSteps.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   FootStep: () => (/* binding */ FootStep),
+/* harmony export */   addFootStep: () => (/* binding */ addFootStep),
+/* harmony export */   "default": () => (/* binding */ renderFootSteps)
+/* harmony export */ });
+/* harmony import */ var _render__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../render */ "./Game/Render/render.js");
+// foot steps will be created in update players every 3 ticks or something
+
+
+
+class FootStep {
+    constructor(x, y, size, dir) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.dir = dir;
+
+        this.alpha = 0.6;
+        this.sizeAlpha = 1;
+        this.waitTime = 1000;
+    }
+
+    update(delta) {
+        if(this.waitTime > 0) this.waitTime -= delta;
+        else {
+            if(this.alpha <= 0) return;
+            this.alpha -= delta / 700;
+
+            if(this.alpha <= 0) this.alpha = 0;
+
+            this.sizeAlpha += delta / 80;
+        }
+    }
+
+    draw(xOffset, yOffset) {
+        _render__WEBPACK_IMPORTED_MODULE_0__.ctx.beginPath();
+        _render__WEBPACK_IMPORTED_MODULE_0__.ctx.fillStyle = "#000";
+        _render__WEBPACK_IMPORTED_MODULE_0__.ctx.globalAlpha = this.alpha;
+
+        _render__WEBPACK_IMPORTED_MODULE_0__.ctx.arc(this.x - xOffset, this.y - yOffset, this.size, 0, Math.PI * 2);
+        _render__WEBPACK_IMPORTED_MODULE_0__.ctx.fill();
+    }
+}
+
+let footsteps = [];
+
+function addFootStep(x, y, size) {
+    footsteps.push(new FootStep(x, y, size));
+}
+
+function renderFootSteps(xOffset, yOffset, delta) {
+    let footstep;
+
+    footsteps = footsteps.filter(step => step.alpha > 0);
+
+    for(let i = footsteps.length; i--;) {
+        if(footstep = footsteps[i]) {
+            footstep.update(delta);
+            footstep.draw(xOffset, yOffset);
+        }
+    }
+
+    _render__WEBPACK_IMPORTED_MODULE_0__.ctx.globalAlpha = 1;
+}
+
+/***/ }),
+
+/***/ "./Game/Render/functions/renderGameObjects.js":
+/*!****************************************************!*\
+  !*** ./Game/Render/functions/renderGameObjects.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ addGameObjects)
+/* harmony export */ });
+/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../configurations */ "./Game/configurations.js");
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../main */ "./Game/main.js");
+/* harmony import */ var _Utils_randomInt__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Utils/randomInt */ "./Game/Utils/randomInt.js");
+/* harmony import */ var _render__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../render */ "./Game/Render/render.js");
+/* harmony import */ var _makeImage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./makeImage */ "./Game/Render/functions/makeImage.js");
+
+
+
+
+
+
+function addGameObjects(xOffset, yOffset, delta) {
+    for (let i = _main__WEBPACK_IMPORTED_MODULE_1__["default"].buildings.length; i--;) {
+        const object = _main__WEBPACK_IMPORTED_MODULE_1__["default"].buildings[i];
+        if (!object) continue;
+
+        object.update(delta);
+
+        _render__WEBPACK_IMPORTED_MODULE_3__.ctx.save();
+        _render__WEBPACK_IMPORTED_MODULE_3__.ctx.translate(object.x + object.xWiggle - xOffset, object.y + object.yWiggle - yOffset);
+        _render__WEBPACK_IMPORTED_MODULE_3__.ctx.rotate(object.spinDir);
+        
+        if(object?.data?.isItem) {
+            const sprite = _configurations__WEBPACK_IMPORTED_MODULE_0__.buildingTypes.find(type => type.id == object.data.id);
+            _render__WEBPACK_IMPORTED_MODULE_3__.ctx.drawImage(sprite.img, -( sprite.scale), -( sprite.scale), sprite.scale * 2, sprite.scale * 2);
+
+            //ctx.fillStyle = "red";
+            //ctx.arc(0, 0, 50, 0, Math.PI * 2);
+            //ctx.fill()
+        } else {
+            const sprite = getObjectSprite(object, xOffset, yOffset);
+            _render__WEBPACK_IMPORTED_MODULE_3__.ctx.drawImage(sprite, -(sprite.width / 2), -(sprite.height / 2));
+        }
+
+        _render__WEBPACK_IMPORTED_MODULE_3__.ctx.restore();
+    }
+}
+
+let objectSprites = {};
+
+function getObjectSprite(tmpObj) {
+    let biomeID = (tmpObj.y >= _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale - _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].snowBiomeTop) ? 2 : ((tmpObj.y <= _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].snowBiomeTop) ? 1 : 0);
+
+    let sprite = objectSprites[`${tmpObj.name == "bush" ? tmpObj.name + "" + tmpObj.y : tmpObj.name}${biomeID}`];
+    if (!sprite) {
+        let tmpCanvas = document.createElement("canvas");
+        let size = tmpObj.scale * 2.5 + 50;
+        tmpCanvas.width = tmpCanvas.height = size;
+
+        let tmpContext = tmpCanvas.getContext("2d");
+        tmpContext.translate(size / 2, size / 2);
+        tmpContext.rotate(Math.PI / 2);
+
+        tmpContext.strokeStyle = _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].outlineColor;
+        tmpContext.lineWidth = _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].lineWidth;
+
+        if (tmpObj.scale === 100) {
+            for (let i = 0; i < 2; i++) {
+                const scale = (() => {
+                    if(!i) return tmpObj.scale + 50;
+                    else return tmpObj.scale * 0.5 + 30;
+                }); //tmpObj.scale * (!i ? 1 : 0.5) + 50;
+                (0,_render__WEBPACK_IMPORTED_MODULE_3__.renderStar)(tmpContext, 7, scale(), scale() * 0.7);
+                tmpContext.fillStyle = !biomeID ? (!i ? "#9ebf57" : "#b4db62") : (!i ? "#e3f1f4" : "#fff");
+                tmpContext.fill();
+                if (!i) tmpContext.stroke();
+            }
+        } else if (tmpObj.scale === 90 || tmpObj.scale === 10) {
+            tmpContext.fillStyle = biomeID === 2 ? "#938d77" : "#939393";
+            (0,_render__WEBPACK_IMPORTED_MODULE_3__.renderStar)(tmpContext, 3, tmpObj.scale, tmpObj.scale);
+            tmpContext.fill();
+            tmpContext.stroke();
+
+            tmpContext.fillStyle = biomeID === 2 ? "#b2ab90" : "#bcbcbc";
+            (0,_render__WEBPACK_IMPORTED_MODULE_3__.renderStar)(tmpContext, 3, tmpObj.scale * 0.55, tmpObj.scale * 0.65);
+            tmpContext.fill();
+        } else if (tmpObj.scale === 75) {
+            (0,_render__WEBPACK_IMPORTED_MODULE_3__.renderBlob)(tmpContext, 6, tmpObj.scale + 10, tmpObj.scale * 0.8);
+            tmpContext.fillStyle = biomeID ? "#e3f1f4" : "#89a54c";
+            tmpContext.fill();
+            tmpContext.stroke();
+
+            tmpContext.fillStyle = biomeID ? "#6a64af" : "#c15555";
+            const berries = 4;
+            const rotVal = (Math.PI * 2) / berries;
+            for (let i = 0; i < berries; i++) {
+                const range = (0,_Utils_randomInt__WEBPACK_IMPORTED_MODULE_2__["default"])(tmpObj.scale / 3.5, tmpObj.scale / 2.3);
+                (0,_render__WEBPACK_IMPORTED_MODULE_3__.renderCircle)(
+                    range * Math.cos(rotVal * i),
+                    range * Math.sin(rotVal * i),
+                    (0,_Utils_randomInt__WEBPACK_IMPORTED_MODULE_2__["default"])(10, 12),
+                    tmpContext
+                );
+            }
+        } else if (tmpObj.scale === 250) {
+            tmpContext.fillStyle = "#e0c655";
+            (0,_render__WEBPACK_IMPORTED_MODULE_3__.renderStar)(tmpContext, 3, tmpObj.scale, tmpObj.scale);
+            tmpContext.fill();
+            tmpContext.stroke();
+
+            tmpContext.fillStyle = "#ebdca3";
+            (0,_render__WEBPACK_IMPORTED_MODULE_3__.renderStar)(tmpContext, 3, tmpObj.scale * 0.55, tmpObj.scale * 0.65);
+            tmpContext.fill();
+        }
+
+        objectSprites[`${tmpObj.name == "bush" ? tmpObj.name + "" + tmpObj.y : tmpObj.name}${biomeID}`] = tmpCanvas;
+        sprite = tmpCanvas;
+    }
+
+    return sprite;
+}
+
+
+/***/ }),
+
+/***/ "./Game/Render/functions/renderGrid.js":
+/*!*********************************************!*\
+  !*** ./Game/Render/functions/renderGrid.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ renderGrid)
+/* harmony export */ });
+/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../configurations */ "./Game/configurations.js");
+/* harmony import */ var _render__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../render */ "./Game/Render/render.js");
+
+
+
+function renderGrid(camera) {
+    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.lineWidth = 4;
+    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.globalAlpha = 0.06;
+    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillStyle = "#000";
+    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.beginPath();
+
+    for (let i = -camera.x; i < _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth; i += 60) {
+        if (i > 0) {
+            _render__WEBPACK_IMPORTED_MODULE_1__.ctx.moveTo(i, 0);
+            _render__WEBPACK_IMPORTED_MODULE_1__.ctx.lineTo(i, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight);
+        }
+    }
+
+    for (let i = -camera.y; i < _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight; i += 60) {
+        if (i > 0) {
+            _render__WEBPACK_IMPORTED_MODULE_1__.ctx.moveTo(0, i);
+            _render__WEBPACK_IMPORTED_MODULE_1__.ctx.lineTo(_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth, i);
+        }
+    }
+
+    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.stroke();
+
+    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.globalAlpha = 1;
+}
+
+
+/***/ }),
+
+/***/ "./Game/Render/functions/renderMap.js":
+/*!********************************************!*\
+  !*** ./Game/Render/functions/renderMap.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ renderMap)
+/* harmony export */ });
+/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../configurations */ "./Game/configurations.js");
+/* harmony import */ var _render__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../render */ "./Game/Render/render.js");
+
+
+
+function renderMap(xOffset, yOffset, riverPaddingOffset) {
+    //ctx.fillStyle = colors.grasslands;
+    //ctx.fillRect(0, 0, configurations.maxScreenWidth, configurations.maxScreenHeight);
+    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.globalAlpha = 1;
+
+    //ctx.translate(xOffset, yOffset);
+
+    /*
+    ctx.save();
+    ctx.translate(xOffset, yOffset);
+
+    // snow
+    ctx.fillStyle = colors.winter;
+    ctx.fillRect(0, 0, configurations.mapScale, configurations.snowBiomeTop);
+
+    // grassland up
+    ctx.fillStyle = colors.grasslands;
+    ctx.fillRect(0, configurations.snowBiomeTop, configurations.mapScale, (configurations.mapScale / 2) - configurations.snowBiomeTop - (configurations.riverWidth / 2));
+
+    // liver
+    ctx.fillStyle = `rgba(180, 205, 240)`;
+    ctx.fillRect(0, (configurations.mapScale / 2) - (configurations.riverWidth / 2), configurations.mapScale, configurations.riverWidth);
+
+    // grassland down
+    ctx.fillStyle = colors.autumn;
+    ctx.fillRect(0, (configurations.mapScale / 2) + (configurations.riverWidth / 2), configurations.mapScale, (configurations.mapScale / 2) - configurations.snowBiomeTop - (configurations.riverWidth / 2));
+
+    // desert
+    ctx.fillStyle = colors.desert;
+    ctx.fillRect(0, (configurations.mapScale - configurations.snowBiomeTop), configurations.mapScale, configurations.snowBiomeTop);
+
+    ctx.restore();
+
+*/
+    if (_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].snowBiomeTop - yOffset <= 0 && _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale - _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].snowBiomeTop - yOffset >= _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight) {
+        _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillStyle = _configurations__WEBPACK_IMPORTED_MODULE_0__.colors.grasslands;
+        _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillRect(0, 0, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight);
+    } else if (_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale - _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].snowBiomeTop - yOffset <= 0) {
+        _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillStyle = _configurations__WEBPACK_IMPORTED_MODULE_0__.colors.desert;
+        _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillRect(0, 0, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight);
+    } else if (_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].snowBiomeTop - yOffset >= _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight) {
+        _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillStyle = _configurations__WEBPACK_IMPORTED_MODULE_0__.colors.winter;
+        _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillRect(0, 0, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight);
+    } else if (_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].snowBiomeTop - yOffset >= 0) {
+        _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillStyle = _configurations__WEBPACK_IMPORTED_MODULE_0__.colors.winter;
+        _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillRect(0, 0, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].snowBiomeTop - yOffset);
+
+        _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillStyle = _configurations__WEBPACK_IMPORTED_MODULE_0__.colors.grasslands;
+        _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillRect(0, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].snowBiomeTop - yOffset, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight - (_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].snowBiomeTop - yOffset));
+    } else {
+        _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillStyle = _configurations__WEBPACK_IMPORTED_MODULE_0__.colors.grasslands;
+        _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillRect(0, 0, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale - _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].snowBiomeTop - yOffset);
+
+        _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillStyle = _configurations__WEBPACK_IMPORTED_MODULE_0__.colors.desert;
+        _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillRect(0, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale - _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].snowBiomeTop - yOffset, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight - (_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale - _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].snowBiomeTop - yOffset));
+    }
+
+    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillStyle = "#dbc666";
+    (0,_render__WEBPACK_IMPORTED_MODULE_1__.renderRiverPortion)(xOffset, yOffset, _render__WEBPACK_IMPORTED_MODULE_1__.ctx, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].riverWidth);
+    _render__WEBPACK_IMPORTED_MODULE_1__.ctx.fillStyle = "#91b2db";
+    (0,_render__WEBPACK_IMPORTED_MODULE_1__.renderRiverPortion)(xOffset, yOffset, _render__WEBPACK_IMPORTED_MODULE_1__.ctx, (riverPaddingOffset - 1) * 1e3 * riverPaddingOffset, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].riverWidth - _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].riverPadding);
+}
+
+/***/ }),
+
+/***/ "./Game/Render/functions/renderPlayerInfo.js":
+/*!***************************************************!*\
+  !*** ./Game/Render/functions/renderPlayerInfo.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ renderPlayerInfo)
+/* harmony export */ });
+/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../configurations */ "./Game/configurations.js");
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../main */ "./Game/main.js");
+/* harmony import */ var _render__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../render */ "./Game/Render/render.js");
+
+
+
+
+
+function renderPlayerInfo(xOffset, yOffset, delta) {
+    let tmpObj;
+
+    _render__WEBPACK_IMPORTED_MODULE_2__.ctx.strokeStyle = _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].textOutlineColor;
+    _render__WEBPACK_IMPORTED_MODULE_2__.ctx.globalAlpha = 1;
+
+    for(let i = _main__WEBPACK_IMPORTED_MODULE_1__["default"].players.length; i--;) {
+        if(tmpObj = _main__WEBPACK_IMPORTED_MODULE_1__["default"].players[i]/*, tmpObj.alive*/) {
+            _render__WEBPACK_IMPORTED_MODULE_2__.ctx.font = "30px Hammersmith One";
+            _render__WEBPACK_IMPORTED_MODULE_2__.ctx.fillStyle = "#fff";
+            _render__WEBPACK_IMPORTED_MODULE_2__.ctx.textBaseline = "middle";
+            _render__WEBPACK_IMPORTED_MODULE_2__.ctx.textAlign = "center";
+            _render__WEBPACK_IMPORTED_MODULE_2__.ctx.lineWidth = 8;
+            _render__WEBPACK_IMPORTED_MODULE_2__.ctx.lineJoin = "round"; // fix text clipping
+
+            _render__WEBPACK_IMPORTED_MODULE_2__.ctx.strokeText("[" + tmpObj.sid + "] " + tmpObj.name, tmpObj.lerpx - xOffset, tmpObj.lerpy - yOffset - tmpObj.scale - _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].nameY);
+            _render__WEBPACK_IMPORTED_MODULE_2__.ctx.fillText("[" + tmpObj.sid + "] " + tmpObj.name, tmpObj.lerpx - xOffset, tmpObj.lerpy - yOffset - tmpObj.scale - _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].nameY);
+
+            if(tmpObj.health > 0) {
+                _render__WEBPACK_IMPORTED_MODULE_2__.ctx.fillStyle = _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].textOutlineColor;
+                _render__WEBPACK_IMPORTED_MODULE_2__.ctx.roundRect(tmpObj.lerpx - xOffset - _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].healthBarWidth - _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].healthBarPad, tmpObj.lerpy - yOffset + tmpObj.scale + _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].nameY, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].healthBarWidth * 2 + _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].healthBarPad * 2, 17, 8);
+                _render__WEBPACK_IMPORTED_MODULE_2__.ctx.fill();
+                _render__WEBPACK_IMPORTED_MODULE_2__.ctx.fillStyle = tmpObj.sid == _main__WEBPACK_IMPORTED_MODULE_1__["default"].player.sid ? "#8ecc51" : "#cc5151";
+                _render__WEBPACK_IMPORTED_MODULE_2__.ctx.roundRect(tmpObj.lerpx - xOffset - _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].healthBarWidth, tmpObj.lerpy - yOffset + tmpObj.scale + _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].nameY + _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].healthBarPad, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].healthBarWidth * 2 * (tmpObj.health / tmpObj.maxHealth), 17 - _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].healthBarPad * 2, 7);
+                _render__WEBPACK_IMPORTED_MODULE_2__.ctx.fill();
+            }
+
+            if(!tmpObj.outOfRange && tmpObj.chatCountdown > 0) {
+                tmpObj.chatCountdown = Math.max(tmpObj.chatCountdown - delta, 0);
+    
+                _render__WEBPACK_IMPORTED_MODULE_2__.ctx.font = "32px Hammersmith One";
+                let textSize = _render__WEBPACK_IMPORTED_MODULE_2__.ctx.measureText(tmpObj.chatMessage);
+                _render__WEBPACK_IMPORTED_MODULE_2__.ctx.textBaseline = "middle";
+                _render__WEBPACK_IMPORTED_MODULE_2__.ctx.textAlign = "center";
+    
+                let tmpX = tmpObj.lerpx - xOffset;
+                let tmpY = tmpObj.lerpy - yOffset - tmpObj.scale - 90;
+                let height = 47;
+                let width = textSize.width + 17;
+    
+                // background
+                _render__WEBPACK_IMPORTED_MODULE_2__.ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
+                _render__WEBPACK_IMPORTED_MODULE_2__.ctx.roundRect(tmpX - (width / 2), tmpY - (height / 2), width, height, 6);
+                _render__WEBPACK_IMPORTED_MODULE_2__.ctx.fill();
+    
+                // actual text
+                _render__WEBPACK_IMPORTED_MODULE_2__.ctx.fillStyle = "#fff";
+                _render__WEBPACK_IMPORTED_MODULE_2__.ctx.fillText(tmpObj.chatMessage, tmpX, tmpY);
+            }
+        }
+    }
+}
+
+/***/ }),
+
+/***/ "./Game/Render/functions/renderPlayers.js":
+/*!************************************************!*\
+  !*** ./Game/Render/functions/renderPlayers.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ renderPlayers)
+/* harmony export */ });
+/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../configurations */ "./Game/configurations.js");
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../main */ "./Game/main.js");
+/* harmony import */ var _Utils_renderCircle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Utils/renderCircle */ "./Game/Utils/renderCircle.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_updatePlayers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../WebSocket/hooks/eventHooks/updatePlayers */ "./Game/WebSocket/hooks/eventHooks/updatePlayers.js");
+/* harmony import */ var _render__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../render */ "./Game/Render/render.js");
+/* harmony import */ var _renderWeapon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./renderWeapon */ "./Game/Render/functions/renderWeapon.js");
+
+
+
+
+
+
+
+function renderPlayers(xOffset, yOffset, delta) {
+    let tmpObj;
+    for(let i = _main__WEBPACK_IMPORTED_MODULE_1__["default"].players.length; i--;) {
+        if(tmpObj = _main__WEBPACK_IMPORTED_MODULE_1__["default"].players[i]/*, tmpObj.alive*/) {
+            tmpObj.animate(delta);
+
+            _render__WEBPACK_IMPORTED_MODULE_4__.ctx.beginPath();
+            _render__WEBPACK_IMPORTED_MODULE_4__.ctx.save();
+            _render__WEBPACK_IMPORTED_MODULE_4__.ctx.globalAlpha = 1;
+            _render__WEBPACK_IMPORTED_MODULE_4__.ctx.translate(tmpObj.lerpx - xOffset, tmpObj.lerpy - yOffset);
+            _render__WEBPACK_IMPORTED_MODULE_4__.ctx.rotate((tmpObj.sid == _main__WEBPACK_IMPORTED_MODULE_1__["default"].player.sid ? (0,_WebSocket_hooks_eventHooks_updatePlayers__WEBPACK_IMPORTED_MODULE_3__.getAimDir)() : tmpObj.dir) + tmpObj.dirPlus);
+            renderPlayer(tmpObj);
+            _render__WEBPACK_IMPORTED_MODULE_4__.ctx.restore();
+        }
+    }
+}
+
+function renderPlayer(tmpObj) {
+    _render__WEBPACK_IMPORTED_MODULE_4__.ctx.lineWidth = 5.5;
+    _render__WEBPACK_IMPORTED_MODULE_4__.ctx.lineJoin = "miter"; //to stop clipping
+
+    const i = Math.PI / 4 * (_configurations__WEBPACK_IMPORTED_MODULE_0__.weaponTypes[0].armS || 1)
+    , n = /*tmpObj.buildIndex < 0*/ true && _configurations__WEBPACK_IMPORTED_MODULE_0__.weaponTypes[0].hndS || 1
+    , s = /*tmpObj.buildIndex < 0*/ true && _configurations__WEBPACK_IMPORTED_MODULE_0__.weaponTypes[0].hndD || 1;
+
+    if(tmpObj.weaponIndex.weapon) {
+        let weapon = _configurations__WEBPACK_IMPORTED_MODULE_0__.weaponTypes[0];
+
+        (0,_renderWeapon__WEBPACK_IMPORTED_MODULE_5__["default"])(weapon, tmpObj.scale, 0, _render__WEBPACK_IMPORTED_MODULE_4__.ctx);
+    } else if(tmpObj.weaponIndex.heal) {
+        let src = _configurations__WEBPACK_IMPORTED_MODULE_0__.foodTypes.find(type => type.id == tmpObj.weaponIndex.id);
+
+        //ctx.fillStyle = "red";
+        //ctx.arc(src.scale, src.scale, 50, 0, Math.PI * 2)
+        //ctx.fill()
+        (0,_renderWeapon__WEBPACK_IMPORTED_MODULE_5__.renderItem)(src, tmpObj.scale + (src.scale / 2) + src.holdOffset, 0, _render__WEBPACK_IMPORTED_MODULE_4__.ctx);
+    } else {
+        let src = _configurations__WEBPACK_IMPORTED_MODULE_0__.buildingTypes.find(type => type.id == tmpObj.weaponIndex.id);
+
+        //ctx.fillStyle = "red";
+        //ctx.arc(src.scale, src.scale, 50, 0, Math.PI * 2)
+        //ctx.fill()
+        (0,_renderWeapon__WEBPACK_IMPORTED_MODULE_5__.renderItem)(src, tmpObj.scale + (src.scale / 2) + src.holdOffset - src.placeOffset, 0, _render__WEBPACK_IMPORTED_MODULE_4__.ctx);
+    }
+
+    _render__WEBPACK_IMPORTED_MODULE_4__.ctx.fillStyle = "#bf8f54"; //config.skinColors[tmpObj.skinColor];
+    (0,_Utils_renderCircle__WEBPACK_IMPORTED_MODULE_2__["default"])(tmpObj.scale * Math.cos(i), tmpObj.scale * Math.sin(i), 14);
+    (0,_Utils_renderCircle__WEBPACK_IMPORTED_MODULE_2__["default"])(tmpObj.scale * /*s*/1 * Math.cos(-i * /*n*/1), tmpObj.scale * /*s*/1 * Math.sin(-i * /*n*/1), 14);
+
+    (0,_Utils_renderCircle__WEBPACK_IMPORTED_MODULE_2__["default"])(0, 0, tmpObj.scale, _render__WEBPACK_IMPORTED_MODULE_4__.ctx);
+}
+
+/***/ }),
+
+/***/ "./Game/Render/functions/renderTexts.js":
+/*!**********************************************!*\
+  !*** ./Game/Render/functions/renderTexts.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _render__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../render */ "./Game/Render/render.js");
+
+
+class Text {
+    constructor(x, y, text, size, color, life) {
+        Object.assign(this, {x, y, text, size, color, life});
+    }
+
+    update(delta) {
+        this.life -= delta;
+
+        if(this.life <= 0) return;
+
+        this.y -= delta * 0.18;
+    }
+
+    render(xOffset, yOffset) {
+        if(this.life <= 0) return
+        _render__WEBPACK_IMPORTED_MODULE_0__.ctx.beginPath();
+        _render__WEBPACK_IMPORTED_MODULE_0__.ctx.fillStyle = this.color;
+        _render__WEBPACK_IMPORTED_MODULE_0__.ctx.font = this.size + "px Hammersmith One";
+        _render__WEBPACK_IMPORTED_MODULE_0__.ctx.fillText(this.text, this.x - xOffset, this.y - yOffset);
+    }
+}
+
+class TextManager {
+    #texts = []
+    addText(x, y, text, size, color, life) {
+        this.#texts.push(new Text(x, y, text, size, color, life));
+    }
+
+    renderTexts(xOffset, yOffset, delta) {
+        this.#texts.filter(text => text.life >= 0);
+
+        let text;
+        for(let i = this.#texts.length; i--;) {
+            if(text = this.#texts[i]) {
+                text.update(delta);
+                text.render(xOffset, yOffset);
+            }
+        }
+    }
+}
+
+const textManager = new TextManager();
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (textManager);
+
+/***/ }),
+
+/***/ "./Game/Render/functions/renderWeapon.js":
+/*!***********************************************!*\
+  !*** ./Game/Render/functions/renderWeapon.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ renderWeapon),
+/* harmony export */   renderItem: () => (/* binding */ renderItem)
+/* harmony export */ });
+function renderWeapon(weapon, x, y, ctx) {
+    ctx.drawImage(weapon.img, x + weapon.xOff - (weapon.length / 2), y + weapon.yOff - (weapon.width / 2), weapon.length, weapon.width);
+}
+
+function renderItem(item, x, y, ctx) {
+    ctx.drawImage(item.img, x - (item.scale), y - (item.scale), item.scale * 2, item.scale * 2);
+}
+
+/***/ }),
+
+/***/ "./Game/Render/render.js":
+/*!*******************************!*\
+  !*** ./Game/Render/render.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ctx: () => (/* binding */ ctx),
+/* harmony export */   "default": () => (/* binding */ render),
+/* harmony export */   getCam: () => (/* binding */ getCam),
+/* harmony export */   renderBlob: () => (/* binding */ renderBlob),
+/* harmony export */   renderCircle: () => (/* binding */ renderCircle),
+/* harmony export */   renderRiverPortion: () => (/* binding */ renderRiverPortion),
+/* harmony export */   renderStar: () => (/* binding */ renderStar)
+/* harmony export */ });
+/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../configurations */ "./Game/configurations.js");
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../main */ "./Game/main.js");
+/* harmony import */ var _UI_minimap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../UI/minimap */ "./Game/UI/minimap.js");
+/* harmony import */ var _Utils_getDirection__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Utils/getDirection */ "./Game/Utils/getDirection.js");
+/* harmony import */ var _Utils_getDistance__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Utils/getDistance */ "./Game/Utils/getDistance.js");
+/* harmony import */ var _Utils_randomInt__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Utils/randomInt */ "./Game/Utils/randomInt.js");
+/* harmony import */ var _functions_renderAnimals__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./functions/renderAnimals */ "./Game/Render/functions/renderAnimals.js");
+/* harmony import */ var _functions_renderBoundary__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./functions/renderBoundary */ "./Game/Render/functions/renderBoundary.js");
+/* harmony import */ var _functions_renderFootSteps__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./functions/renderFootSteps */ "./Game/Render/functions/renderFootSteps.js");
+/* harmony import */ var _functions_renderGameObjects__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./functions/renderGameObjects */ "./Game/Render/functions/renderGameObjects.js");
+/* harmony import */ var _functions_renderGrid__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./functions/renderGrid */ "./Game/Render/functions/renderGrid.js");
+/* harmony import */ var _functions_renderMap__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./functions/renderMap */ "./Game/Render/functions/renderMap.js");
+/* harmony import */ var _functions_renderPlayerInfo__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./functions/renderPlayerInfo */ "./Game/Render/functions/renderPlayerInfo.js");
+/* harmony import */ var _functions_renderPlayers__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./functions/renderPlayers */ "./Game/Render/functions/renderPlayers.js");
+/* harmony import */ var _functions_renderTexts__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./functions/renderTexts */ "./Game/Render/functions/renderTexts.js");
+/*
+
+do we really need more then one file to render everything
+
+maybe import functions from a different file, so it's more organized?
+*/
+
+
+
+
+
+
+
+
+//import min from "../Utils/math"
+
+
+
+
+
+
+
+
+
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d"); // consider webgl later on, much more performance efficient
+
+// SMOOTH LERP:
+Math.lerpAngle = function(value1, value2, amount) {
+    let difference = Math.abs(value2 - value1);
+    if (difference > Math.PI) {
+        if (value1 > value2) {
+            value2 += Math.PI * 2;
+        } else {
+            value1 += Math.PI * 2;
+        }
+    }
+    let value = value2 + ((value1 - value2) * amount);
+    if (value >= 0 && value <= Math.PI * 2) return value;
+    return value % (Math.PI * 2);
+};
+
+// ROUNDED RECTANGLE:
+CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+    if (w < 2 * r) r = w / 2;
+    if (h < 2 * r) r = h / 2;
+    if (r < 0)
+        r = 0;
+    this.beginPath();
+    this.moveTo(x + r, y);
+    this.arcTo(x + w, y, x + w, y + h, r);
+    this.arcTo(x + w, y + h, x, y + h, r);
+    this.arcTo(x, y + h, x, y, r);
+    this.arcTo(x, y, x + w, y, r);
+    this.closePath();
+    return this;
+};
+
+//window.devicePixelRatio = 1.4; //change to adjust game res
+window.addEventListener("resize", () => {
+    let screenWidth = window.innerWidth;
+    let screenHeight = window.innerHeight;
+
+    canvas.width = screenWidth;
+    canvas.height = screenHeight;
+    canvas.style.width = `${screenWidth}px`;
+    canvas.style.height = `${screenHeight}px`;
+
+    let scaleFillNative = Math.max(
+        screenWidth / _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth,
+        screenHeight / _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight
+    );
+
+    ctx.setTransform(
+        scaleFillNative,
+        0,
+        0,
+        scaleFillNative,
+        (screenWidth - (_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth * scaleFillNative)) / 2,
+        (screenHeight - (_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight * scaleFillNative)) / 2
+    );
+});
+
+window.onload = function() {
+    let screenWidth = window.innerWidth;
+    let screenHeight = window.innerHeight;
+
+    canvas.width = screenWidth;
+    canvas.height = screenHeight;
+    canvas.style.width = `${screenWidth}px`;
+    canvas.style.height = `${screenHeight}px`;
+
+    let scaleFillNative = Math.max(
+        screenWidth / _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth,
+        screenHeight / _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight
+    );
+
+    ctx.setTransform(
+        scaleFillNative,
+        0,
+        0,
+        scaleFillNative,
+        (screenWidth - (_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth * scaleFillNative)) / 2,
+        (screenHeight - (_configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight * scaleFillNative)) / 2
+    );
+}
+
+canvas.style = `
+  width: ${window.innerWidth};
+  height: ${window.innerHeight};
+`;
+
+let xOffset, yOffset = 0;
+let riverPaddingOffset = 0;
+let riverGrow = 1;
+let camera = {
+    x: _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale / 2,
+    y: _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale / 2
+};
+function dist(v1, v2, mult = 1) {
+    return (v1 - v2) / mult;
+};
+
+const getCam = () => {
+    return camera;
+};
+
+function render(delta, frameDate) {
+    //ctx.clearRect(0, 0, configurations.maxScreenWidth, configurations.maxScreenWidth);
+
+    if(_main__WEBPACK_IMPORTED_MODULE_1__["default"].player) {
+        /*
+        let distance = getDistance(camera.x, camera.y, Game.player.lerpx, Game.player.lerpy);
+        let direction = getDirection(Game.player.lerpx, Game.player.lerpy, camera.x, camera.y) - Math.PI;
+
+        let increment = Math.min(distance * 0.0045 * delta, distance);
+
+        //if (distance > 0.05) {
+            //camera.x += increment * Math.cos(direction);
+            //camera.y += increment * Math.sin(direction);
+        //} else {
+        //    camera.x = Game.player.lerpx;
+        //    camera.y = Game.player.lerpy;
+        //}
+        */
+
+        // credit ueheua, op master of all
+        camera.x += dist(_main__WEBPACK_IMPORTED_MODULE_1__["default"].player.lerpx, camera.x, 200 / delta);
+        camera.y += dist(_main__WEBPACK_IMPORTED_MODULE_1__["default"].player.lerpy, camera.y, 200 / delta);
+
+        let tmpObj;
+        let timeSinceTick = frameDate - (1000 / _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].serverUpdateRate)
+        for(let i = _main__WEBPACK_IMPORTED_MODULE_1__["default"].players.length + _main__WEBPACK_IMPORTED_MODULE_1__["default"].animals.length; i--;) {
+            if(tmpObj = _main__WEBPACK_IMPORTED_MODULE_1__["default"].players[i] || _main__WEBPACK_IMPORTED_MODULE_1__["default"].animals[i - _main__WEBPACK_IMPORTED_MODULE_1__["default"].players.length]) {
+                tmpObj.lastlerpx = tmpObj.lerpx;
+                tmpObj.lastlerpy = tmpObj.lerpy;
+
+                if(tmpObj.outOfRange) {
+                    tmpObj.lerpx = tmpObj.x;
+                    tmpObj.lerpy = tmpObj.y;
+                } else {
+                    let timeDifference = tmpObj.t2 - tmpObj.t1;
+                    let playerDelta = (timeSinceTick - tmpObj.t1) / timeDifference;
+                    const stable = 170;
+
+                    tmpObj.delta += delta;
+                    
+                    let tmpRate = Math.min(1.7, tmpObj.delta / stable);
+
+                    let dist = tmpObj.x - tmpObj.x1;
+                    tmpObj.lerpx = tmpObj.x1 + (dist * tmpRate);
+
+                    dist = tmpObj.y - tmpObj.y1;
+                    tmpObj.lerpy = tmpObj.y1 + (dist * tmpRate);
+
+                    tmpObj.dir = Math.lerpAngle(tmpObj.d2, tmpObj.d1, Math.min(1.2, playerDelta));
+                }
+            }
+        }
+
+        xOffset = camera.x - _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth / 2;
+        yOffset = camera.y - _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight / 2;
+
+        riverPaddingOffset += riverGrow * _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].waveSpeed * delta;
+
+        if(riverPaddingOffset >= _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].waveMax) {
+            riverPaddingOffset = _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].waveMax;
+            riverGrow = -1;
+        } else if(riverPaddingOffset <= 1) {
+            riverPaddingOffset = riverGrow = 1;
+        }
+
+        (0,_functions_renderMap__WEBPACK_IMPORTED_MODULE_11__["default"])(xOffset, yOffset, riverPaddingOffset);
+
+        (0,_functions_renderGrid__WEBPACK_IMPORTED_MODULE_10__["default"])(camera);
+
+        ctx.globalAlpha = 1;
+        (0,_functions_renderBoundary__WEBPACK_IMPORTED_MODULE_7__["default"])(xOffset, yOffset);
+
+        ctx.fillStyle = "#000";
+        (0,_functions_renderFootSteps__WEBPACK_IMPORTED_MODULE_8__["default"])(xOffset, yOffset, delta);
+    
+        ctx.strokeStyle = _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].outlineColor;
+        ctx.globalAlpha = 1;
+        (0,_functions_renderPlayers__WEBPACK_IMPORTED_MODULE_13__["default"])(xOffset, yOffset, delta);
+
+        (0,_functions_renderAnimals__WEBPACK_IMPORTED_MODULE_6__["default"])(xOffset, yOffset);
+
+        ctx.globalAlpha = 1;
+        (0,_functions_renderGameObjects__WEBPACK_IMPORTED_MODULE_9__["default"])(xOffset, yOffset, delta);
+    
+        ctx.beginPath();
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = `rgba(0, 0, 70, 0.35)`;
+        ctx.fillRect(0, 0, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight);
+
+        (0,_functions_renderPlayerInfo__WEBPACK_IMPORTED_MODULE_12__["default"])(xOffset, yOffset, delta);
+
+        _functions_renderTexts__WEBPACK_IMPORTED_MODULE_14__["default"].renderTexts(xOffset, yOffset, delta);
+
+        (0,_UI_minimap__WEBPACK_IMPORTED_MODULE_2__["default"])();
+    } else {
+        // set to default (center of map)
+        camera.x = _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale / 2;
+        camera.y = _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale / 2;
+    }
+}
+/*
+*/
+
+function renderRiverPortion(e, t, i, n) {
+
+    const s = _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].riverWidth + n
+    , r = _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale / 2 - t - s / 2;
+    r < _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenHeight && r + s > 0 && i.fillRect(0, r, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].maxScreenWidth, s)
+}
+
+function renderStar(ctxt, spikes, outer, inner) {
+    let rot = Math.PI / 2 * 3;
+    let x, y;
+    let step = Math.PI / spikes;
+    ctxt.beginPath();
+    ctxt.moveTo(0, -outer);
+    for (let i = 0; i < spikes; i++) {
+        x = Math.cos(rot) * outer;
+        y = Math.sin(rot) * outer;
+        ctxt.lineTo(x, y);
+        rot += step;
+        x = Math.cos(rot) * inner;
+        y = Math.sin(rot) * inner;
+        ctxt.lineTo(x, y);
+        rot += step;
+    }
+    ctxt.lineTo(0, -outer);
+    ctxt.closePath();
+}
+
+function renderBlob(ctxt, spikes, outer, inner) {
+    let rot = Math.PI / 2 * 3;
+    let step = Math.PI / spikes;
+    let tmpOuter;
+    ctxt.beginPath();
+    ctxt.moveTo(0, -inner);
+    for (let i = 0; i < spikes; i++) {
+        tmpOuter = (0,_Utils_randomInt__WEBPACK_IMPORTED_MODULE_5__["default"])(outer + 0.9, outer * 1.2);
+        ctxt.quadraticCurveTo(Math.cos(rot + step) * tmpOuter, Math.sin(rot + step) * tmpOuter,
+                              Math.cos(rot + (step * 2)) * inner, Math.sin(rot + (step * 2)) * inner);
+        rot += step * 2;
+    }
+    ctxt.lineTo(0, -inner);
+    ctxt.closePath();
+}
+
+function renderCircle(x, y, scale, tmpContext, dontStroke, dontFill) {
+    tmpContext = tmpContext || mainContext;
+    tmpContext.beginPath();
+    tmpContext.arc(x, y, scale, 0, 2 * Math.PI);
+    if (!dontFill) tmpContext.fill();
+    if (!dontStroke) tmpContext.stroke();
+}
+
+
+/***/ }),
+
+/***/ "./Game/UI/chatLog.js":
+/*!****************************!*\
+  !*** ./Game/UI/chatLog.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ addMessage)
+/* harmony export */ });
+const chatlog = document.getElementById("chatLog");
+
+function addMessage(owner, message) {
+    // beware of XSS
+
+    let data = `${owner}: ${message}`;
+    
+    let tmp = document.createElement("p");
+    tmp.className = "chatElm";
+    tmp.innerText = data;
+
+    chatlog.appendChild(tmp);
+
+    chatlog.scrollTop = chatlog.scrollHeight;
+}
+
+/***/ }),
+
+/***/ "./Game/UI/eventHooks.js":
+/*!*******************************!*\
+  !*** ./Game/UI/eventHooks.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   actionBar: () => (/* binding */ actionBar),
+/* harmony export */   ageBar: () => (/* binding */ ageBar),
+/* harmony export */   ageBarBody: () => (/* binding */ ageBarBody),
+/* harmony export */   ageText: () => (/* binding */ ageText),
+/* harmony export */   deathText: () => (/* binding */ deathText),
+/* harmony export */   "default": () => (/* binding */ registerDOMEventHooks),
+/* harmony export */   leaderboard: () => (/* binding */ leaderboard),
+/* harmony export */   loadingText: () => (/* binding */ loadingText),
+/* harmony export */   mainMenu: () => (/* binding */ mainMenu),
+/* harmony export */   menuCardHolder: () => (/* binding */ menuCardHolder),
+/* harmony export */   nameInput: () => (/* binding */ nameInput)
+/* harmony export */ });
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../main */ "./Game/main.js");
+
+
+const serverSelector = document.getElementById("serverBrowser");
+const loadingText = document.getElementById("loadingText");
+const mainMenu = document.getElementById("mainMenu");
+const menuCardHolder = document.getElementById("menuCardHolder");
+const nameInput = document.getElementById("nameInput");
+const leaderboard = document.getElementById("leaderboard");
+const actionBar = document.getElementById("actionBar");
+const deathText = document.getElementById("");
+const ageBar = document.getElementById("ageBar");
+const ageBarBody = document.getElementById("ageBarBody");
+const ageText = document.getElementById("ageText");
+
+function registerDOMEventHooks() {
+    document.getElementById("enterGame").addEventListener("click", (event) => {
+        _main__WEBPACK_IMPORTED_MODULE_0__["default"].changeRegion(serverSelector.value || "miami");
+        _main__WEBPACK_IMPORTED_MODULE_0__["default"].spawn();
+
+        loadingText.style.display = "block";
+        menuCardHolder.style.display = "none";
+    });
+}
+
+/***/ }),
+
+/***/ "./Game/UI/minimap.js":
+/*!****************************!*\
+  !*** ./Game/UI/minimap.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ renderMinimap),
+/* harmony export */   minimap: () => (/* binding */ minimap),
+/* harmony export */   minimapCtx: () => (/* binding */ minimapCtx)
+/* harmony export */ });
+/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../configurations */ "./Game/configurations.js");
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../main */ "./Game/main.js");
+
+
+
+const minimap = document.getElementById("minimap");
+const minimapCtx = minimap.getContext("2d");
+
+function renderMinimap(delta) {
+    // scale it accordingly
+    
+    let ctx = minimapCtx; // easier to write with :skull:
+
+    ctx.clearRect(0, 0, minimap.width, minimap.height);
+
+    ctx.beginPath();
+    ctx.fillStyle = "#fff";
+    ctx.arc((_main__WEBPACK_IMPORTED_MODULE_1__["default"].player.lerpx / _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale) * minimap.width, (_main__WEBPACK_IMPORTED_MODULE_1__["default"].player.lerpy / _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].mapScale) * minimap.height, 4, 0, Math.PI * 2);
+    ctx.fill();
+}
+
+/***/ }),
+
+/***/ "./Game/UI/playerDied.js":
+/*!*******************************!*\
+  !*** ./Game/UI/playerDied.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ playerDied)
+/* harmony export */ });
+/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../configurations */ "./Game/configurations.js");
+/* harmony import */ var _eventHooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./eventHooks */ "./Game/UI/eventHooks.js");
+
+
+
+let deathFontSize = 99999;
+function playerDied() {
+    _eventHooks__WEBPACK_IMPORTED_MODULE_1__.deathText.style.display = "block",
+    _eventHooks__WEBPACK_IMPORTED_MODULE_1__.deathText.style.fontSize = "0px",
+    deathFontSize = 0,
+    setTimeout(function() {
+        _eventHooks__WEBPACK_IMPORTED_MODULE_1__.deathText.style.display = "none";
+    }, _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].deathFadeout);
+}
+
+/***/ }),
+
+/***/ "./Game/UI/updateActionBar.js":
+/*!************************************!*\
+  !*** ./Game/UI/updateActionBar.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ updateActionBar)
+/* harmony export */ });
+/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../configurations */ "./Game/configurations.js");
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../main */ "./Game/main.js");
+/* harmony import */ var _eventHooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./eventHooks */ "./Game/UI/eventHooks.js");
+
+
+
+
+function updateActionBar(items = [..._main__WEBPACK_IMPORTED_MODULE_1__["default"].player.weapons, ..._main__WEBPACK_IMPORTED_MODULE_1__["default"].player.items]) {
+    _eventHooks__WEBPACK_IMPORTED_MODULE_2__.actionBar.innerHTML = "";
+
+    items.forEach(item => {
+        const actionBarItem = document.createElement("div");
+        actionBarItem.className = "actionBarItems";
+        actionBarItem.id = item.name;
+
+        actionBarItem.onclick = function() {
+            _main__WEBPACK_IMPORTED_MODULE_1__["default"].webSocket.wsSend("s", item.id, item?.weapon ? "weapon" : (item?.heal ? "food" : "item"));
+        }
+
+        const canvas = document.createElement("canvas");
+        canvas.width = canvas.height = 66;
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+        canvas.style.zIndex = "99";
+
+        const ctx = canvas.getContext("2d");
+
+        let img = item.img;
+        const scale = item.iPad || 1;
+        const pad = _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].iconPad;
+
+        const imgWidth = canvas.width * scale * pad + 5;
+        const imgHeight = canvas.height * scale * pad + 5;
+
+        const x = (canvas.width - imgWidth) / 2;
+        const y = (canvas.height - imgHeight) / 2;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        if(item.weapon) ctx.rotate(Math.PI / 4 + Math.PI);
+        ctx.translate(-canvas.width / 2, -canvas.height / 2);
+        ctx.drawImage(img, x, y, imgWidth, imgHeight);
+        ctx.restore();
+
+        actionBarItem.appendChild(canvas);
+        _eventHooks__WEBPACK_IMPORTED_MODULE_2__.actionBar.appendChild(actionBarItem);
+    });
+}
+
+
+/***/ }),
+
+/***/ "./Game/UI/updateAge.js":
+/*!******************************!*\
+  !*** ./Game/UI/updateAge.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ updateAge)
+/* harmony export */ });
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../main */ "./Game/main.js");
+/* harmony import */ var _eventHooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./eventHooks */ "./Game/UI/eventHooks.js");
+
+
+
+function updateAge([xp]) {
+    // ok so default xp will be 300
+    // every age max xp will increas eby like 1.2x
+
+    _main__WEBPACK_IMPORTED_MODULE_0__["default"].player.xp += xp;
+
+    if(_main__WEBPACK_IMPORTED_MODULE_0__["default"].player.xp >= _main__WEBPACK_IMPORTED_MODULE_0__["default"].player.maxXP) {
+        _main__WEBPACK_IMPORTED_MODULE_0__["default"].player.xp = 0;
+        _main__WEBPACK_IMPORTED_MODULE_0__["default"].player.maxXP *= 1.2;
+
+        if(_main__WEBPACK_IMPORTED_MODULE_0__["default"].player.age < 21) {
+            _main__WEBPACK_IMPORTED_MODULE_0__["default"].player.age++;
+
+            _eventHooks__WEBPACK_IMPORTED_MODULE_1__.ageText.innerHTML = `AGE ${_main__WEBPACK_IMPORTED_MODULE_0__["default"].player.age}`;
+        } else {
+            _eventHooks__WEBPACK_IMPORTED_MODULE_1__.ageText.innerHTML = "MAX AGE";
+        }
+    } else {
+        _main__WEBPACK_IMPORTED_MODULE_0__["default"].player.xp += xp;
+
+        _eventHooks__WEBPACK_IMPORTED_MODULE_1__.ageBarBody.style.width = ((_main__WEBPACK_IMPORTED_MODULE_0__["default"].player.xp / _main__WEBPACK_IMPORTED_MODULE_0__["default"].player.maxXP) * 100) + "px";
+    }
+}
+
+/***/ }),
+
+/***/ "./Game/UI/updateLeaderboard.js":
+/*!**************************************!*\
+  !*** ./Game/UI/updateLeaderboard.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ updateLeaderboard)
+/* harmony export */ });
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../main */ "./Game/main.js");
+/* harmony import */ var _Utils_kFormat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Utils/kFormat */ "./Game/Utils/kFormat.js");
+/* harmony import */ var _eventHooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./eventHooks */ "./Game/UI/eventHooks.js");
+
+
+
+
+
+// do test
+function updateLeaderboard(data) {
+    _eventHooks__WEBPACK_IMPORTED_MODULE_2__.leaderboard.innerHTML = `
+    <div style="font-size: 30px;">Leaderboard</div>
+    `;
+
+    for (let i = 0; i < data.length; i++) {        
+        _eventHooks__WEBPACK_IMPORTED_MODULE_2__.leaderboard.innerHTML += `
+        <div id="leaderHolder" style="display: flex; justify-content: space-between; align-items: center;">
+            <div id="leaderboardItem" style="font-size: 22px; color: ${data[i].sid == _main__WEBPACK_IMPORTED_MODULE_0__["default"].player.sid ? "#fff" : "rgba(255, 255, 255, 0.5)"}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 75%;">
+                ${i + 1}. [${data[i].sid}] ${data[i].name}
+            </div>
+
+            <div id="leaderScore" style="font-size: 22px; color: #fff;">
+                ${(0,_Utils_kFormat__WEBPACK_IMPORTED_MODULE_1__["default"])(data[i].gold)}
+            </div>
+        </div>
+        `;
+    }
+}
+
+/***/ }),
+
+/***/ "./Game/Utils/getDirection.js":
+/*!************************************!*\
+  !*** ./Game/Utils/getDirection.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ getDirection)
+/* harmony export */ });
+//import atan2 from "./math"
+
+function getDirection(ax, ay, bx, by) {
+    return Math.atan2(by - ay, bx - ax);
+}
+
+/***/ }),
+
+/***/ "./Game/Utils/getDistance.js":
+/*!***********************************!*\
+  !*** ./Game/Utils/getDistance.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ getDistance),
+/* harmony export */   fastHypot: () => (/* binding */ fastHypot)
+/* harmony export */ });
+//import hypot from "./math"
+
+function getDistance(ax, ay, bx, by) {
+    return Math.hypot(by - ay, bx - ax);
+}
+
+// Credit Wynd
+function fastHypot(a, b){
+    const c = Math.SQRT2-1;
+    a = Math.abs(a);
+    b = Math.abs(b);
+    if(a > b){
+        let temp = a;
+        a = b;
+        b = temp;
+    }
+    return (c * a) + b
+}
+
+/***/ }),
+
+/***/ "./Game/Utils/kFormat.js":
+/*!*******************************!*\
+  !*** ./Game/Utils/kFormat.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ kFormat)
+/* harmony export */ });
+
+
+function kFormat(number) {
+    if(typeof number != 'number') throw new TypeError("value passed to kFormat is not number", number);
+
+    if (number >= 1e6) {
+        return (number / 1e6).toFixed(1) + "m";
+    } else if (number >= 1e3) {
+        return (number / 1e3).toFixed(1) + "k";
+    } else {
+        return number;
+    }
+}
+
+/***/ }),
+
+/***/ "./Game/Utils/randomInt.js":
+/*!*********************************!*\
+  !*** ./Game/Utils/randomInt.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ randomInt)
+/* harmony export */ });
+function randomInt(min, max) {
+    return ~~(Math.random() * (max - min + 1)) + min;
+}
+
+/***/ }),
+
+/***/ "./Game/Utils/renderCircle.js":
+/*!************************************!*\
+  !*** ./Game/Utils/renderCircle.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ drawCircle)
+/* harmony export */ });
+/* harmony import */ var _Render_render__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Render/render */ "./Game/Render/render.js");
+
+
+function drawCircle(x, y, radius, context = _Render_render__WEBPACK_IMPORTED_MODULE_0__.ctx, shouldFill = true, shouldStroke = true) {
+    context.beginPath();
+    context.arc(x, y, radius, 0, 2 * Math.PI);
+    
+    if (shouldFill) {
+        context.fill();
+    }
+
+    if (shouldStroke) {
+        context.stroke();
+    }
+}
+
+/***/ }),
+
+/***/ "./Game/WebSocket/hooks/eventHook.js":
+/*!*******************************************!*\
+  !*** ./Game/WebSocket/hooks/eventHook.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ handleEvent)
+/* harmony export */ });
+/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../configurations */ "./Game/configurations.js");
+
+
+function handleEvent(packetType) {
+    if(typeof packetType[0][0] !== "string") throw new TypeError("packet type is not of String");
+
+    if(typeof _configurations__WEBPACK_IMPORTED_MODULE_0__.packetMap[packetType[0][0]] !== "function") throw new Error("function type does not exist for packet type", packetType);
+
+    _configurations__WEBPACK_IMPORTED_MODULE_0__.packetMap[packetType[0][0]](packetType[0][1]);
+}
+
+
+/***/ }),
+
+/***/ "./Game/WebSocket/hooks/eventHooks/addGameObjects.js":
+/*!***********************************************************!*\
+  !*** ./Game/WebSocket/hooks/eventHooks/addGameObjects.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ addGameObjects)
+/* harmony export */ });
+/* harmony import */ var _Classes_Building__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Classes/Building */ "./Game/Classes/Building.js");
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../main */ "./Game/main.js");
+
+
+
+
+function addGameObjects(data) {
+    /*for(let i = 0; i < data[0].length; i++) {
+        let d = new Building(data[0][i]);
+        Game.buildings.push(d);
+
+        console.warn(Game.buildings.find(a => a.sid == data[0][i].sid))
+    }*/
+
+        for(let datas of data[0]) {
+            let tmp = new _Classes_Building__WEBPACK_IMPORTED_MODULE_0__["default"](datas);
+            _main__WEBPACK_IMPORTED_MODULE_1__["default"].buildings.push(tmp);
+        }
+}
+
+/***/ }),
+
+/***/ "./Game/WebSocket/hooks/eventHooks/addPlayer.js":
+/*!******************************************************!*\
+  !*** ./Game/WebSocket/hooks/eventHooks/addPlayer.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ addPlayer)
+/* harmony export */ });
+/* harmony import */ var _Classes_Player__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Classes/Player */ "./Game/Classes/Player.js");
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../main */ "./Game/main.js");
+/* harmony import */ var _UI_updateActionBar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../UI/updateActionBar */ "./Game/UI/updateActionBar.js");
+
+
+
+
+function addPlayer([playerData, isMe]) {    
+    let tmpPlayer = _main__WEBPACK_IMPORTED_MODULE_1__["default"].getPlayerBySid(playerData.sid);
+
+    if(!tmpPlayer) {
+        tmpPlayer = new _Classes_Player__WEBPACK_IMPORTED_MODULE_0__["default"](playerData);
+        _main__WEBPACK_IMPORTED_MODULE_1__["default"].players.push(tmpPlayer);
+    } else {
+        tmpPlayer.x = playerData.x;
+        tmpPlayer.y = playerData.y;
+        tmpPlayer.alive = true;
+        tmpPlayer.resetStuff();
+    }
+
+    if(isMe) {
+        _main__WEBPACK_IMPORTED_MODULE_1__["default"].player = tmpPlayer;
+        (0,_UI_updateActionBar__WEBPACK_IMPORTED_MODULE_2__["default"])();
+    }
+}
+
+/***/ }),
+
+/***/ "./Game/WebSocket/hooks/eventHooks/gatherAnimation.js":
+/*!************************************************************!*\
+  !*** ./Game/WebSocket/hooks/eventHooks/gatherAnimation.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ gatherAnimation)
+/* harmony export */ });
+/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../configurations */ "./Game/configurations.js");
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../main */ "./Game/main.js");
+/* harmony import */ var _Utils_getDirection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Utils/getDirection */ "./Game/Utils/getDirection.js");
+
+
+
+
+function gatherAnimation([sid, index, hitObject]) {
+    // hit object for later
+    let tmpObj = _main__WEBPACK_IMPORTED_MODULE_1__["default"].getPlayerBySid(sid);
+
+    if(tmpObj) {
+        tmpObj.startAnimation(hitObject.length);
+
+        let tmp;
+        for(let i = hitObject.length; i--;) {
+            if(tmp = _main__WEBPACK_IMPORTED_MODULE_1__["default"].getBuildingBySid(hitObject[i].sid)) {
+                tmp.xWiggle += _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].wiggleIntensity * Math.cos((0,_Utils_getDirection__WEBPACK_IMPORTED_MODULE_2__["default"])(_main__WEBPACK_IMPORTED_MODULE_1__["default"].player.lerpx, _main__WEBPACK_IMPORTED_MODULE_1__["default"].player.lerpy, tmp.x, tmp.y));
+                tmp.yWiggle += _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].wiggleIntensity * Math.sin((0,_Utils_getDirection__WEBPACK_IMPORTED_MODULE_2__["default"])(_main__WEBPACK_IMPORTED_MODULE_1__["default"].player.lerpx, _main__WEBPACK_IMPORTED_MODULE_1__["default"].player.lerpy, tmp.x, tmp.y));
+            }
+        }
+    }
+}
+
+/***/ }),
+
+/***/ "./Game/WebSocket/hooks/eventHooks/killObject.js":
+/*!*******************************************************!*\
+  !*** ./Game/WebSocket/hooks/eventHooks/killObject.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ killObject)
+/* harmony export */ });
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../main */ "./Game/main.js");
+
+
+function killObject([sid]) {
+    _main__WEBPACK_IMPORTED_MODULE_0__["default"].buildings.splice(_main__WEBPACK_IMPORTED_MODULE_0__["default"].buildings.indexOf(_main__WEBPACK_IMPORTED_MODULE_0__["default"].getBuildingBySid(sid)), 1);
+}
+
+/***/ }),
+
+/***/ "./Game/WebSocket/hooks/eventHooks/pingSocketResponse.js":
+/*!***************************************************************!*\
+  !*** ./Game/WebSocket/hooks/eventHooks/pingSocketResponse.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ pingSocketResponse)
+/* harmony export */ });
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../main */ "./Game/main.js");
+/* harmony import */ var _updatePlayers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./updatePlayers */ "./Game/WebSocket/hooks/eventHooks/updatePlayers.js");
+
+
+
+
+function pingSocketResponse() {
+    let ping = Date.now() - _updatePlayers__WEBPACK_IMPORTED_MODULE_1__.pingSocketDate;
+
+    document.getElementById("pingDisplay").innerHTML = `Ping: ${ping}ms Objects ${_main__WEBPACK_IMPORTED_MODULE_0__["default"].buildings.length}`;
+}
+
+/***/ }),
+
+/***/ "./Game/WebSocket/hooks/eventHooks/receiveChat.js":
+/*!********************************************************!*\
+  !*** ./Game/WebSocket/hooks/eventHooks/receiveChat.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ receiveChat)
+/* harmony export */ });
+/* harmony import */ var _configurations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../configurations */ "./Game/configurations.js");
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../main */ "./Game/main.js");
+/* harmony import */ var _UI_chatLog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../UI/chatLog */ "./Game/UI/chatLog.js");
+
+
+
+
+function receiveChat(data) {
+    _main__WEBPACK_IMPORTED_MODULE_1__["default"].getPlayerBySid(data[0]).chatMessage = replaceEmojis(data[1]);
+    _main__WEBPACK_IMPORTED_MODULE_1__["default"].getPlayerBySid(data[0]).chatCountdown = _configurations__WEBPACK_IMPORTED_MODULE_0__["default"].chatCountdown;
+
+    (0,_UI_chatLog__WEBPACK_IMPORTED_MODULE_2__["default"])(_main__WEBPACK_IMPORTED_MODULE_1__["default"].getPlayerBySid(data[0]).name || "unknown", replaceEmojis(data[1]))
+}
+
+function replaceEmojis(text) {
+    const emojiMap = {
+        ':smile:': '😄',
+        ':sob:': '😭',
+        ':heart:': '❤️',
+        ':thumbsup:': '👍',
+        ':fire:': '🔥',
+        ':laughing:': '😂',
+        ':clap:': '👏',
+        ':wink:': '😉',
+        ':sunglasses:': '😎',
+        ':thinking:': '🤔',
+        ':grin:': '😀',
+        ':star:': '⭐',
+        ':check:': '✔️',
+        ':x:': '❌',
+        ':warning:': '⚠️',
+        ':sparkles:': '✨',
+        ':100:': '💯',
+        ':pray:': '🙏',
+        ':wave:': '👋',
+        ':ok:': '👌',
+        ':poop:': '💩',
+        ':shit:': '💩',
+        ':kiss:': '😘',
+        ':sleeping:': '😴',
+        ':angry:': '😠',
+        ':neutral:': '😐',
+        ':confused:': '😕',
+        ':shocked:': '😲',
+        ':party:': '🥳',
+        ':drool:': '🤤',
+        ':money:': '🤑',
+        ':alien:': '👽',
+        ':robot:': '🤖',
+        ':cat:': '🐱',
+        ':dog:': '🐶',
+        ':unicorn:': '🦄',
+        ':sun:': '☀️',
+        ':moon:': '🌙',
+        ':cloud:': '☁️',
+        ':rainbow:': '🌈',
+        ':coffee:': '☕',
+        ':pizza:': '🍕',
+        ':burger:': '🍔',
+        ':fries:': '🍟',
+        ':cake:': '🎂',
+        ':gift:': '🎁',
+        ':balloon:': '🎈',
+        ':muscle:': '💪',
+        ':eyes:': '👀',
+        ':skull:': '💀',
+        ':ghost:': '👻',
+        ':zombie:': '🧟',
+        ':vampire:': '🧛',
+        ':angel:': '😇',
+        ':devil:': '😈',
+        ':hug:': '🤗',
+        ':writing:': '✍️',
+        ':phone:': '📞',
+        ':laptop:': '💻',
+        ':hourglass:': '⏳',
+        ':lock:': '🔒',
+        ':unlock:': '🔓',
+        ':key:': '🔑',
+        ':music:': '🎵',
+        ':microphone:': '🎤',
+        ':camera:': '📷',
+        ':video:': '📹',
+        ':tv:': '📺',
+        ':game:': '🎮',
+        ':airplane:': '✈️',
+        ':car:': '🚗',
+        ':train:': '🚆',
+        ':rocket:': '🚀',
+        ':medal:': '🏅',
+        ':trophy:': '🏆',
+    };
+
+    return text.replace(/:\w+:/g, match => emojiMap[match] || match);
+}
+
+/***/ }),
+
+/***/ "./Game/WebSocket/hooks/eventHooks/removePlayer.js":
+/*!*********************************************************!*\
+  !*** ./Game/WebSocket/hooks/eventHooks/removePlayer.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ removePlayer)
+/* harmony export */ });
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../main */ "./Game/main.js");
+
+
+function removePlayer(data) {
+    let sid = data[0];
+    
+    let player = _main__WEBPACK_IMPORTED_MODULE_0__["default"].getPlayerBySid(sid);
+
+    if (!player) {
+        console.error(`player with sid ${sid} not found`);
+        return;
+    }
+
+    let playerIndex = _main__WEBPACK_IMPORTED_MODULE_0__["default"].players.indexOf(player);
+
+    if (playerIndex !== -1) {
+        _main__WEBPACK_IMPORTED_MODULE_0__["default"].players.splice(playerIndex, 1);
+    } else {
+        console.error(`player with sid ${sid} not found in the players array`);
+    }
+}
+
+
+/***/ }),
+
+/***/ "./Game/WebSocket/hooks/eventHooks/updateAI.js":
+/*!*****************************************************!*\
+  !*** ./Game/WebSocket/hooks/eventHooks/updateAI.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ updateAI)
+/* harmony export */ });
+/* harmony import */ var _Classes_Animal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Classes/Animal */ "./Game/Classes/Animal.js");
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../main */ "./Game/main.js");
+
+
+
+
+function updateAI(data) {
+    for(let i = 0; i < data.length; i++) {
+        let ai = _main__WEBPACK_IMPORTED_MODULE_1__["default"].getAnimalBySid(data[i].sid);
+
+        if(ai) {
+            ai.x1 = ai.lerpx;
+            ai.y1 = ai.lerpy
+            ai.x = data[i].x;
+            ai.y = data[i].y;
+            ai.t1 = (ai.t2 === undefined) ? Date.now() : ai.t2;
+            ai.t2 = Date.now();
+            ai.d1 = (ai.d2 === void 0 ? data[i].dir : ai.d2);
+            ai.d2 = data[i].dir;
+            ai.delta = 0;
+        } else {
+            ai = new _Classes_Animal__WEBPACK_IMPORTED_MODULE_0__["default"](data[i].sid, data[i].type || 1, data[i].x, data[i].y);
+            
+            ai.sid = data[i].sid;
+            ai.x = data[i].x;
+            ai.y = data[i].y;
+            ai.d2 = data[i].dir;
+            ai.health = data[i].health;
+
+            _main__WEBPACK_IMPORTED_MODULE_1__["default"].animals.push(ai);
+        }
+    }
+}
+
+/***/ }),
+
+/***/ "./Game/WebSocket/hooks/eventHooks/updateHealth.js":
+/*!*********************************************************!*\
+  !*** ./Game/WebSocket/hooks/eventHooks/updateHealth.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ updateHealth)
+/* harmony export */ });
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../main */ "./Game/main.js");
+/* harmony import */ var _Render_functions_renderTexts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Render/functions/renderTexts */ "./Game/Render/functions/renderTexts.js");
+/* harmony import */ var _UI_playerDied__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../UI/playerDied */ "./Game/UI/playerDied.js");
+
+
+
+
+
+function updateHealth([sid, value]) {
+    let player = _main__WEBPACK_IMPORTED_MODULE_0__["default"].getPlayerBySid(sid);
+    
+    player.health += value;
+
+    if(player.health <= 0) player.alive = false;
+
+    _Render_functions_renderTexts__WEBPACK_IMPORTED_MODULE_1__["default"].addText(player.lerpx, player.lerpy, Math.abs(value), 50, value < 0 ? "#fff" : "#8ecc51", 500);
+
+    if(player.sid == _main__WEBPACK_IMPORTED_MODULE_0__["default"].player.sid) {
+        (0,_UI_playerDied__WEBPACK_IMPORTED_MODULE_2__["default"])();
+    }
+}
+
+/***/ }),
+
+/***/ "./Game/WebSocket/hooks/eventHooks/updatePlayers.js":
+/*!**********************************************************!*\
+  !*** ./Game/WebSocket/hooks/eventHooks/updatePlayers.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ updatePlayers),
+/* harmony export */   getAimDir: () => (/* binding */ getAimDir),
+/* harmony export */   pingSocketDate: () => (/* binding */ pingSocketDate)
+/* harmony export */ });
+/* harmony import */ var _main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../main */ "./Game/main.js");
+/* harmony import */ var _Render_functions_renderFootSteps__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Render/functions/renderFootSteps */ "./Game/Render/functions/renderFootSteps.js");
+/* harmony import */ var _Utils_getDirection__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Utils/getDirection */ "./Game/Utils/getDirection.js");
+/*
+
+we are going to be copying MooMoo.io's updatePlayer system. Because fuck me!
+
+*/
+
+
+
+
+
+let lastAimDir = 0;
+let lastDir = 0;
+function getAimDir() {
+    if(_main__WEBPACK_IMPORTED_MODULE_0__["default"].lockDir) return lastAimDir || 0;
+
+    let mouseDir = Math.atan2(_main__WEBPACK_IMPORTED_MODULE_0__.mouseEvents.mouseY - (window.innerHeight / 2), _main__WEBPACK_IMPORTED_MODULE_0__.mouseEvents.mouseX - (window.innerWidth / 2));
+
+    return mouseDir;
+}
+
+// works since objects are passed as pointers (javascript is amazing)
+let tickCount = 0;
+var pingSocketDate = Date.now();
+function updatePlayers(data) {
+    //data = data[0]
+    tickCount++;
+
+    let tmp;
+    for(let i = _main__WEBPACK_IMPORTED_MODULE_0__["default"].players.length; i--;) {
+        if(tmp = _main__WEBPACK_IMPORTED_MODULE_0__["default"].players[i]) {
+            tmp.outOfRange = true;
+        }
+    }
+
+    for(let i = 0; i < data.length; i++) {
+        let player = _main__WEBPACK_IMPORTED_MODULE_0__["default"].getPlayerBySid(data[i].sid);
+
+        player.outOfRange = false;
+        player.x = data[i].x;
+        player.y = data[i].y;
+        player.x1 = player.lerpx;
+        player.y1 = player.lerpy;
+        player.t1 = (player.t2 === undefined) ? Date.now() : player.t2;
+        player.t2 = Date.now();
+        player.d1 = (player.d2 === undefined) ? data[i].dir : player.d2;
+        player.d2 = data[i].dir;
+        player.delta = 0;
+        player.weaponIndex = data[i].weaponIndex; // also declares weapon?? shit this will be fucking annoying
+
+        /*
+        let randomOffset = () => (Math.random() - 0.5) * 30;
+
+        let footsteps = [
+            {
+                x: player.lerpx + 20 * Math.cos(getDirection(player.x, player.y, player.x1, player.y1) + Math.PI / 2) +
+                    randomOffset(),
+                y: player.lerpy + 20 * Math.sin(getDirection(player.x, player.y, player.x1, player.y1) + Math.PI / 2) +
+                    randomOffset()
+            },
+            {
+                x: player.lerpx + 20 * Math.cos(getDirection(player.x, player.y, player.x1, player.y1) - Math.PI / 2) +
+                    randomOffset(),
+                y: player.lerpy + 20 * Math.sin(getDirection(player.x, player.y, player.x1, player.y1) - Math.PI / 2) +
+                    randomOffset()
+            }
+        ];
+        */
+
+        let timeFactor = performance.now() * 0.01;
+        let footsteps = [
+            {
+                x: player.lerpx + 20 * Math.cos((0,_Utils_getDirection__WEBPACK_IMPORTED_MODULE_2__["default"])(player.x, player.y, player.x1, player.y1) + Math.PI / 2) +
+                    5 * Math.sin(timeFactor),
+                y: player.lerpy + 20 * Math.sin((0,_Utils_getDirection__WEBPACK_IMPORTED_MODULE_2__["default"])(player.x, player.y, player.x1, player.y1) + Math.PI / 2) +
+                    5 * Math.cos(timeFactor) 
+            },
+            {
+                x: player.lerpx + 20 * Math.cos((0,_Utils_getDirection__WEBPACK_IMPORTED_MODULE_2__["default"])(player.x, player.y, player.x1, player.y1) - Math.PI / 2) +
+                    5 * Math.sin(timeFactor + Math.PI),
+                y: player.lerpy + 20 * Math.sin((0,_Utils_getDirection__WEBPACK_IMPORTED_MODULE_2__["default"])(player.x, player.y, player.x1, player.y1) - Math.PI / 2) +
+                    5 * Math.cos(timeFactor + Math.PI) 
+            }
+        ];
+
+        if(player.rightFoot) {
+            (0,_Render_functions_renderFootSteps__WEBPACK_IMPORTED_MODULE_1__.addFootStep)(footsteps[1].x, footsteps[1].y, 10);
+        } else {
+            (0,_Render_functions_renderFootSteps__WEBPACK_IMPORTED_MODULE_1__.addFootStep)(footsteps[0].x, footsteps[0].y, 10);
+        }
+
+        player.rightFoot = !player.rightFoot;
+    }
+
+    if(tickCount % 15 === 0) {
+        pingSocketDate = Date.now();
+        _main__WEBPACK_IMPORTED_MODULE_0__["default"].webSocket.wsSend("0");
+    }
+
+    //for(let i = 0; i < data.length; i += 5) {
+        //let player = Game.getPlayerBySid(data[i]);
+
+        /*
+        player.x = data[i + 1];
+        player.y = data[i + 2];
+        player.dir = data[i + 3];
+        */
+    //}
+
+    //addFootStep(Game.player.lerpx, Game.player.lerpy, 10);
+
+    let newAimDir = getAimDir();
+    if(newAimDir !== lastAimDir) {
+        lastAimDir = newAimDir;
+        _main__WEBPACK_IMPORTED_MODULE_0__["default"].webSocket.wsSend("d", getAimDir());
+    }
+}
+
+/***/ }),
+
+/***/ "./Game/WebSocket/main.js":
+/*!********************************!*\
+  !*** ./Game/WebSocket/main.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Socket)
+/* harmony export */ });
+/* harmony import */ var msgpack_lite__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! msgpack-lite */ "./node_modules/msgpack-lite/lib/browser.js");
+/* harmony import */ var _hooks_eventHook__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./hooks/eventHook */ "./Game/WebSocket/hooks/eventHook.js");
+
+
+
+
+class Socket extends WebSocket {
+    constructor(url, protocols) {
+        super(url, protocols);
+
+        this.wsSend = function(message, ...args) {
+            let data = [message, ...args];
+            this.send(new Uint8Array(msgpack_lite__WEBPACK_IMPORTED_MODULE_0__.encode(data)));
+        }
+
+        this.onopen = function() {
+            //this.wsSend("sp");
+            this.wsSend("0", Date.now());
+        }
+
+        this.onmessage = function(data) {
+            data = (0,msgpack_lite__WEBPACK_IMPORTED_MODULE_0__.decode)(new Uint8Array(data.data));
+
+            (0,_hooks_eventHook__WEBPACK_IMPORTED_MODULE_1__["default"])(data)
+        }
+
+        this.onerror = function(error) {
+            console.error(error);
+            alert("failed to connect to server. check the console and join the discord server to report this issue.")
+        }
+    }
+}
+
+/***/ }),
+
+/***/ "./Game/configurations.js":
+/*!********************************!*\
+  !*** ./Game/configurations.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   animalTypes: () => (/* binding */ animalTypes),
+/* harmony export */   buildingTypes: () => (/* binding */ buildingTypes),
+/* harmony export */   colors: () => (/* binding */ colors),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   foodTypes: () => (/* binding */ foodTypes),
+/* harmony export */   packetMap: () => (/* binding */ packetMap),
+/* harmony export */   weaponTypes: () => (/* binding */ weaponTypes)
+/* harmony export */ });
+/* harmony import */ var _Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Render/functions/makeImage */ "./Game/Render/functions/makeImage.js");
+/* harmony import */ var _UI_updateAge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UI/updateAge */ "./Game/UI/updateAge.js");
+/* harmony import */ var _UI_updateLeaderboard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UI/updateLeaderboard */ "./Game/UI/updateLeaderboard.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_addGameObjects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/addGameObjects */ "./Game/WebSocket/hooks/eventHooks/addGameObjects.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_addPlayer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/addPlayer */ "./Game/WebSocket/hooks/eventHooks/addPlayer.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_gatherAnimation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/gatherAnimation */ "./Game/WebSocket/hooks/eventHooks/gatherAnimation.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_killObject__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/killObject */ "./Game/WebSocket/hooks/eventHooks/killObject.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_pingSocketResponse__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/pingSocketResponse */ "./Game/WebSocket/hooks/eventHooks/pingSocketResponse.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_receiveChat__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/receiveChat */ "./Game/WebSocket/hooks/eventHooks/receiveChat.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_removePlayer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/removePlayer */ "./Game/WebSocket/hooks/eventHooks/removePlayer.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_updateAI__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/updateAI */ "./Game/WebSocket/hooks/eventHooks/updateAI.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_updateHealth__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/updateHealth */ "./Game/WebSocket/hooks/eventHooks/updateHealth.js");
+/* harmony import */ var _WebSocket_hooks_eventHooks_updatePlayers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./WebSocket/hooks/eventHooks/updatePlayers */ "./Game/WebSocket/hooks/eventHooks/updatePlayers.js");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+    mapScale: 6000,
+    maxNameLength: 15,
+    maxChatLength: 40,
+    playerScale: 35,
+    lineWidth: 5.5,
+    maxScreenWidth: 1920,
+    maxScreenHeight: 1080,
+    maxPlayerHealth: 100,
+    snowBiomeTop: 1000,
+    serverUpdateRate: 9,
+    riverWidth: 400,
+    riverPadding: 20,
+    waveSpeed: 0.0001,
+    waveMax: 1.2,
+    outlineColor: "#525252",
+    textOutlineColor: "#3d3f42",
+    nameY: 34,
+    healthBarWidth: 55,
+    healthBarPad: 4.5,
+    chatCountdown: 4000,
+    hitReturnRatio: 0.25,
+    hitAngle: Math.PI / 2,
+    wiggleIntensity: 20,
+    iconPad: 0.9
+});
+
+const weaponTypes = [{
+    id: 0,
+    type: 0,
+    name: "tool hammer",
+    desc: "tool for gathering all resources",
+    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/hammer_1.png"),
+    length: 140,
+    width: 140,
+    xOff: -3,
+    yOff: 18,
+    dmg: 25,
+    range: 65,
+    gather: 1,
+    speed: 300,
+    weapon: true,
+    gameID: 0
+}]
+
+const buildingTypes = [{
+    id: 0,
+    name: "wall",
+    description: "protects your base from hostile aggressors",
+    health: 400,
+    scale: 55,
+    weapon: false,
+    isItem: true,
+    holdOffset: 20,
+    placeOffset: -5,
+    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/3_wood_wall.svg?v=1735857908118"),
+    hitResistance: 80, // it's kind of like a shield, the shield will slowly regenerate over time, and the building health won't be affected unless the shield is down
+},
+{
+    id: 1,
+    name: "baby spikes",
+    description: "fortifies your base, knocks back hostile aggressors",
+    health: 300,
+    scale: 50,
+    holdOffset: 14,
+    placeOffset: -5,
+    weapon: false,
+    isItem: true,
+    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/Untitled%20(1).svg?v=1735910950877"),
+    hitResistance: 20
+},
+{
+    id: 2,
+    name: "basic windmill",
+    description: "generates gold over time",
+    health: 400,
+    scale: 75,
+    holdOffset: 20,
+    placeOffset: 5,
+    weapon: false,
+    isItem: true,
+    ///img: makeImage("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/moomoorocktransparent.svg?v=1735932074001"),
+    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/mill.svg?v=1735857620463"),
+    hitResistance: 120
+}];
+
+const animalTypes = [
+    {
+        id: 0,
+        img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/cow.png"),
+        killScore: 150,
+        health: 500,
+        weightM: 0.8,
+        speed: 95e-5,
+        turnSpeed: 0.001,
+        scale: 72,
+        drop: ["food", 50],
+    },
+    {
+        id: 1,
+        img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/pig.png"),
+        killScore: 200,
+        health: 800,
+        weightM: 0.6,
+        speed: 85e-5,
+        turnSpeed: 0.001,
+        scale: 72,
+        drop: ["food", 80],
+    },
+];
+
+const foodTypes = [{
+    id: 0,
+    name: "apple",
+    heal: 10,
+    scale: 22,
+    holdOffset: 15,
+    weapon: false,
+    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/0_apple.svg?v=1735858017502")
+},
+{
+    id: 1,
+    name: "fly honeysuckle",
+    heal: 60,
+    slowEffect: 6000, // slowdown effect after eating (value is ms)
+    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/Apple-1-Modified.webp?v=1735782332913")
+},
+{
+    id: 2,
+    name: "pork",
+    heal: 20,
+    poisonEffect: 5000,
+    haram: true // haram
+}]
+
+const packetMap = {
+    1: _WebSocket_hooks_eventHooks_updatePlayers__WEBPACK_IMPORTED_MODULE_12__["default"],
+    2: _WebSocket_hooks_eventHooks_addPlayer__WEBPACK_IMPORTED_MODULE_4__["default"],
+    "r": _WebSocket_hooks_eventHooks_removePlayer__WEBPACK_IMPORTED_MODULE_9__["default"],
+    6: _WebSocket_hooks_eventHooks_receiveChat__WEBPACK_IMPORTED_MODULE_8__["default"],
+    0: _WebSocket_hooks_eventHooks_pingSocketResponse__WEBPACK_IMPORTED_MODULE_7__["default"],
+    "a": _WebSocket_hooks_eventHooks_updateAI__WEBPACK_IMPORTED_MODULE_10__["default"],
+    "l": _UI_updateLeaderboard__WEBPACK_IMPORTED_MODULE_2__["default"],
+    "g": _WebSocket_hooks_eventHooks_addGameObjects__WEBPACK_IMPORTED_MODULE_3__["default"],
+    "h": _WebSocket_hooks_eventHooks_gatherAnimation__WEBPACK_IMPORTED_MODULE_5__["default"],
+    "o": _WebSocket_hooks_eventHooks_updateHealth__WEBPACK_IMPORTED_MODULE_11__["default"],
+    "d": _WebSocket_hooks_eventHooks_killObject__WEBPACK_IMPORTED_MODULE_6__["default"],
+    "x": _UI_updateAge__WEBPACK_IMPORTED_MODULE_1__["default"]
+};
+
+const colors = {
+    grasslands: "#b6db66",
+    winter: "#fff",
+    desert: "#dbc666",
+    water: "#91b2db",
+    autumn: "#ffb666",
+    healthBarTeam: "#8ecc51",
+    healthBarEnemy: "#cc5151"
+}
+
+/***/ }),
+
+/***/ "./Game/main.js":
+/*!**********************!*\
+  !*** ./Game/main.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   keyHandler: () => (/* binding */ keyHandler),
+/* harmony export */   mouseEvents: () => (/* binding */ mouseEvents)
+/* harmony export */ });
+/* harmony import */ var _Render_render__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Render/render */ "./Game/Render/render.js");
+/* harmony import */ var _WebSocket_main__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WebSocket/main */ "./Game/WebSocket/main.js");
+/* harmony import */ var _UI_chatLog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UI/chatLog */ "./Game/UI/chatLog.js");
+/* harmony import */ var _UI_eventHooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UI/eventHooks */ "./Game/UI/eventHooks.js");
+/* harmony import */ var _Render_functions_renderTexts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Render/functions/renderTexts */ "./Game/Render/functions/renderTexts.js");
+
+
+
+
+
+
+class GameManager {
+    constructor() {
+        //this.eventLoop = setInterval(async () => {
+
+        //});
+
+        this.players = [];
+        this.buildings = [];
+        this.animals = [];
+        this.projectiles = [];
+
+        this.player = null;
+
+        this.moveDirection = null;
+
+        this.servers = {
+            testus: "wss://servertest-1-83we.onrender.com",
+            testusor: "https://servertest-3.onrender.com",
+            testeu: "wss://servertest-2.onrender.com",
+            miami: "wss://laughing-rotary-phone-4jw6qgq6w4pv3w6j-8080.app.github.dev/",
+            eu: "wss://opulent-chainsaw-jjq9r4r9q6xv2pv5x-8080.app.github.dev/",
+            asia: "wss://shiny-happiness-v6rgv6pp9rjjc6xrg-8080.app.github.dev/",
+            scilicon: "wss://fictional-chainsaw-wr597rvvpqxg39r55-8080.app.github.dev/",
+            dev: "wss://curious-petal-watchmaker.glitch.me"
+        };
+
+        this.serverURL = this.servers.dev;
+
+        //let serverurl = prompt("enter server region. available regions: miami, eu, asia, scilicon, dev. (MAKE SURE TO TYPE THE OPTIONS EXACTLY)!")
+
+        // create WebSocket ASAP, so spawning will have as little delay as possible
+        this.webSocket = null; //new Socket(servers[serverurl]/*"wss://curious-petal-watchmaker.glitch.me"*/); // pls buy vps
+        //this.webSocket.binaryType = "arraybuffer";
+
+        // this is some other random stuff
+        this.lockDir = false;
+    }
+
+    changeRegion(region) {
+        this.serverURL = this.servers[region];
+    }
+
+    spawn() {
+        this.webSocket = new _WebSocket_main__WEBPACK_IMPORTED_MODULE_1__["default"](this.serverURL);
+        this.webSocket.binaryType = "arraybuffer";
+
+        this.webSocket.onopen = () => {
+            this.webSocket.wsSend("sp", _UI_eventHooks__WEBPACK_IMPORTED_MODULE_3__.nameInput.value);
+
+            _UI_eventHooks__WEBPACK_IMPORTED_MODULE_3__.mainMenu.style.display = "none";
+        };
+
+        (0,_UI_chatLog__WEBPACK_IMPORTED_MODULE_2__["default"])("Game", "spawning in " + this.serverURL)
+    }
+
+    // maybe compact into one method
+    getPlayerBySid(sid) {
+        return this.players.find(player => player.sid == sid);
+    }
+
+    getBuildingBySid(sid) {
+        return this.buildings.find(building => building.sid == sid);
+    }
+
+    getAnimalBySid(sid) {
+        return this.animals.find(animal => animal.sid == sid);
+    }
+
+    close(reason) {
+        console.warn(reason);
+        alert(reason);
+    }
+}
+
+const Game = new GameManager;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Game);
+
+let lastTime = Date.now();
+let frameDate = Date.now();
+function runAtDrawTime() {
+    frameDate = Date.now();
+    let delta = frameDate - lastTime;
+
+    (0,_Render_render__WEBPACK_IMPORTED_MODULE_0__["default"])(delta, frameDate);
+
+    lastTime = frameDate;
+
+    requestAnimationFrame(runAtDrawTime);
+}
+
+runAtDrawTime();
+
+
+// do later now
+class KeyHandler {
+    constructor() {
+        document.addEventListener("keydown", (event) => {
+            this.handleKeyDown(event.keyCode);
+        });
+
+        document.addEventListener("keyup", (event) => {
+            this.handleKeyUp(event.keyCode);
+        });
+
+        this.moveKey = {
+            87: [0, -1],
+            38: [0, -1],
+            83: [0, 1],
+            40: [0, 1],
+            65: [-1, 0],
+            37: [-1, 0],
+            68: [1, 0],
+            39: [1, 0],
+        };
+
+        this.moveKeysPressed = {};
+        this.angle = undefined;
+
+        this.chatToggle = false;
+        this.chat = document.getElementById("chatbox");
+        this.chat.style.display = "none";
+
+        this.oldIndexData = {};
+    }
+
+    handleKeyDown(keyCode) {
+        if (this.moveKey[keyCode] && !this.chatToggle) {
+            this.moveKeysPressed[keyCode] = true;
+        }
+        
+        if([87, 65, 83, 68].includes(keyCode)) this.updateAngle();
+
+        if(keyCode == 13) {
+            if(!this.chatToggle) {
+                this.chat.style.display = "block";
+                this.chatToggle = true;
+                this.chat.focus();
+            } else {
+                Game.webSocket.wsSend("6", this.chat.value);
+                this.chat.value = "";
+                this.chat.style.display = "none";
+                this.chatToggle = false;
+            }
+        }
+
+        if(this.chat.style.display == "none") {
+            switch(keyCode) {
+                case 88: // "x"
+                    Game.webSocket.wsSend("h", 0);
+                    console.warn("lock dir");
+                    Game.lockDir = !Game.lockDir;
+                    break;
+
+                case 69: // "e"
+                    Game.webSocket.wsSend("h", 1);
+                    console.warn("okok");
+
+                    _Render_functions_renderTexts__WEBPACK_IMPORTED_MODULE_4__["default"].addText(Game.player.lerpx, Game.player.lerpy, "works", 60, "#fff", 900);
+
+                    break;
+                
+                case 81: // "q"
+                    Game.webSocket.wsSend("s", Game.player.items[0].id, "food");
+
+                    break;
+
+                case 32:
+                    
+                    if (Game.player.weaponIndex.weapon) {
+                        Game.webSocket.wsSend("h", 1);
+                    } else if(Game.player.weaponIndex.food) {
+                        Game.webSocket.wsSend("p", "food");
+                    } else {
+                        this.didPlaceObject = true;
+                        Game.webSocket.wsSend("p", Game.player.weaponIndex.id);
+                    }
+
+                    this.oldIndexData = Game.player.weaponIndex;
+
+                    break;
+
+                default: this.handleSelection(keyCode);
+            }
+        }
+    }
+
+    handleSelection(keyCode) {
+        const weaponIndex = keyCode - 49;
+        const itemIndex = weaponIndex - Game.player.weapons.length;
+    
+        if (Game.player.weapons[weaponIndex] != null) {
+            Game.webSocket.wsSend("s", Game.player.weapons[weaponIndex].id, "weapon");
+        } else if (Game.player.items[itemIndex] != null) {
+            Game.webSocket.wsSend("s", Game.player.items[itemIndex].id, itemIndex == 0 ? "food" : "item");
+        }
+    }
+
+    handleKeyUp(keyCode) {
+        if (this.moveKey[keyCode]) {
+            delete this.moveKeysPressed[keyCode];
+        }
+
+        if([87, 65, 83, 68].includes(keyCode)) this.updateAngle();
+
+        switch(keyCode) {
+            case 32:
+                    
+            if (this.oldIndexData.weapon) {
+                Game.webSocket.wsSend("h", 1);
+            }
+
+            this.oldIndexData = {}
+
+            break;
+        }
+    }
+
+    updateAngle() {
+        let moveX = 0;
+        let moveY = 0;
+    
+        for (let keyCode in this.moveKeysPressed) {
+            const direction = this.moveKey[keyCode];
+            moveX += direction[0];
+            moveY += direction[1];
+        }
+    
+        if (moveX === 0 && moveY === 0) {
+            this.angle = undefined;
+        } else {
+            this.angle = Math.atan2(moveY, moveX);
+        }
+    
+        Game.webSocket.wsSend("m", this.angle);
+    }
+}
+
+const keyHandler = new KeyHandler;
+
+class Mouse {
+    constructor() {
+        this.mouseX = 0;
+        this.mouseY = 0;
+
+        this.mouseDown = {
+            left: false,
+            right: false,
+            middle: false,
+        };
+
+        document.addEventListener("mousemove", (event) => {
+            this.mouseX = event.clientX;
+            this.mouseY = event.clientY;
+        });
+
+        _Render_render__WEBPACK_IMPORTED_MODULE_0__.ctx.canvas.addEventListener("mousedown", (event) => this.handleMouseDown(event));
+        _Render_render__WEBPACK_IMPORTED_MODULE_0__.ctx.canvas.addEventListener("mouseup", (event) => this.handleMouseUp(event));
+
+        this.dataOnClick = {};
+    }
+
+    handleMouseDown(event) {
+        if (event.button === 0) {
+            this.mouseDown.left = true;
+        } else if (event.button === 1) {
+            this.mouseDown.middle = true;
+        } else if (event.button === 2) {
+            this.mouseDown.right = true;
+        }
+
+        if (Game.player.weaponIndex.weapon) {
+            Game.webSocket.wsSend("h", 1);
+        } else if(Game.player.weaponIndex.food) {
+            Game.webSocket.wsSend("p", "food");
+        } else {
+            Game.webSocket.wsSend("p", Game.player.weaponIndex.id);
+        }
+
+        this.dataOnClick = Game.player.weaponIndex;
+    }
+
+    handleMouseUp(event) {
+        if (event.button === 0) {
+            this.mouseDown.left = false;
+        } else if (event.button === 1) {
+            this.mouseDown.middle = false;
+        } else if (event.button === 2) {
+            this.mouseDown.right = false;
+        }
+
+        if (this.dataOnClick.weapon) {
+            Game.webSocket.wsSend("h", 1);
+            this.dataOnClick = {};
+        }
+    }
+}
+
+const mouseEvents = new Mouse;
+
+(0,_UI_eventHooks__WEBPACK_IMPORTED_MODULE_3__["default"])();
+window.oncontextmenu = e => e.preventDefault(); 
+
+/***/ }),
+
+/***/ "./node_modules/event-lite/event-lite.js":
+/*!***********************************************!*\
+  !*** ./node_modules/event-lite/event-lite.js ***!
+  \***********************************************/
+/***/ ((module) => {
+
+/**
+ * event-lite.js - Light-weight EventEmitter (less than 1KB when gzipped)
+ *
+ * @copyright Yusuke Kawasaki
+ * @license MIT
+ * @constructor
+ * @see https://github.com/kawanet/event-lite
+ * @see http://kawanet.github.io/event-lite/EventLite.html
+ * @example
+ * var EventLite = require("event-lite");
+ *
+ * function MyClass() {...}             // your class
+ *
+ * EventLite.mixin(MyClass.prototype);  // import event methods
+ *
+ * var obj = new MyClass();
+ * obj.on("foo", function() {...});     // add event listener
+ * obj.once("bar", function() {...});   // add one-time event listener
+ * obj.emit("foo");                     // dispatch event
+ * obj.emit("bar");                     // dispatch another event
+ * obj.off("foo");                      // remove event listener
+ */
+
+function EventLite() {
+  if (!(this instanceof EventLite)) return new EventLite();
+}
+
+(function(EventLite) {
+  // export the class for node.js
+  if (true) module.exports = EventLite;
+
+  // property name to hold listeners
+  var LISTENERS = "listeners";
+
+  // methods to export
+  var methods = {
+    on: on,
+    once: once,
+    off: off,
+    emit: emit
+  };
+
+  // mixin to self
+  mixin(EventLite.prototype);
+
+  // export mixin function
+  EventLite.mixin = mixin;
+
+  /**
+   * Import on(), once(), off() and emit() methods into target object.
+   *
+   * @function EventLite.mixin
+   * @param target {Prototype}
+   */
+
+  function mixin(target) {
+    for (var key in methods) {
+      target[key] = methods[key];
+    }
+    return target;
+  }
+
+  /**
+   * Add an event listener.
+   *
+   * @function EventLite.prototype.on
+   * @param type {string}
+   * @param func {Function}
+   * @returns {EventLite} Self for method chaining
+   */
+
+  function on(type, func) {
+    getListeners(this, type).push(func);
+    return this;
+  }
+
+  /**
+   * Add one-time event listener.
+   *
+   * @function EventLite.prototype.once
+   * @param type {string}
+   * @param func {Function}
+   * @returns {EventLite} Self for method chaining
+   */
+
+  function once(type, func) {
+    var that = this;
+    wrap.originalListener = func;
+    getListeners(that, type).push(wrap);
+    return that;
+
+    function wrap() {
+      off.call(that, type, wrap);
+      func.apply(this, arguments);
+    }
+  }
+
+  /**
+   * Remove an event listener.
+   *
+   * @function EventLite.prototype.off
+   * @param [type] {string}
+   * @param [func] {Function}
+   * @returns {EventLite} Self for method chaining
+   */
+
+  function off(type, func) {
+    var that = this;
+    var listners;
+    if (!arguments.length) {
+      delete that[LISTENERS];
+    } else if (!func) {
+      listners = that[LISTENERS];
+      if (listners) {
+        delete listners[type];
+        if (!Object.keys(listners).length) return off.call(that);
+      }
+    } else {
+      listners = getListeners(that, type, true);
+      if (listners) {
+        listners = listners.filter(ne);
+        if (!listners.length) return off.call(that, type);
+        that[LISTENERS][type] = listners;
+      }
+    }
+    return that;
+
+    function ne(test) {
+      return test !== func && test.originalListener !== func;
+    }
+  }
+
+  /**
+   * Dispatch (trigger) an event.
+   *
+   * @function EventLite.prototype.emit
+   * @param type {string}
+   * @param [value] {*}
+   * @returns {boolean} True when a listener received the event
+   */
+
+  function emit(type, value) {
+    var that = this;
+    var listeners = getListeners(that, type, true);
+    if (!listeners) return false;
+    var arglen = arguments.length;
+    if (arglen === 1) {
+      listeners.forEach(zeroarg);
+    } else if (arglen === 2) {
+      listeners.forEach(onearg);
+    } else {
+      var args = Array.prototype.slice.call(arguments, 1);
+      listeners.forEach(moreargs);
+    }
+    return !!listeners.length;
+
+    function zeroarg(func) {
+      func.call(that);
+    }
+
+    function onearg(func) {
+      func.call(that, value);
+    }
+
+    function moreargs(func) {
+      func.apply(that, args);
+    }
+  }
+
+  /**
+   * @ignore
+   */
+
+  function getListeners(that, type, readonly) {
+    if (readonly && !that[LISTENERS]) return;
+    var listeners = that[LISTENERS] || (that[LISTENERS] = {});
+    return listeners[type] || (listeners[type] = []);
+  }
+
+})(EventLite);
+
+
+/***/ }),
+
+/***/ "./node_modules/ieee754/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/ieee754/index.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
+exports.read = function (buffer, offset, isLE, mLen, nBytes) {
+  var e, m
+  var eLen = (nBytes * 8) - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var nBits = -7
+  var i = isLE ? (nBytes - 1) : 0
+  var d = isLE ? -1 : 1
+  var s = buffer[offset + i]
+
+  i += d
+
+  e = s & ((1 << (-nBits)) - 1)
+  s >>= (-nBits)
+  nBits += eLen
+  for (; nBits > 0; e = (e * 256) + buffer[offset + i], i += d, nBits -= 8) {}
+
+  m = e & ((1 << (-nBits)) - 1)
+  e >>= (-nBits)
+  nBits += mLen
+  for (; nBits > 0; m = (m * 256) + buffer[offset + i], i += d, nBits -= 8) {}
+
+  if (e === 0) {
+    e = 1 - eBias
+  } else if (e === eMax) {
+    return m ? NaN : ((s ? -1 : 1) * Infinity)
+  } else {
+    m = m + Math.pow(2, mLen)
+    e = e - eBias
+  }
+  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
+}
+
+exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
+  var e, m, c
+  var eLen = (nBytes * 8) - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
+  var i = isLE ? 0 : (nBytes - 1)
+  var d = isLE ? 1 : -1
+  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
+
+  value = Math.abs(value)
+
+  if (isNaN(value) || value === Infinity) {
+    m = isNaN(value) ? 1 : 0
+    e = eMax
+  } else {
+    e = Math.floor(Math.log(value) / Math.LN2)
+    if (value * (c = Math.pow(2, -e)) < 1) {
+      e--
+      c *= 2
+    }
+    if (e + eBias >= 1) {
+      value += rt / c
+    } else {
+      value += rt * Math.pow(2, 1 - eBias)
+    }
+    if (value * c >= 2) {
+      e++
+      c /= 2
+    }
+
+    if (e + eBias >= eMax) {
+      m = 0
+      e = eMax
+    } else if (e + eBias >= 1) {
+      m = ((value * c) - 1) * Math.pow(2, mLen)
+      e = e + eBias
+    } else {
+      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
+      e = 0
+    }
+  }
+
+  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
+
+  e = (e << mLen) | m
+  eLen += mLen
+  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
+
+  buffer[offset + i - d] |= s * 128
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/int64-buffer/int64-buffer.js":
+/*!***************************************************!*\
+  !*** ./node_modules/int64-buffer/int64-buffer.js ***!
+  \***************************************************/
+/***/ (function(__unused_webpack_module, exports) {
+
+// int64-buffer.js
+
+/*jshint -W018 */ // Confusing use of '!'.
+/*jshint -W030 */ // Expected an assignment or function call and instead saw an expression.
+/*jshint -W093 */ // Did you mean to return a conditional instead of an assignment?
+
+var Uint64BE, Int64BE, Uint64LE, Int64LE;
+
+!function(exports) {
+  // constants
+
+  var UNDEFINED = "undefined";
+  var BUFFER = (UNDEFINED !== typeof Buffer) && Buffer;
+  var UINT8ARRAY = (UNDEFINED !== typeof Uint8Array) && Uint8Array;
+  var ARRAYBUFFER = (UNDEFINED !== typeof ArrayBuffer) && ArrayBuffer;
+  var ZERO = [0, 0, 0, 0, 0, 0, 0, 0];
+  var isArray = Array.isArray || _isArray;
+  var BIT32 = 4294967296;
+  var BIT24 = 16777216;
+
+  // storage class
+
+  var storage; // Array;
+
+  // generate classes
+
+  Uint64BE = factory("Uint64BE", true, true);
+  Int64BE = factory("Int64BE", true, false);
+  Uint64LE = factory("Uint64LE", false, true);
+  Int64LE = factory("Int64LE", false, false);
+
+  // class factory
+
+  function factory(name, bigendian, unsigned) {
+    var posH = bigendian ? 0 : 4;
+    var posL = bigendian ? 4 : 0;
+    var pos0 = bigendian ? 0 : 3;
+    var pos1 = bigendian ? 1 : 2;
+    var pos2 = bigendian ? 2 : 1;
+    var pos3 = bigendian ? 3 : 0;
+    var fromPositive = bigendian ? fromPositiveBE : fromPositiveLE;
+    var fromNegative = bigendian ? fromNegativeBE : fromNegativeLE;
+    var proto = Int64.prototype;
+    var isName = "is" + name;
+    var _isInt64 = "_" + isName;
+
+    // properties
+    proto.buffer = void 0;
+    proto.offset = 0;
+    proto[_isInt64] = true;
+
+    // methods
+    proto.toNumber = toNumber;
+    proto.toString = toString;
+    proto.toJSON = toNumber;
+    proto.toArray = toArray;
+
+    // add .toBuffer() method only when Buffer available
+    if (BUFFER) proto.toBuffer = toBuffer;
+
+    // add .toArrayBuffer() method only when Uint8Array available
+    if (UINT8ARRAY) proto.toArrayBuffer = toArrayBuffer;
+
+    // isUint64BE, isInt64BE
+    Int64[isName] = isInt64;
+
+    // CommonJS
+    exports[name] = Int64;
+
+    return Int64;
+
+    // constructor
+    function Int64(buffer, offset, value, raddix) {
+      if (!(this instanceof Int64)) return new Int64(buffer, offset, value, raddix);
+      return init(this, buffer, offset, value, raddix);
+    }
+
+    // isUint64BE, isInt64BE
+    function isInt64(b) {
+      return !!(b && b[_isInt64]);
+    }
+
+    // initializer
+    function init(that, buffer, offset, value, raddix) {
+      if (UINT8ARRAY && ARRAYBUFFER) {
+        if (buffer instanceof ARRAYBUFFER) buffer = new UINT8ARRAY(buffer);
+        if (value instanceof ARRAYBUFFER) value = new UINT8ARRAY(value);
+      }
+
+      // Int64BE() style
+      if (!buffer && !offset && !value && !storage) {
+        // shortcut to initialize with zero
+        that.buffer = newArray(ZERO, 0);
+        return;
+      }
+
+      // Int64BE(value, raddix) style
+      if (!isValidBuffer(buffer, offset)) {
+        var _storage = storage || Array;
+        raddix = offset;
+        value = buffer;
+        offset = 0;
+        buffer = new _storage(8);
+      }
+
+      that.buffer = buffer;
+      that.offset = offset |= 0;
+
+      // Int64BE(buffer, offset) style
+      if (UNDEFINED === typeof value) return;
+
+      // Int64BE(buffer, offset, value, raddix) style
+      if ("string" === typeof value) {
+        fromString(buffer, offset, value, raddix || 10);
+      } else if (isValidBuffer(value, raddix)) {
+        fromArray(buffer, offset, value, raddix);
+      } else if ("number" === typeof raddix) {
+        writeInt32(buffer, offset + posH, value); // high
+        writeInt32(buffer, offset + posL, raddix); // low
+      } else if (value > 0) {
+        fromPositive(buffer, offset, value); // positive
+      } else if (value < 0) {
+        fromNegative(buffer, offset, value); // negative
+      } else {
+        fromArray(buffer, offset, ZERO, 0); // zero, NaN and others
+      }
+    }
+
+    function fromString(buffer, offset, str, raddix) {
+      var pos = 0;
+      var len = str.length;
+      var high = 0;
+      var low = 0;
+      if (str[0] === "-") pos++;
+      var sign = pos;
+      while (pos < len) {
+        var chr = parseInt(str[pos++], raddix);
+        if (!(chr >= 0)) break; // NaN
+        low = low * raddix + chr;
+        high = high * raddix + Math.floor(low / BIT32);
+        low %= BIT32;
+      }
+      if (sign) {
+        high = ~high;
+        if (low) {
+          low = BIT32 - low;
+        } else {
+          high++;
+        }
+      }
+      writeInt32(buffer, offset + posH, high);
+      writeInt32(buffer, offset + posL, low);
+    }
+
+    function toNumber() {
+      var buffer = this.buffer;
+      var offset = this.offset;
+      var high = readInt32(buffer, offset + posH);
+      var low = readInt32(buffer, offset + posL);
+      if (!unsigned) high |= 0; // a trick to get signed
+      return high ? (high * BIT32 + low) : low;
+    }
+
+    function toString(radix) {
+      var buffer = this.buffer;
+      var offset = this.offset;
+      var high = readInt32(buffer, offset + posH);
+      var low = readInt32(buffer, offset + posL);
+      var str = "";
+      var sign = !unsigned && (high & 0x80000000);
+      if (sign) {
+        high = ~high;
+        low = BIT32 - low;
+      }
+      radix = radix || 10;
+      while (1) {
+        var mod = (high % radix) * BIT32 + low;
+        high = Math.floor(high / radix);
+        low = Math.floor(mod / radix);
+        str = (mod % radix).toString(radix) + str;
+        if (!high && !low) break;
+      }
+      if (sign) {
+        str = "-" + str;
+      }
+      return str;
+    }
+
+    function writeInt32(buffer, offset, value) {
+      buffer[offset + pos3] = value & 255;
+      value = value >> 8;
+      buffer[offset + pos2] = value & 255;
+      value = value >> 8;
+      buffer[offset + pos1] = value & 255;
+      value = value >> 8;
+      buffer[offset + pos0] = value & 255;
+    }
+
+    function readInt32(buffer, offset) {
+      return (buffer[offset + pos0] * BIT24) +
+        (buffer[offset + pos1] << 16) +
+        (buffer[offset + pos2] << 8) +
+        buffer[offset + pos3];
+    }
+  }
+
+  function toArray(raw) {
+    var buffer = this.buffer;
+    var offset = this.offset;
+    storage = null; // Array
+    if (raw !== false && offset === 0 && buffer.length === 8 && isArray(buffer)) return buffer;
+    return newArray(buffer, offset);
+  }
+
+  function toBuffer(raw) {
+    var buffer = this.buffer;
+    var offset = this.offset;
+    storage = BUFFER;
+    if (raw !== false && offset === 0 && buffer.length === 8 && Buffer.isBuffer(buffer)) return buffer;
+    var dest = new BUFFER(8);
+    fromArray(dest, 0, buffer, offset);
+    return dest;
+  }
+
+  function toArrayBuffer(raw) {
+    var buffer = this.buffer;
+    var offset = this.offset;
+    var arrbuf = buffer.buffer;
+    storage = UINT8ARRAY;
+    if (raw !== false && offset === 0 && (arrbuf instanceof ARRAYBUFFER) && arrbuf.byteLength === 8) return arrbuf;
+    var dest = new UINT8ARRAY(8);
+    fromArray(dest, 0, buffer, offset);
+    return dest.buffer;
+  }
+
+  function isValidBuffer(buffer, offset) {
+    var len = buffer && buffer.length;
+    offset |= 0;
+    return len && (offset + 8 <= len) && ("string" !== typeof buffer[offset]);
+  }
+
+  function fromArray(destbuf, destoff, srcbuf, srcoff) {
+    destoff |= 0;
+    srcoff |= 0;
+    for (var i = 0; i < 8; i++) {
+      destbuf[destoff++] = srcbuf[srcoff++] & 255;
+    }
+  }
+
+  function newArray(buffer, offset) {
+    return Array.prototype.slice.call(buffer, offset, offset + 8);
+  }
+
+  function fromPositiveBE(buffer, offset, value) {
+    var pos = offset + 8;
+    while (pos > offset) {
+      buffer[--pos] = value & 255;
+      value /= 256;
+    }
+  }
+
+  function fromNegativeBE(buffer, offset, value) {
+    var pos = offset + 8;
+    value++;
+    while (pos > offset) {
+      buffer[--pos] = ((-value) & 255) ^ 255;
+      value /= 256;
+    }
+  }
+
+  function fromPositiveLE(buffer, offset, value) {
+    var end = offset + 8;
+    while (offset < end) {
+      buffer[offset++] = value & 255;
+      value /= 256;
+    }
+  }
+
+  function fromNegativeLE(buffer, offset, value) {
+    var end = offset + 8;
+    value++;
+    while (offset < end) {
+      buffer[offset++] = ((-value) & 255) ^ 255;
+      value /= 256;
+    }
+  }
+
+  // https://github.com/retrofox/is-array
+  function _isArray(val) {
+    return !!val && "[object Array]" == Object.prototype.toString.call(val);
+  }
+
+}( true && typeof exports.nodeName !== 'string' ? exports : (this || {}));
+
+
+/***/ }),
+
+/***/ "./node_modules/isarray/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/isarray/index.js ***!
+  \***************************************/
+/***/ ((module) => {
+
+var toString = {}.toString;
+
+module.exports = Array.isArray || function (arr) {
+  return toString.call(arr) == '[object Array]';
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/browser.js":
+/*!**************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/browser.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// browser.js
+
+exports.encode = __webpack_require__(/*! ./encode */ "./node_modules/msgpack-lite/lib/encode.js").encode;
+exports.decode = __webpack_require__(/*! ./decode */ "./node_modules/msgpack-lite/lib/decode.js").decode;
+
+exports.Encoder = __webpack_require__(/*! ./encoder */ "./node_modules/msgpack-lite/lib/encoder.js").Encoder;
+exports.Decoder = __webpack_require__(/*! ./decoder */ "./node_modules/msgpack-lite/lib/decoder.js").Decoder;
+
+exports.createCodec = __webpack_require__(/*! ./ext */ "./node_modules/msgpack-lite/lib/ext.js").createCodec;
+exports.codec = __webpack_require__(/*! ./codec */ "./node_modules/msgpack-lite/lib/codec.js").codec;
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/buffer-global.js":
+/*!********************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/buffer-global.js ***!
+  \********************************************************/
+/***/ (function(module) {
+
+/* globals Buffer */
+
+module.exports =
+  c(("undefined" !== typeof Buffer) && Buffer) ||
+  c(this.Buffer) ||
+  c(("undefined" !== typeof window) && window.Buffer) ||
+  this.Buffer;
+
+function c(B) {
+  return B && B.isBuffer && B;
+}
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/buffer-lite.js":
+/*!******************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/buffer-lite.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+// buffer-lite.js
+
+var MAXBUFLEN = 8192;
+
+exports.copy = copy;
+exports.toString = toString;
+exports.write = write;
+
+/**
+ * Buffer.prototype.write()
+ *
+ * @param string {String}
+ * @param [offset] {Number}
+ * @returns {Number}
+ */
+
+function write(string, offset) {
+  var buffer = this;
+  var index = offset || (offset |= 0);
+  var length = string.length;
+  var chr = 0;
+  var i = 0;
+  while (i < length) {
+    chr = string.charCodeAt(i++);
+
+    if (chr < 128) {
+      buffer[index++] = chr;
+    } else if (chr < 0x800) {
+      // 2 bytes
+      buffer[index++] = 0xC0 | (chr >>> 6);
+      buffer[index++] = 0x80 | (chr & 0x3F);
+    } else if (chr < 0xD800 || chr > 0xDFFF) {
+      // 3 bytes
+      buffer[index++] = 0xE0 | (chr  >>> 12);
+      buffer[index++] = 0x80 | ((chr >>> 6)  & 0x3F);
+      buffer[index++] = 0x80 | (chr          & 0x3F);
+    } else {
+      // 4 bytes - surrogate pair
+      chr = (((chr - 0xD800) << 10) | (string.charCodeAt(i++) - 0xDC00)) + 0x10000;
+      buffer[index++] = 0xF0 | (chr >>> 18);
+      buffer[index++] = 0x80 | ((chr >>> 12) & 0x3F);
+      buffer[index++] = 0x80 | ((chr >>> 6)  & 0x3F);
+      buffer[index++] = 0x80 | (chr          & 0x3F);
+    }
+  }
+  return index - offset;
+}
+
+/**
+ * Buffer.prototype.toString()
+ *
+ * @param [encoding] {String} ignored
+ * @param [start] {Number}
+ * @param [end] {Number}
+ * @returns {String}
+ */
+
+function toString(encoding, start, end) {
+  var buffer = this;
+  var index = start|0;
+  if (!end) end = buffer.length;
+  var string = '';
+  var chr = 0;
+
+  while (index < end) {
+    chr = buffer[index++];
+    if (chr < 128) {
+      string += String.fromCharCode(chr);
+      continue;
+    }
+
+    if ((chr & 0xE0) === 0xC0) {
+      // 2 bytes
+      chr = (chr & 0x1F) << 6 |
+            (buffer[index++] & 0x3F);
+
+    } else if ((chr & 0xF0) === 0xE0) {
+      // 3 bytes
+      chr = (chr & 0x0F)             << 12 |
+            (buffer[index++] & 0x3F) << 6  |
+            (buffer[index++] & 0x3F);
+
+    } else if ((chr & 0xF8) === 0xF0) {
+      // 4 bytes
+      chr = (chr & 0x07)             << 18 |
+            (buffer[index++] & 0x3F) << 12 |
+            (buffer[index++] & 0x3F) << 6  |
+            (buffer[index++] & 0x3F);
+    }
+
+    if (chr >= 0x010000) {
+      // A surrogate pair
+      chr -= 0x010000;
+
+      string += String.fromCharCode((chr >>> 10) + 0xD800, (chr & 0x3FF) + 0xDC00);
+    } else {
+      string += String.fromCharCode(chr);
+    }
+  }
+
+  return string;
+}
+
+/**
+ * Buffer.prototype.copy()
+ *
+ * @param target {Buffer}
+ * @param [targetStart] {Number}
+ * @param [start] {Number}
+ * @param [end] {Number}
+ * @returns {number}
+ */
+
+function copy(target, targetStart, start, end) {
+  var i;
+  if (!start) start = 0;
+  if (!end && end !== 0) end = this.length;
+  if (!targetStart) targetStart = 0;
+  var len = end - start;
+
+  if (target === this && start < targetStart && targetStart < end) {
+    // descending
+    for (i = len - 1; i >= 0; i--) {
+      target[i + targetStart] = this[i + start];
+    }
+  } else {
+    // ascending
+    for (i = 0; i < len; i++) {
+      target[i + targetStart] = this[i + start];
+    }
+  }
+
+  return len;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/bufferish-array.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/bufferish-array.js ***!
+  \**********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// bufferish-array.js
+
+var Bufferish = __webpack_require__(/*! ./bufferish */ "./node_modules/msgpack-lite/lib/bufferish.js");
+
+var exports = module.exports = alloc(0);
+
+exports.alloc = alloc;
+exports.concat = Bufferish.concat;
+exports.from = from;
+
+/**
+ * @param size {Number}
+ * @returns {Buffer|Uint8Array|Array}
+ */
+
+function alloc(size) {
+  return new Array(size);
+}
+
+/**
+ * @param value {Array|ArrayBuffer|Buffer|String}
+ * @returns {Array}
+ */
+
+function from(value) {
+  if (!Bufferish.isBuffer(value) && Bufferish.isView(value)) {
+    // TypedArray to Uint8Array
+    value = Bufferish.Uint8Array.from(value);
+  } else if (Bufferish.isArrayBuffer(value)) {
+    // ArrayBuffer to Uint8Array
+    value = new Uint8Array(value);
+  } else if (typeof value === "string") {
+    // String to Array
+    return Bufferish.from.call(exports, value);
+  } else if (typeof value === "number") {
+    throw new TypeError('"value" argument must not be a number');
+  }
+
+  // Array-like to Array
+  return Array.prototype.slice.call(value);
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/bufferish-buffer.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/bufferish-buffer.js ***!
+  \***********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// bufferish-buffer.js
+
+var Bufferish = __webpack_require__(/*! ./bufferish */ "./node_modules/msgpack-lite/lib/bufferish.js");
+var Buffer = Bufferish.global;
+
+var exports = module.exports = Bufferish.hasBuffer ? alloc(0) : [];
+
+exports.alloc = Bufferish.hasBuffer && Buffer.alloc || alloc;
+exports.concat = Bufferish.concat;
+exports.from = from;
+
+/**
+ * @param size {Number}
+ * @returns {Buffer|Uint8Array|Array}
+ */
+
+function alloc(size) {
+  return new Buffer(size);
+}
+
+/**
+ * @param value {Array|ArrayBuffer|Buffer|String}
+ * @returns {Buffer}
+ */
+
+function from(value) {
+  if (!Bufferish.isBuffer(value) && Bufferish.isView(value)) {
+    // TypedArray to Uint8Array
+    value = Bufferish.Uint8Array.from(value);
+  } else if (Bufferish.isArrayBuffer(value)) {
+    // ArrayBuffer to Uint8Array
+    value = new Uint8Array(value);
+  } else if (typeof value === "string") {
+    // String to Buffer
+    return Bufferish.from.call(exports, value);
+  } else if (typeof value === "number") {
+    throw new TypeError('"value" argument must not be a number');
+  }
+
+  // Array-like to Buffer
+  if (Buffer.from && Buffer.from.length !== 1) {
+    return Buffer.from(value); // node v6+
+  } else {
+    return new Buffer(value); // node v4
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/bufferish-proto.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/bufferish-proto.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// bufferish-proto.js
+
+/* jshint eqnull:true */
+
+var BufferLite = __webpack_require__(/*! ./buffer-lite */ "./node_modules/msgpack-lite/lib/buffer-lite.js");
+
+exports.copy = copy;
+exports.slice = slice;
+exports.toString = toString;
+exports.write = gen("write");
+
+var Bufferish = __webpack_require__(/*! ./bufferish */ "./node_modules/msgpack-lite/lib/bufferish.js");
+var Buffer = Bufferish.global;
+
+var isBufferShim = Bufferish.hasBuffer && ("TYPED_ARRAY_SUPPORT" in Buffer);
+var brokenTypedArray = isBufferShim && !Buffer.TYPED_ARRAY_SUPPORT;
+
+/**
+ * @param target {Buffer|Uint8Array|Array}
+ * @param [targetStart] {Number}
+ * @param [start] {Number}
+ * @param [end] {Number}
+ * @returns {Buffer|Uint8Array|Array}
+ */
+
+function copy(target, targetStart, start, end) {
+  var thisIsBuffer = Bufferish.isBuffer(this);
+  var targetIsBuffer = Bufferish.isBuffer(target);
+  if (thisIsBuffer && targetIsBuffer) {
+    // Buffer to Buffer
+    return this.copy(target, targetStart, start, end);
+  } else if (!brokenTypedArray && !thisIsBuffer && !targetIsBuffer &&
+    Bufferish.isView(this) && Bufferish.isView(target)) {
+    // Uint8Array to Uint8Array (except for minor some browsers)
+    var buffer = (start || end != null) ? slice.call(this, start, end) : this;
+    target.set(buffer, targetStart);
+    return buffer.length;
+  } else {
+    // other cases
+    return BufferLite.copy.call(this, target, targetStart, start, end);
+  }
+}
+
+/**
+ * @param [start] {Number}
+ * @param [end] {Number}
+ * @returns {Buffer|Uint8Array|Array}
+ */
+
+function slice(start, end) {
+  // for Buffer, Uint8Array (except for minor some browsers) and Array
+  var f = this.slice || (!brokenTypedArray && this.subarray);
+  if (f) return f.call(this, start, end);
+
+  // Uint8Array (for minor some browsers)
+  var target = Bufferish.alloc.call(this, end - start);
+  copy.call(this, target, 0, start, end);
+  return target;
+}
+
+/**
+ * Buffer.prototype.toString()
+ *
+ * @param [encoding] {String} ignored
+ * @param [start] {Number}
+ * @param [end] {Number}
+ * @returns {String}
+ */
+
+function toString(encoding, start, end) {
+  var f = (!isBufferShim && Bufferish.isBuffer(this)) ? this.toString : BufferLite.toString;
+  return f.apply(this, arguments);
+}
+
+/**
+ * @private
+ */
+
+function gen(method) {
+  return wrap;
+
+  function wrap() {
+    var f = this[method] || BufferLite[method];
+    return f.apply(this, arguments);
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/bufferish-uint8array.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/bufferish-uint8array.js ***!
+  \***************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// bufferish-uint8array.js
+
+var Bufferish = __webpack_require__(/*! ./bufferish */ "./node_modules/msgpack-lite/lib/bufferish.js");
+
+var exports = module.exports = Bufferish.hasArrayBuffer ? alloc(0) : [];
+
+exports.alloc = alloc;
+exports.concat = Bufferish.concat;
+exports.from = from;
+
+/**
+ * @param size {Number}
+ * @returns {Buffer|Uint8Array|Array}
+ */
+
+function alloc(size) {
+  return new Uint8Array(size);
+}
+
+/**
+ * @param value {Array|ArrayBuffer|Buffer|String}
+ * @returns {Uint8Array}
+ */
+
+function from(value) {
+  if (Bufferish.isView(value)) {
+    // TypedArray to ArrayBuffer
+    var byteOffset = value.byteOffset;
+    var byteLength = value.byteLength;
+    value = value.buffer;
+    if (value.byteLength !== byteLength) {
+      if (value.slice) {
+        value = value.slice(byteOffset, byteOffset + byteLength);
+      } else {
+        // Android 4.1 does not have ArrayBuffer.prototype.slice
+        value = new Uint8Array(value);
+        if (value.byteLength !== byteLength) {
+          // TypedArray to ArrayBuffer to Uint8Array to Array
+          value = Array.prototype.slice.call(value, byteOffset, byteOffset + byteLength);
+        }
+      }
+    }
+  } else if (typeof value === "string") {
+    // String to Uint8Array
+    return Bufferish.from.call(exports, value);
+  } else if (typeof value === "number") {
+    throw new TypeError('"value" argument must not be a number');
+  }
+
+  return new Uint8Array(value);
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/bufferish.js":
+/*!****************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/bufferish.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// bufferish.js
+
+var Buffer = exports.global = __webpack_require__(/*! ./buffer-global */ "./node_modules/msgpack-lite/lib/buffer-global.js");
+var hasBuffer = exports.hasBuffer = Buffer && !!Buffer.isBuffer;
+var hasArrayBuffer = exports.hasArrayBuffer = ("undefined" !== typeof ArrayBuffer);
+
+var isArray = exports.isArray = __webpack_require__(/*! isarray */ "./node_modules/isarray/index.js");
+exports.isArrayBuffer = hasArrayBuffer ? isArrayBuffer : _false;
+var isBuffer = exports.isBuffer = hasBuffer ? Buffer.isBuffer : _false;
+var isView = exports.isView = hasArrayBuffer ? (ArrayBuffer.isView || _is("ArrayBuffer", "buffer")) : _false;
+
+exports.alloc = alloc;
+exports.concat = concat;
+exports.from = from;
+
+var BufferArray = exports.Array = __webpack_require__(/*! ./bufferish-array */ "./node_modules/msgpack-lite/lib/bufferish-array.js");
+var BufferBuffer = exports.Buffer = __webpack_require__(/*! ./bufferish-buffer */ "./node_modules/msgpack-lite/lib/bufferish-buffer.js");
+var BufferUint8Array = exports.Uint8Array = __webpack_require__(/*! ./bufferish-uint8array */ "./node_modules/msgpack-lite/lib/bufferish-uint8array.js");
+var BufferProto = exports.prototype = __webpack_require__(/*! ./bufferish-proto */ "./node_modules/msgpack-lite/lib/bufferish-proto.js");
+
+/**
+ * @param value {Array|ArrayBuffer|Buffer|String}
+ * @returns {Buffer|Uint8Array|Array}
+ */
+
+function from(value) {
+  if (typeof value === "string") {
+    return fromString.call(this, value);
+  } else {
+    return auto(this).from(value);
+  }
+}
+
+/**
+ * @param size {Number}
+ * @returns {Buffer|Uint8Array|Array}
+ */
+
+function alloc(size) {
+  return auto(this).alloc(size);
+}
+
+/**
+ * @param list {Array} array of (Buffer|Uint8Array|Array)s
+ * @param [length]
+ * @returns {Buffer|Uint8Array|Array}
+ */
+
+function concat(list, length) {
+  if (!length) {
+    length = 0;
+    Array.prototype.forEach.call(list, dryrun);
+  }
+  var ref = (this !== exports) && this || list[0];
+  var result = alloc.call(ref, length);
+  var offset = 0;
+  Array.prototype.forEach.call(list, append);
+  return result;
+
+  function dryrun(buffer) {
+    length += buffer.length;
+  }
+
+  function append(buffer) {
+    offset += BufferProto.copy.call(buffer, result, offset);
+  }
+}
+
+var _isArrayBuffer = _is("ArrayBuffer");
+
+function isArrayBuffer(value) {
+  return (value instanceof ArrayBuffer) || _isArrayBuffer(value);
+}
+
+/**
+ * @private
+ */
+
+function fromString(value) {
+  var expected = value.length * 3;
+  var that = alloc.call(this, expected);
+  var actual = BufferProto.write.call(that, value);
+  if (expected !== actual) {
+    that = BufferProto.slice.call(that, 0, actual);
+  }
+  return that;
+}
+
+function auto(that) {
+  return isBuffer(that) ? BufferBuffer
+    : isView(that) ? BufferUint8Array
+    : isArray(that) ? BufferArray
+    : hasBuffer ? BufferBuffer
+    : hasArrayBuffer ? BufferUint8Array
+    : BufferArray;
+}
+
+function _false() {
+  return false;
+}
+
+function _is(name, key) {
+  /* jshint eqnull:true */
+  name = "[object " + name + "]";
+  return function(value) {
+    return (value != null) && {}.toString.call(key ? value[key] : value) === name;
+  };
+}
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/codec-base.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/codec-base.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// codec-base.js
+
+var IS_ARRAY = __webpack_require__(/*! isarray */ "./node_modules/isarray/index.js");
+
+exports.createCodec = createCodec;
+exports.install = install;
+exports.filter = filter;
+
+var Bufferish = __webpack_require__(/*! ./bufferish */ "./node_modules/msgpack-lite/lib/bufferish.js");
+
+function Codec(options) {
+  if (!(this instanceof Codec)) return new Codec(options);
+  this.options = options;
+  this.init();
+}
+
+Codec.prototype.init = function() {
+  var options = this.options;
+
+  if (options && options.uint8array) {
+    this.bufferish = Bufferish.Uint8Array;
+  }
+
+  return this;
+};
+
+function install(props) {
+  for (var key in props) {
+    Codec.prototype[key] = add(Codec.prototype[key], props[key]);
+  }
+}
+
+function add(a, b) {
+  return (a && b) ? ab : (a || b);
+
+  function ab() {
+    a.apply(this, arguments);
+    return b.apply(this, arguments);
+  }
+}
+
+function join(filters) {
+  filters = filters.slice();
+
+  return function(value) {
+    return filters.reduce(iterator, value);
+  };
+
+  function iterator(value, filter) {
+    return filter(value);
+  }
+}
+
+function filter(filter) {
+  return IS_ARRAY(filter) ? join(filter) : filter;
+}
+
+// @public
+// msgpack.createCodec()
+
+function createCodec(options) {
+  return new Codec(options);
+}
+
+// default shared codec
+
+exports.preset = createCodec({preset: true});
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/codec.js":
+/*!************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/codec.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// codec.js
+
+// load both interfaces
+__webpack_require__(/*! ./read-core */ "./node_modules/msgpack-lite/lib/read-core.js");
+__webpack_require__(/*! ./write-core */ "./node_modules/msgpack-lite/lib/write-core.js");
+
+// @public
+// msgpack.codec.preset
+
+exports.codec = {
+  preset: (__webpack_require__(/*! ./codec-base */ "./node_modules/msgpack-lite/lib/codec-base.js").preset)
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/decode-buffer.js":
+/*!********************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/decode-buffer.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// decode-buffer.js
+
+exports.DecodeBuffer = DecodeBuffer;
+
+var preset = (__webpack_require__(/*! ./read-core */ "./node_modules/msgpack-lite/lib/read-core.js").preset);
+
+var FlexDecoder = (__webpack_require__(/*! ./flex-buffer */ "./node_modules/msgpack-lite/lib/flex-buffer.js").FlexDecoder);
+
+FlexDecoder.mixin(DecodeBuffer.prototype);
+
+function DecodeBuffer(options) {
+  if (!(this instanceof DecodeBuffer)) return new DecodeBuffer(options);
+
+  if (options) {
+    this.options = options;
+    if (options.codec) {
+      var codec = this.codec = options.codec;
+      if (codec.bufferish) this.bufferish = codec.bufferish;
+    }
+  }
+}
+
+DecodeBuffer.prototype.codec = preset;
+
+DecodeBuffer.prototype.fetch = function() {
+  return this.codec.decode(this);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/decode.js":
+/*!*************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/decode.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// decode.js
+
+exports.decode = decode;
+
+var DecodeBuffer = (__webpack_require__(/*! ./decode-buffer */ "./node_modules/msgpack-lite/lib/decode-buffer.js").DecodeBuffer);
+
+function decode(input, options) {
+  var decoder = new DecodeBuffer(options);
+  decoder.write(input);
+  return decoder.read();
+}
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/decoder.js":
+/*!**************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/decoder.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// decoder.js
+
+exports.Decoder = Decoder;
+
+var EventLite = __webpack_require__(/*! event-lite */ "./node_modules/event-lite/event-lite.js");
+var DecodeBuffer = (__webpack_require__(/*! ./decode-buffer */ "./node_modules/msgpack-lite/lib/decode-buffer.js").DecodeBuffer);
+
+function Decoder(options) {
+  if (!(this instanceof Decoder)) return new Decoder(options);
+  DecodeBuffer.call(this, options);
+}
+
+Decoder.prototype = new DecodeBuffer();
+
+EventLite.mixin(Decoder.prototype);
+
+Decoder.prototype.decode = function(chunk) {
+  if (arguments.length) this.write(chunk);
+  this.flush();
+};
+
+Decoder.prototype.push = function(chunk) {
+  this.emit("data", chunk);
+};
+
+Decoder.prototype.end = function(chunk) {
+  this.decode(chunk);
+  this.emit("end");
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/encode-buffer.js":
+/*!********************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/encode-buffer.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// encode-buffer.js
+
+exports.EncodeBuffer = EncodeBuffer;
+
+var preset = (__webpack_require__(/*! ./write-core */ "./node_modules/msgpack-lite/lib/write-core.js").preset);
+
+var FlexEncoder = (__webpack_require__(/*! ./flex-buffer */ "./node_modules/msgpack-lite/lib/flex-buffer.js").FlexEncoder);
+
+FlexEncoder.mixin(EncodeBuffer.prototype);
+
+function EncodeBuffer(options) {
+  if (!(this instanceof EncodeBuffer)) return new EncodeBuffer(options);
+
+  if (options) {
+    this.options = options;
+    if (options.codec) {
+      var codec = this.codec = options.codec;
+      if (codec.bufferish) this.bufferish = codec.bufferish;
+    }
+  }
+}
+
+EncodeBuffer.prototype.codec = preset;
+
+EncodeBuffer.prototype.write = function(input) {
+  this.codec.encode(this, input);
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/encode.js":
+/*!*************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/encode.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// encode.js
+
+exports.encode = encode;
+
+var EncodeBuffer = (__webpack_require__(/*! ./encode-buffer */ "./node_modules/msgpack-lite/lib/encode-buffer.js").EncodeBuffer);
+
+function encode(input, options) {
+  var encoder = new EncodeBuffer(options);
+  encoder.write(input);
+  return encoder.read();
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/encoder.js":
+/*!**************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/encoder.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// encoder.js
+
+exports.Encoder = Encoder;
+
+var EventLite = __webpack_require__(/*! event-lite */ "./node_modules/event-lite/event-lite.js");
+var EncodeBuffer = (__webpack_require__(/*! ./encode-buffer */ "./node_modules/msgpack-lite/lib/encode-buffer.js").EncodeBuffer);
+
+function Encoder(options) {
+  if (!(this instanceof Encoder)) return new Encoder(options);
+  EncodeBuffer.call(this, options);
+}
+
+Encoder.prototype = new EncodeBuffer();
+
+EventLite.mixin(Encoder.prototype);
+
+Encoder.prototype.encode = function(chunk) {
+  this.write(chunk);
+  this.emit("data", this.read());
+};
+
+Encoder.prototype.end = function(chunk) {
+  if (arguments.length) this.encode(chunk);
+  this.flush();
+  this.emit("end");
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/ext-buffer.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/ext-buffer.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// ext-buffer.js
+
+exports.ExtBuffer = ExtBuffer;
+
+var Bufferish = __webpack_require__(/*! ./bufferish */ "./node_modules/msgpack-lite/lib/bufferish.js");
+
+function ExtBuffer(buffer, type) {
+  if (!(this instanceof ExtBuffer)) return new ExtBuffer(buffer, type);
+  this.buffer = Bufferish.from(buffer);
+  this.type = type;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/ext-packer.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/ext-packer.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// ext-packer.js
+
+exports.setExtPackers = setExtPackers;
+
+var Bufferish = __webpack_require__(/*! ./bufferish */ "./node_modules/msgpack-lite/lib/bufferish.js");
+var Buffer = Bufferish.global;
+var packTypedArray = Bufferish.Uint8Array.from;
+var _encode;
+
+var ERROR_COLUMNS = {name: 1, message: 1, stack: 1, columnNumber: 1, fileName: 1, lineNumber: 1};
+
+function setExtPackers(codec) {
+  codec.addExtPacker(0x0E, Error, [packError, encode]);
+  codec.addExtPacker(0x01, EvalError, [packError, encode]);
+  codec.addExtPacker(0x02, RangeError, [packError, encode]);
+  codec.addExtPacker(0x03, ReferenceError, [packError, encode]);
+  codec.addExtPacker(0x04, SyntaxError, [packError, encode]);
+  codec.addExtPacker(0x05, TypeError, [packError, encode]);
+  codec.addExtPacker(0x06, URIError, [packError, encode]);
+
+  codec.addExtPacker(0x0A, RegExp, [packRegExp, encode]);
+  codec.addExtPacker(0x0B, Boolean, [packValueOf, encode]);
+  codec.addExtPacker(0x0C, String, [packValueOf, encode]);
+  codec.addExtPacker(0x0D, Date, [Number, encode]);
+  codec.addExtPacker(0x0F, Number, [packValueOf, encode]);
+
+  if ("undefined" !== typeof Uint8Array) {
+    codec.addExtPacker(0x11, Int8Array, packTypedArray);
+    codec.addExtPacker(0x12, Uint8Array, packTypedArray);
+    codec.addExtPacker(0x13, Int16Array, packTypedArray);
+    codec.addExtPacker(0x14, Uint16Array, packTypedArray);
+    codec.addExtPacker(0x15, Int32Array, packTypedArray);
+    codec.addExtPacker(0x16, Uint32Array, packTypedArray);
+    codec.addExtPacker(0x17, Float32Array, packTypedArray);
+
+    // PhantomJS/1.9.7 doesn't have Float64Array
+    if ("undefined" !== typeof Float64Array) {
+      codec.addExtPacker(0x18, Float64Array, packTypedArray);
+    }
+
+    // IE10 doesn't have Uint8ClampedArray
+    if ("undefined" !== typeof Uint8ClampedArray) {
+      codec.addExtPacker(0x19, Uint8ClampedArray, packTypedArray);
+    }
+
+    codec.addExtPacker(0x1A, ArrayBuffer, packTypedArray);
+    codec.addExtPacker(0x1D, DataView, packTypedArray);
+  }
+
+  if (Bufferish.hasBuffer) {
+    codec.addExtPacker(0x1B, Buffer, Bufferish.from);
+  }
+}
+
+function encode(input) {
+  if (!_encode) _encode = (__webpack_require__(/*! ./encode */ "./node_modules/msgpack-lite/lib/encode.js").encode); // lazy load
+  return _encode(input);
+}
+
+function packValueOf(value) {
+  return (value).valueOf();
+}
+
+function packRegExp(value) {
+  value = RegExp.prototype.toString.call(value).split("/");
+  value.shift();
+  var out = [value.pop()];
+  out.unshift(value.join("/"));
+  return out;
+}
+
+function packError(value) {
+  var out = {};
+  for (var key in ERROR_COLUMNS) {
+    out[key] = value[key];
+  }
+  return out;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/ext-unpacker.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/ext-unpacker.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// ext-unpacker.js
+
+exports.setExtUnpackers = setExtUnpackers;
+
+var Bufferish = __webpack_require__(/*! ./bufferish */ "./node_modules/msgpack-lite/lib/bufferish.js");
+var Buffer = Bufferish.global;
+var _decode;
+
+var ERROR_COLUMNS = {name: 1, message: 1, stack: 1, columnNumber: 1, fileName: 1, lineNumber: 1};
+
+function setExtUnpackers(codec) {
+  codec.addExtUnpacker(0x0E, [decode, unpackError(Error)]);
+  codec.addExtUnpacker(0x01, [decode, unpackError(EvalError)]);
+  codec.addExtUnpacker(0x02, [decode, unpackError(RangeError)]);
+  codec.addExtUnpacker(0x03, [decode, unpackError(ReferenceError)]);
+  codec.addExtUnpacker(0x04, [decode, unpackError(SyntaxError)]);
+  codec.addExtUnpacker(0x05, [decode, unpackError(TypeError)]);
+  codec.addExtUnpacker(0x06, [decode, unpackError(URIError)]);
+
+  codec.addExtUnpacker(0x0A, [decode, unpackRegExp]);
+  codec.addExtUnpacker(0x0B, [decode, unpackClass(Boolean)]);
+  codec.addExtUnpacker(0x0C, [decode, unpackClass(String)]);
+  codec.addExtUnpacker(0x0D, [decode, unpackClass(Date)]);
+  codec.addExtUnpacker(0x0F, [decode, unpackClass(Number)]);
+
+  if ("undefined" !== typeof Uint8Array) {
+    codec.addExtUnpacker(0x11, unpackClass(Int8Array));
+    codec.addExtUnpacker(0x12, unpackClass(Uint8Array));
+    codec.addExtUnpacker(0x13, [unpackArrayBuffer, unpackClass(Int16Array)]);
+    codec.addExtUnpacker(0x14, [unpackArrayBuffer, unpackClass(Uint16Array)]);
+    codec.addExtUnpacker(0x15, [unpackArrayBuffer, unpackClass(Int32Array)]);
+    codec.addExtUnpacker(0x16, [unpackArrayBuffer, unpackClass(Uint32Array)]);
+    codec.addExtUnpacker(0x17, [unpackArrayBuffer, unpackClass(Float32Array)]);
+
+    // PhantomJS/1.9.7 doesn't have Float64Array
+    if ("undefined" !== typeof Float64Array) {
+      codec.addExtUnpacker(0x18, [unpackArrayBuffer, unpackClass(Float64Array)]);
+    }
+
+    // IE10 doesn't have Uint8ClampedArray
+    if ("undefined" !== typeof Uint8ClampedArray) {
+      codec.addExtUnpacker(0x19, unpackClass(Uint8ClampedArray));
+    }
+
+    codec.addExtUnpacker(0x1A, unpackArrayBuffer);
+    codec.addExtUnpacker(0x1D, [unpackArrayBuffer, unpackClass(DataView)]);
+  }
+
+  if (Bufferish.hasBuffer) {
+    codec.addExtUnpacker(0x1B, unpackClass(Buffer));
+  }
+}
+
+function decode(input) {
+  if (!_decode) _decode = (__webpack_require__(/*! ./decode */ "./node_modules/msgpack-lite/lib/decode.js").decode); // lazy load
+  return _decode(input);
+}
+
+function unpackRegExp(value) {
+  return RegExp.apply(null, value);
+}
+
+function unpackError(Class) {
+  return function(value) {
+    var out = new Class();
+    for (var key in ERROR_COLUMNS) {
+      out[key] = value[key];
+    }
+    return out;
+  };
+}
+
+function unpackClass(Class) {
+  return function(value) {
+    return new Class(value);
+  };
+}
+
+function unpackArrayBuffer(value) {
+  return (new Uint8Array(value)).buffer;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/ext.js":
+/*!**********************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/ext.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// ext.js
+
+// load both interfaces
+__webpack_require__(/*! ./read-core */ "./node_modules/msgpack-lite/lib/read-core.js");
+__webpack_require__(/*! ./write-core */ "./node_modules/msgpack-lite/lib/write-core.js");
+
+exports.createCodec = __webpack_require__(/*! ./codec-base */ "./node_modules/msgpack-lite/lib/codec-base.js").createCodec;
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/flex-buffer.js":
+/*!******************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/flex-buffer.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// flex-buffer.js
+
+exports.FlexDecoder = FlexDecoder;
+exports.FlexEncoder = FlexEncoder;
+
+var Bufferish = __webpack_require__(/*! ./bufferish */ "./node_modules/msgpack-lite/lib/bufferish.js");
+
+var MIN_BUFFER_SIZE = 2048;
+var MAX_BUFFER_SIZE = 65536;
+var BUFFER_SHORTAGE = "BUFFER_SHORTAGE";
+
+function FlexDecoder() {
+  if (!(this instanceof FlexDecoder)) return new FlexDecoder();
+}
+
+function FlexEncoder() {
+  if (!(this instanceof FlexEncoder)) return new FlexEncoder();
+}
+
+FlexDecoder.mixin = mixinFactory(getDecoderMethods());
+FlexDecoder.mixin(FlexDecoder.prototype);
+
+FlexEncoder.mixin = mixinFactory(getEncoderMethods());
+FlexEncoder.mixin(FlexEncoder.prototype);
+
+function getDecoderMethods() {
+  return {
+    bufferish: Bufferish,
+    write: write,
+    fetch: fetch,
+    flush: flush,
+    push: push,
+    pull: pull,
+    read: read,
+    reserve: reserve,
+    offset: 0
+  };
+
+  function write(chunk) {
+    var prev = this.offset ? Bufferish.prototype.slice.call(this.buffer, this.offset) : this.buffer;
+    this.buffer = prev ? (chunk ? this.bufferish.concat([prev, chunk]) : prev) : chunk;
+    this.offset = 0;
+  }
+
+  function flush() {
+    while (this.offset < this.buffer.length) {
+      var start = this.offset;
+      var value;
+      try {
+        value = this.fetch();
+      } catch (e) {
+        if (e && e.message != BUFFER_SHORTAGE) throw e;
+        // rollback
+        this.offset = start;
+        break;
+      }
+      this.push(value);
+    }
+  }
+
+  function reserve(length) {
+    var start = this.offset;
+    var end = start + length;
+    if (end > this.buffer.length) throw new Error(BUFFER_SHORTAGE);
+    this.offset = end;
+    return start;
+  }
+}
+
+function getEncoderMethods() {
+  return {
+    bufferish: Bufferish,
+    write: write,
+    fetch: fetch,
+    flush: flush,
+    push: push,
+    pull: pull,
+    read: read,
+    reserve: reserve,
+    send: send,
+    maxBufferSize: MAX_BUFFER_SIZE,
+    minBufferSize: MIN_BUFFER_SIZE,
+    offset: 0,
+    start: 0
+  };
+
+  function fetch() {
+    var start = this.start;
+    if (start < this.offset) {
+      var end = this.start = this.offset;
+      return Bufferish.prototype.slice.call(this.buffer, start, end);
+    }
+  }
+
+  function flush() {
+    while (this.start < this.offset) {
+      var value = this.fetch();
+      if (value) this.push(value);
+    }
+  }
+
+  function pull() {
+    var buffers = this.buffers || (this.buffers = []);
+    var chunk = buffers.length > 1 ? this.bufferish.concat(buffers) : buffers[0];
+    buffers.length = 0; // buffer exhausted
+    return chunk;
+  }
+
+  function reserve(length) {
+    var req = length | 0;
+
+    if (this.buffer) {
+      var size = this.buffer.length;
+      var start = this.offset | 0;
+      var end = start + req;
+
+      // is it long enough?
+      if (end < size) {
+        this.offset = end;
+        return start;
+      }
+
+      // flush current buffer
+      this.flush();
+
+      // resize it to 2x current length
+      length = Math.max(length, Math.min(size * 2, this.maxBufferSize));
+    }
+
+    // minimum buffer size
+    length = Math.max(length, this.minBufferSize);
+
+    // allocate new buffer
+    this.buffer = this.bufferish.alloc(length);
+    this.start = 0;
+    this.offset = req;
+    return 0;
+  }
+
+  function send(buffer) {
+    var length = buffer.length;
+    if (length > this.minBufferSize) {
+      this.flush();
+      this.push(buffer);
+    } else {
+      var offset = this.reserve(length);
+      Bufferish.prototype.copy.call(buffer, this.buffer, offset);
+    }
+  }
+}
+
+// common methods
+
+function write() {
+  throw new Error("method not implemented: write()");
+}
+
+function fetch() {
+  throw new Error("method not implemented: fetch()");
+}
+
+function read() {
+  var length = this.buffers && this.buffers.length;
+
+  // fetch the first result
+  if (!length) return this.fetch();
+
+  // flush current buffer
+  this.flush();
+
+  // read from the results
+  return this.pull();
+}
+
+function push(chunk) {
+  var buffers = this.buffers || (this.buffers = []);
+  buffers.push(chunk);
+}
+
+function pull() {
+  var buffers = this.buffers || (this.buffers = []);
+  return buffers.shift();
+}
+
+function mixinFactory(source) {
+  return mixin;
+
+  function mixin(target) {
+    for (var key in source) {
+      target[key] = source[key];
+    }
+    return target;
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/read-core.js":
+/*!****************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/read-core.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// read-core.js
+
+var ExtBuffer = (__webpack_require__(/*! ./ext-buffer */ "./node_modules/msgpack-lite/lib/ext-buffer.js").ExtBuffer);
+var ExtUnpacker = __webpack_require__(/*! ./ext-unpacker */ "./node_modules/msgpack-lite/lib/ext-unpacker.js");
+var readUint8 = (__webpack_require__(/*! ./read-format */ "./node_modules/msgpack-lite/lib/read-format.js").readUint8);
+var ReadToken = __webpack_require__(/*! ./read-token */ "./node_modules/msgpack-lite/lib/read-token.js");
+var CodecBase = __webpack_require__(/*! ./codec-base */ "./node_modules/msgpack-lite/lib/codec-base.js");
+
+CodecBase.install({
+  addExtUnpacker: addExtUnpacker,
+  getExtUnpacker: getExtUnpacker,
+  init: init
+});
+
+exports.preset = init.call(CodecBase.preset);
+
+function getDecoder(options) {
+  var readToken = ReadToken.getReadToken(options);
+  return decode;
+
+  function decode(decoder) {
+    var type = readUint8(decoder);
+    var func = readToken[type];
+    if (!func) throw new Error("Invalid type: " + (type ? ("0x" + type.toString(16)) : type));
+    return func(decoder);
+  }
+}
+
+function init() {
+  var options = this.options;
+  this.decode = getDecoder(options);
+
+  if (options && options.preset) {
+    ExtUnpacker.setExtUnpackers(this);
+  }
+
+  return this;
+}
+
+function addExtUnpacker(etype, unpacker) {
+  var unpackers = this.extUnpackers || (this.extUnpackers = []);
+  unpackers[etype] = CodecBase.filter(unpacker);
+}
+
+function getExtUnpacker(type) {
+  var unpackers = this.extUnpackers || (this.extUnpackers = []);
+  return unpackers[type] || extUnpacker;
+
+  function extUnpacker(buffer) {
+    return new ExtBuffer(buffer, type);
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/read-format.js":
+/*!******************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/read-format.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// read-format.js
+
+var ieee754 = __webpack_require__(/*! ieee754 */ "./node_modules/ieee754/index.js");
+var Int64Buffer = __webpack_require__(/*! int64-buffer */ "./node_modules/int64-buffer/int64-buffer.js");
+var Uint64BE = Int64Buffer.Uint64BE;
+var Int64BE = Int64Buffer.Int64BE;
+
+exports.getReadFormat = getReadFormat;
+exports.readUint8 = uint8;
+
+var Bufferish = __webpack_require__(/*! ./bufferish */ "./node_modules/msgpack-lite/lib/bufferish.js");
+var BufferProto = __webpack_require__(/*! ./bufferish-proto */ "./node_modules/msgpack-lite/lib/bufferish-proto.js");
+
+var HAS_MAP = ("undefined" !== typeof Map);
+var NO_ASSERT = true;
+
+function getReadFormat(options) {
+  var binarraybuffer = Bufferish.hasArrayBuffer && options && options.binarraybuffer;
+  var int64 = options && options.int64;
+  var usemap = HAS_MAP && options && options.usemap;
+
+  var readFormat = {
+    map: (usemap ? map_to_map : map_to_obj),
+    array: array,
+    str: str,
+    bin: (binarraybuffer ? bin_arraybuffer : bin_buffer),
+    ext: ext,
+    uint8: uint8,
+    uint16: uint16,
+    uint32: uint32,
+    uint64: read(8, int64 ? readUInt64BE_int64 : readUInt64BE),
+    int8: int8,
+    int16: int16,
+    int32: int32,
+    int64: read(8, int64 ? readInt64BE_int64 : readInt64BE),
+    float32: read(4, readFloatBE),
+    float64: read(8, readDoubleBE)
+  };
+
+  return readFormat;
+}
+
+function map_to_obj(decoder, len) {
+  var value = {};
+  var i;
+  var k = new Array(len);
+  var v = new Array(len);
+
+  var decode = decoder.codec.decode;
+  for (i = 0; i < len; i++) {
+    k[i] = decode(decoder);
+    v[i] = decode(decoder);
+  }
+  for (i = 0; i < len; i++) {
+    value[k[i]] = v[i];
+  }
+  return value;
+}
+
+function map_to_map(decoder, len) {
+  var value = new Map();
+  var i;
+  var k = new Array(len);
+  var v = new Array(len);
+
+  var decode = decoder.codec.decode;
+  for (i = 0; i < len; i++) {
+    k[i] = decode(decoder);
+    v[i] = decode(decoder);
+  }
+  for (i = 0; i < len; i++) {
+    value.set(k[i], v[i]);
+  }
+  return value;
+}
+
+function array(decoder, len) {
+  var value = new Array(len);
+  var decode = decoder.codec.decode;
+  for (var i = 0; i < len; i++) {
+    value[i] = decode(decoder);
+  }
+  return value;
+}
+
+function str(decoder, len) {
+  var start = decoder.reserve(len);
+  var end = start + len;
+  return BufferProto.toString.call(decoder.buffer, "utf-8", start, end);
+}
+
+function bin_buffer(decoder, len) {
+  var start = decoder.reserve(len);
+  var end = start + len;
+  var buf = BufferProto.slice.call(decoder.buffer, start, end);
+  return Bufferish.from(buf);
+}
+
+function bin_arraybuffer(decoder, len) {
+  var start = decoder.reserve(len);
+  var end = start + len;
+  var buf = BufferProto.slice.call(decoder.buffer, start, end);
+  return Bufferish.Uint8Array.from(buf).buffer;
+}
+
+function ext(decoder, len) {
+  var start = decoder.reserve(len+1);
+  var type = decoder.buffer[start++];
+  var end = start + len;
+  var unpack = decoder.codec.getExtUnpacker(type);
+  if (!unpack) throw new Error("Invalid ext type: " + (type ? ("0x" + type.toString(16)) : type));
+  var buf = BufferProto.slice.call(decoder.buffer, start, end);
+  return unpack(buf);
+}
+
+function uint8(decoder) {
+  var start = decoder.reserve(1);
+  return decoder.buffer[start];
+}
+
+function int8(decoder) {
+  var start = decoder.reserve(1);
+  var value = decoder.buffer[start];
+  return (value & 0x80) ? value - 0x100 : value;
+}
+
+function uint16(decoder) {
+  var start = decoder.reserve(2);
+  var buffer = decoder.buffer;
+  return (buffer[start++] << 8) | buffer[start];
+}
+
+function int16(decoder) {
+  var start = decoder.reserve(2);
+  var buffer = decoder.buffer;
+  var value = (buffer[start++] << 8) | buffer[start];
+  return (value & 0x8000) ? value - 0x10000 : value;
+}
+
+function uint32(decoder) {
+  var start = decoder.reserve(4);
+  var buffer = decoder.buffer;
+  return (buffer[start++] * 16777216) + (buffer[start++] << 16) + (buffer[start++] << 8) + buffer[start];
+}
+
+function int32(decoder) {
+  var start = decoder.reserve(4);
+  var buffer = decoder.buffer;
+  return (buffer[start++] << 24) | (buffer[start++] << 16) | (buffer[start++] << 8) | buffer[start];
+}
+
+function read(len, method) {
+  return function(decoder) {
+    var start = decoder.reserve(len);
+    return method.call(decoder.buffer, start, NO_ASSERT);
+  };
+}
+
+function readUInt64BE(start) {
+  return new Uint64BE(this, start).toNumber();
+}
+
+function readInt64BE(start) {
+  return new Int64BE(this, start).toNumber();
+}
+
+function readUInt64BE_int64(start) {
+  return new Uint64BE(this, start);
+}
+
+function readInt64BE_int64(start) {
+  return new Int64BE(this, start);
+}
+
+function readFloatBE(start) {
+  return ieee754.read(this, start, false, 23, 4);
+}
+
+function readDoubleBE(start) {
+  return ieee754.read(this, start, false, 52, 8);
+}
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/read-token.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/read-token.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// read-token.js
+
+var ReadFormat = __webpack_require__(/*! ./read-format */ "./node_modules/msgpack-lite/lib/read-format.js");
+
+exports.getReadToken = getReadToken;
+
+function getReadToken(options) {
+  var format = ReadFormat.getReadFormat(options);
+
+  if (options && options.useraw) {
+    return init_useraw(format);
+  } else {
+    return init_token(format);
+  }
+}
+
+function init_token(format) {
+  var i;
+  var token = new Array(256);
+
+  // positive fixint -- 0x00 - 0x7f
+  for (i = 0x00; i <= 0x7f; i++) {
+    token[i] = constant(i);
+  }
+
+  // fixmap -- 0x80 - 0x8f
+  for (i = 0x80; i <= 0x8f; i++) {
+    token[i] = fix(i - 0x80, format.map);
+  }
+
+  // fixarray -- 0x90 - 0x9f
+  for (i = 0x90; i <= 0x9f; i++) {
+    token[i] = fix(i - 0x90, format.array);
+  }
+
+  // fixstr -- 0xa0 - 0xbf
+  for (i = 0xa0; i <= 0xbf; i++) {
+    token[i] = fix(i - 0xa0, format.str);
+  }
+
+  // nil -- 0xc0
+  token[0xc0] = constant(null);
+
+  // (never used) -- 0xc1
+  token[0xc1] = null;
+
+  // false -- 0xc2
+  // true -- 0xc3
+  token[0xc2] = constant(false);
+  token[0xc3] = constant(true);
+
+  // bin 8 -- 0xc4
+  // bin 16 -- 0xc5
+  // bin 32 -- 0xc6
+  token[0xc4] = flex(format.uint8, format.bin);
+  token[0xc5] = flex(format.uint16, format.bin);
+  token[0xc6] = flex(format.uint32, format.bin);
+
+  // ext 8 -- 0xc7
+  // ext 16 -- 0xc8
+  // ext 32 -- 0xc9
+  token[0xc7] = flex(format.uint8, format.ext);
+  token[0xc8] = flex(format.uint16, format.ext);
+  token[0xc9] = flex(format.uint32, format.ext);
+
+  // float 32 -- 0xca
+  // float 64 -- 0xcb
+  token[0xca] = format.float32;
+  token[0xcb] = format.float64;
+
+  // uint 8 -- 0xcc
+  // uint 16 -- 0xcd
+  // uint 32 -- 0xce
+  // uint 64 -- 0xcf
+  token[0xcc] = format.uint8;
+  token[0xcd] = format.uint16;
+  token[0xce] = format.uint32;
+  token[0xcf] = format.uint64;
+
+  // int 8 -- 0xd0
+  // int 16 -- 0xd1
+  // int 32 -- 0xd2
+  // int 64 -- 0xd3
+  token[0xd0] = format.int8;
+  token[0xd1] = format.int16;
+  token[0xd2] = format.int32;
+  token[0xd3] = format.int64;
+
+  // fixext 1 -- 0xd4
+  // fixext 2 -- 0xd5
+  // fixext 4 -- 0xd6
+  // fixext 8 -- 0xd7
+  // fixext 16 -- 0xd8
+  token[0xd4] = fix(1, format.ext);
+  token[0xd5] = fix(2, format.ext);
+  token[0xd6] = fix(4, format.ext);
+  token[0xd7] = fix(8, format.ext);
+  token[0xd8] = fix(16, format.ext);
+
+  // str 8 -- 0xd9
+  // str 16 -- 0xda
+  // str 32 -- 0xdb
+  token[0xd9] = flex(format.uint8, format.str);
+  token[0xda] = flex(format.uint16, format.str);
+  token[0xdb] = flex(format.uint32, format.str);
+
+  // array 16 -- 0xdc
+  // array 32 -- 0xdd
+  token[0xdc] = flex(format.uint16, format.array);
+  token[0xdd] = flex(format.uint32, format.array);
+
+  // map 16 -- 0xde
+  // map 32 -- 0xdf
+  token[0xde] = flex(format.uint16, format.map);
+  token[0xdf] = flex(format.uint32, format.map);
+
+  // negative fixint -- 0xe0 - 0xff
+  for (i = 0xe0; i <= 0xff; i++) {
+    token[i] = constant(i - 0x100);
+  }
+
+  return token;
+}
+
+function init_useraw(format) {
+  var i;
+  var token = init_token(format).slice();
+
+  // raw 8 -- 0xd9
+  // raw 16 -- 0xda
+  // raw 32 -- 0xdb
+  token[0xd9] = token[0xc4];
+  token[0xda] = token[0xc5];
+  token[0xdb] = token[0xc6];
+
+  // fixraw -- 0xa0 - 0xbf
+  for (i = 0xa0; i <= 0xbf; i++) {
+    token[i] = fix(i - 0xa0, format.bin);
+  }
+
+  return token;
+}
+
+function constant(value) {
+  return function() {
+    return value;
+  };
+}
+
+function flex(lenFunc, decodeFunc) {
+  return function(decoder) {
+    var len = lenFunc(decoder);
+    return decodeFunc(decoder, len);
+  };
+}
+
+function fix(len, method) {
+  return function(decoder) {
+    return method(decoder, len);
+  };
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/write-core.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/write-core.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// write-core.js
+
+var ExtBuffer = (__webpack_require__(/*! ./ext-buffer */ "./node_modules/msgpack-lite/lib/ext-buffer.js").ExtBuffer);
+var ExtPacker = __webpack_require__(/*! ./ext-packer */ "./node_modules/msgpack-lite/lib/ext-packer.js");
+var WriteType = __webpack_require__(/*! ./write-type */ "./node_modules/msgpack-lite/lib/write-type.js");
+var CodecBase = __webpack_require__(/*! ./codec-base */ "./node_modules/msgpack-lite/lib/codec-base.js");
+
+CodecBase.install({
+  addExtPacker: addExtPacker,
+  getExtPacker: getExtPacker,
+  init: init
+});
+
+exports.preset = init.call(CodecBase.preset);
+
+function getEncoder(options) {
+  var writeType = WriteType.getWriteType(options);
+  return encode;
+
+  function encode(encoder, value) {
+    var func = writeType[typeof value];
+    if (!func) throw new Error("Unsupported type \"" + (typeof value) + "\": " + value);
+    func(encoder, value);
+  }
+}
+
+function init() {
+  var options = this.options;
+  this.encode = getEncoder(options);
+
+  if (options && options.preset) {
+    ExtPacker.setExtPackers(this);
+  }
+
+  return this;
+}
+
+function addExtPacker(etype, Class, packer) {
+  packer = CodecBase.filter(packer);
+  var name = Class.name;
+  if (name && name !== "Object") {
+    var packers = this.extPackers || (this.extPackers = {});
+    packers[name] = extPacker;
+  } else {
+    // fallback for IE
+    var list = this.extEncoderList || (this.extEncoderList = []);
+    list.unshift([Class, extPacker]);
+  }
+
+  function extPacker(value) {
+    if (packer) value = packer(value);
+    return new ExtBuffer(value, etype);
+  }
+}
+
+function getExtPacker(value) {
+  var packers = this.extPackers || (this.extPackers = {});
+  var c = value.constructor;
+  var e = c && c.name && packers[c.name];
+  if (e) return e;
+
+  // fallback for IE
+  var list = this.extEncoderList || (this.extEncoderList = []);
+  var len = list.length;
+  for (var i = 0; i < len; i++) {
+    var pair = list[i];
+    if (c === pair[0]) return pair[1];
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/write-token.js":
+/*!******************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/write-token.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// write-token.js
+
+var ieee754 = __webpack_require__(/*! ieee754 */ "./node_modules/ieee754/index.js");
+var Int64Buffer = __webpack_require__(/*! int64-buffer */ "./node_modules/int64-buffer/int64-buffer.js");
+var Uint64BE = Int64Buffer.Uint64BE;
+var Int64BE = Int64Buffer.Int64BE;
+
+var uint8 = (__webpack_require__(/*! ./write-uint8 */ "./node_modules/msgpack-lite/lib/write-uint8.js").uint8);
+var Bufferish = __webpack_require__(/*! ./bufferish */ "./node_modules/msgpack-lite/lib/bufferish.js");
+var Buffer = Bufferish.global;
+var IS_BUFFER_SHIM = Bufferish.hasBuffer && ("TYPED_ARRAY_SUPPORT" in Buffer);
+var NO_TYPED_ARRAY = IS_BUFFER_SHIM && !Buffer.TYPED_ARRAY_SUPPORT;
+var Buffer_prototype = Bufferish.hasBuffer && Buffer.prototype || {};
+
+exports.getWriteToken = getWriteToken;
+
+function getWriteToken(options) {
+  if (options && options.uint8array) {
+    return init_uint8array();
+  } else if (NO_TYPED_ARRAY || (Bufferish.hasBuffer && options && options.safe)) {
+    return init_safe();
+  } else {
+    return init_token();
+  }
+}
+
+function init_uint8array() {
+  var token = init_token();
+
+  // float 32 -- 0xca
+  // float 64 -- 0xcb
+  token[0xca] = writeN(0xca, 4, writeFloatBE);
+  token[0xcb] = writeN(0xcb, 8, writeDoubleBE);
+
+  return token;
+}
+
+// Node.js and browsers with TypedArray
+
+function init_token() {
+  // (immediate values)
+  // positive fixint -- 0x00 - 0x7f
+  // nil -- 0xc0
+  // false -- 0xc2
+  // true -- 0xc3
+  // negative fixint -- 0xe0 - 0xff
+  var token = uint8.slice();
+
+  // bin 8 -- 0xc4
+  // bin 16 -- 0xc5
+  // bin 32 -- 0xc6
+  token[0xc4] = write1(0xc4);
+  token[0xc5] = write2(0xc5);
+  token[0xc6] = write4(0xc6);
+
+  // ext 8 -- 0xc7
+  // ext 16 -- 0xc8
+  // ext 32 -- 0xc9
+  token[0xc7] = write1(0xc7);
+  token[0xc8] = write2(0xc8);
+  token[0xc9] = write4(0xc9);
+
+  // float 32 -- 0xca
+  // float 64 -- 0xcb
+  token[0xca] = writeN(0xca, 4, (Buffer_prototype.writeFloatBE || writeFloatBE), true);
+  token[0xcb] = writeN(0xcb, 8, (Buffer_prototype.writeDoubleBE || writeDoubleBE), true);
+
+  // uint 8 -- 0xcc
+  // uint 16 -- 0xcd
+  // uint 32 -- 0xce
+  // uint 64 -- 0xcf
+  token[0xcc] = write1(0xcc);
+  token[0xcd] = write2(0xcd);
+  token[0xce] = write4(0xce);
+  token[0xcf] = writeN(0xcf, 8, writeUInt64BE);
+
+  // int 8 -- 0xd0
+  // int 16 -- 0xd1
+  // int 32 -- 0xd2
+  // int 64 -- 0xd3
+  token[0xd0] = write1(0xd0);
+  token[0xd1] = write2(0xd1);
+  token[0xd2] = write4(0xd2);
+  token[0xd3] = writeN(0xd3, 8, writeInt64BE);
+
+  // str 8 -- 0xd9
+  // str 16 -- 0xda
+  // str 32 -- 0xdb
+  token[0xd9] = write1(0xd9);
+  token[0xda] = write2(0xda);
+  token[0xdb] = write4(0xdb);
+
+  // array 16 -- 0xdc
+  // array 32 -- 0xdd
+  token[0xdc] = write2(0xdc);
+  token[0xdd] = write4(0xdd);
+
+  // map 16 -- 0xde
+  // map 32 -- 0xdf
+  token[0xde] = write2(0xde);
+  token[0xdf] = write4(0xdf);
+
+  return token;
+}
+
+// safe mode: for old browsers and who needs asserts
+
+function init_safe() {
+  // (immediate values)
+  // positive fixint -- 0x00 - 0x7f
+  // nil -- 0xc0
+  // false -- 0xc2
+  // true -- 0xc3
+  // negative fixint -- 0xe0 - 0xff
+  var token = uint8.slice();
+
+  // bin 8 -- 0xc4
+  // bin 16 -- 0xc5
+  // bin 32 -- 0xc6
+  token[0xc4] = writeN(0xc4, 1, Buffer.prototype.writeUInt8);
+  token[0xc5] = writeN(0xc5, 2, Buffer.prototype.writeUInt16BE);
+  token[0xc6] = writeN(0xc6, 4, Buffer.prototype.writeUInt32BE);
+
+  // ext 8 -- 0xc7
+  // ext 16 -- 0xc8
+  // ext 32 -- 0xc9
+  token[0xc7] = writeN(0xc7, 1, Buffer.prototype.writeUInt8);
+  token[0xc8] = writeN(0xc8, 2, Buffer.prototype.writeUInt16BE);
+  token[0xc9] = writeN(0xc9, 4, Buffer.prototype.writeUInt32BE);
+
+  // float 32 -- 0xca
+  // float 64 -- 0xcb
+  token[0xca] = writeN(0xca, 4, Buffer.prototype.writeFloatBE);
+  token[0xcb] = writeN(0xcb, 8, Buffer.prototype.writeDoubleBE);
+
+  // uint 8 -- 0xcc
+  // uint 16 -- 0xcd
+  // uint 32 -- 0xce
+  // uint 64 -- 0xcf
+  token[0xcc] = writeN(0xcc, 1, Buffer.prototype.writeUInt8);
+  token[0xcd] = writeN(0xcd, 2, Buffer.prototype.writeUInt16BE);
+  token[0xce] = writeN(0xce, 4, Buffer.prototype.writeUInt32BE);
+  token[0xcf] = writeN(0xcf, 8, writeUInt64BE);
+
+  // int 8 -- 0xd0
+  // int 16 -- 0xd1
+  // int 32 -- 0xd2
+  // int 64 -- 0xd3
+  token[0xd0] = writeN(0xd0, 1, Buffer.prototype.writeInt8);
+  token[0xd1] = writeN(0xd1, 2, Buffer.prototype.writeInt16BE);
+  token[0xd2] = writeN(0xd2, 4, Buffer.prototype.writeInt32BE);
+  token[0xd3] = writeN(0xd3, 8, writeInt64BE);
+
+  // str 8 -- 0xd9
+  // str 16 -- 0xda
+  // str 32 -- 0xdb
+  token[0xd9] = writeN(0xd9, 1, Buffer.prototype.writeUInt8);
+  token[0xda] = writeN(0xda, 2, Buffer.prototype.writeUInt16BE);
+  token[0xdb] = writeN(0xdb, 4, Buffer.prototype.writeUInt32BE);
+
+  // array 16 -- 0xdc
+  // array 32 -- 0xdd
+  token[0xdc] = writeN(0xdc, 2, Buffer.prototype.writeUInt16BE);
+  token[0xdd] = writeN(0xdd, 4, Buffer.prototype.writeUInt32BE);
+
+  // map 16 -- 0xde
+  // map 32 -- 0xdf
+  token[0xde] = writeN(0xde, 2, Buffer.prototype.writeUInt16BE);
+  token[0xdf] = writeN(0xdf, 4, Buffer.prototype.writeUInt32BE);
+
+  return token;
+}
+
+function write1(type) {
+  return function(encoder, value) {
+    var offset = encoder.reserve(2);
+    var buffer = encoder.buffer;
+    buffer[offset++] = type;
+    buffer[offset] = value;
+  };
+}
+
+function write2(type) {
+  return function(encoder, value) {
+    var offset = encoder.reserve(3);
+    var buffer = encoder.buffer;
+    buffer[offset++] = type;
+    buffer[offset++] = value >>> 8;
+    buffer[offset] = value;
+  };
+}
+
+function write4(type) {
+  return function(encoder, value) {
+    var offset = encoder.reserve(5);
+    var buffer = encoder.buffer;
+    buffer[offset++] = type;
+    buffer[offset++] = value >>> 24;
+    buffer[offset++] = value >>> 16;
+    buffer[offset++] = value >>> 8;
+    buffer[offset] = value;
+  };
+}
+
+function writeN(type, len, method, noAssert) {
+  return function(encoder, value) {
+    var offset = encoder.reserve(len + 1);
+    encoder.buffer[offset++] = type;
+    method.call(encoder.buffer, value, offset, noAssert);
+  };
+}
+
+function writeUInt64BE(value, offset) {
+  new Uint64BE(this, offset, value);
+}
+
+function writeInt64BE(value, offset) {
+  new Int64BE(this, offset, value);
+}
+
+function writeFloatBE(value, offset) {
+  ieee754.write(this, value, offset, false, 23, 4);
+}
+
+function writeDoubleBE(value, offset) {
+  ieee754.write(this, value, offset, false, 52, 8);
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/write-type.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/write-type.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+// write-type.js
+
+var IS_ARRAY = __webpack_require__(/*! isarray */ "./node_modules/isarray/index.js");
+var Int64Buffer = __webpack_require__(/*! int64-buffer */ "./node_modules/int64-buffer/int64-buffer.js");
+var Uint64BE = Int64Buffer.Uint64BE;
+var Int64BE = Int64Buffer.Int64BE;
+
+var Bufferish = __webpack_require__(/*! ./bufferish */ "./node_modules/msgpack-lite/lib/bufferish.js");
+var BufferProto = __webpack_require__(/*! ./bufferish-proto */ "./node_modules/msgpack-lite/lib/bufferish-proto.js");
+var WriteToken = __webpack_require__(/*! ./write-token */ "./node_modules/msgpack-lite/lib/write-token.js");
+var uint8 = (__webpack_require__(/*! ./write-uint8 */ "./node_modules/msgpack-lite/lib/write-uint8.js").uint8);
+var ExtBuffer = (__webpack_require__(/*! ./ext-buffer */ "./node_modules/msgpack-lite/lib/ext-buffer.js").ExtBuffer);
+
+var HAS_UINT8ARRAY = ("undefined" !== typeof Uint8Array);
+var HAS_MAP = ("undefined" !== typeof Map);
+
+var extmap = [];
+extmap[1] = 0xd4;
+extmap[2] = 0xd5;
+extmap[4] = 0xd6;
+extmap[8] = 0xd7;
+extmap[16] = 0xd8;
+
+exports.getWriteType = getWriteType;
+
+function getWriteType(options) {
+  var token = WriteToken.getWriteToken(options);
+  var useraw = options && options.useraw;
+  var binarraybuffer = HAS_UINT8ARRAY && options && options.binarraybuffer;
+  var isBuffer = binarraybuffer ? Bufferish.isArrayBuffer : Bufferish.isBuffer;
+  var bin = binarraybuffer ? bin_arraybuffer : bin_buffer;
+  var usemap = HAS_MAP && options && options.usemap;
+  var map = usemap ? map_to_map : obj_to_map;
+
+  var writeType = {
+    "boolean": bool,
+    "function": nil,
+    "number": number,
+    "object": (useraw ? object_raw : object),
+    "string": _string(useraw ? raw_head_size : str_head_size),
+    "symbol": nil,
+    "undefined": nil
+  };
+
+  return writeType;
+
+  // false -- 0xc2
+  // true -- 0xc3
+  function bool(encoder, value) {
+    var type = value ? 0xc3 : 0xc2;
+    token[type](encoder, value);
+  }
+
+  function number(encoder, value) {
+    var ivalue = value | 0;
+    var type;
+    if (value !== ivalue) {
+      // float 64 -- 0xcb
+      type = 0xcb;
+      token[type](encoder, value);
+      return;
+    } else if (-0x20 <= ivalue && ivalue <= 0x7F) {
+      // positive fixint -- 0x00 - 0x7f
+      // negative fixint -- 0xe0 - 0xff
+      type = ivalue & 0xFF;
+    } else if (0 <= ivalue) {
+      // uint 8 -- 0xcc
+      // uint 16 -- 0xcd
+      // uint 32 -- 0xce
+      type = (ivalue <= 0xFF) ? 0xcc : (ivalue <= 0xFFFF) ? 0xcd : 0xce;
+    } else {
+      // int 8 -- 0xd0
+      // int 16 -- 0xd1
+      // int 32 -- 0xd2
+      type = (-0x80 <= ivalue) ? 0xd0 : (-0x8000 <= ivalue) ? 0xd1 : 0xd2;
+    }
+    token[type](encoder, ivalue);
+  }
+
+  // uint 64 -- 0xcf
+  function uint64(encoder, value) {
+    var type = 0xcf;
+    token[type](encoder, value.toArray());
+  }
+
+  // int 64 -- 0xd3
+  function int64(encoder, value) {
+    var type = 0xd3;
+    token[type](encoder, value.toArray());
+  }
+
+  // str 8 -- 0xd9
+  // str 16 -- 0xda
+  // str 32 -- 0xdb
+  // fixstr -- 0xa0 - 0xbf
+  function str_head_size(length) {
+    return (length < 32) ? 1 : (length <= 0xFF) ? 2 : (length <= 0xFFFF) ? 3 : 5;
+  }
+
+  // raw 16 -- 0xda
+  // raw 32 -- 0xdb
+  // fixraw -- 0xa0 - 0xbf
+  function raw_head_size(length) {
+    return (length < 32) ? 1 : (length <= 0xFFFF) ? 3 : 5;
+  }
+
+  function _string(head_size) {
+    return string;
+
+    function string(encoder, value) {
+      // prepare buffer
+      var length = value.length;
+      var maxsize = 5 + length * 3;
+      encoder.offset = encoder.reserve(maxsize);
+      var buffer = encoder.buffer;
+
+      // expected header size
+      var expected = head_size(length);
+
+      // expected start point
+      var start = encoder.offset + expected;
+
+      // write string
+      length = BufferProto.write.call(buffer, value, start);
+
+      // actual header size
+      var actual = head_size(length);
+
+      // move content when needed
+      if (expected !== actual) {
+        var targetStart = start + actual - expected;
+        var end = start + length;
+        BufferProto.copy.call(buffer, buffer, targetStart, start, end);
+      }
+
+      // write header
+      var type = (actual === 1) ? (0xa0 + length) : (actual <= 3) ? (0xd7 + actual) : 0xdb;
+      token[type](encoder, length);
+
+      // move cursor
+      encoder.offset += length;
+    }
+  }
+
+  function object(encoder, value) {
+    // null
+    if (value === null) return nil(encoder, value);
+
+    // Buffer
+    if (isBuffer(value)) return bin(encoder, value);
+
+    // Array
+    if (IS_ARRAY(value)) return array(encoder, value);
+
+    // int64-buffer objects
+    if (Uint64BE.isUint64BE(value)) return uint64(encoder, value);
+    if (Int64BE.isInt64BE(value)) return int64(encoder, value);
+
+    // ext formats
+    var packer = encoder.codec.getExtPacker(value);
+    if (packer) value = packer(value);
+    if (value instanceof ExtBuffer) return ext(encoder, value);
+
+    // plain old Objects or Map
+    map(encoder, value);
+  }
+
+  function object_raw(encoder, value) {
+    // Buffer
+    if (isBuffer(value)) return raw(encoder, value);
+
+    // others
+    object(encoder, value);
+  }
+
+  // nil -- 0xc0
+  function nil(encoder, value) {
+    var type = 0xc0;
+    token[type](encoder, value);
+  }
+
+  // fixarray -- 0x90 - 0x9f
+  // array 16 -- 0xdc
+  // array 32 -- 0xdd
+  function array(encoder, value) {
+    var length = value.length;
+    var type = (length < 16) ? (0x90 + length) : (length <= 0xFFFF) ? 0xdc : 0xdd;
+    token[type](encoder, length);
+
+    var encode = encoder.codec.encode;
+    for (var i = 0; i < length; i++) {
+      encode(encoder, value[i]);
+    }
+  }
+
+  // bin 8 -- 0xc4
+  // bin 16 -- 0xc5
+  // bin 32 -- 0xc6
+  function bin_buffer(encoder, value) {
+    var length = value.length;
+    var type = (length < 0xFF) ? 0xc4 : (length <= 0xFFFF) ? 0xc5 : 0xc6;
+    token[type](encoder, length);
+    encoder.send(value);
+  }
+
+  function bin_arraybuffer(encoder, value) {
+    bin_buffer(encoder, new Uint8Array(value));
+  }
+
+  // fixext 1 -- 0xd4
+  // fixext 2 -- 0xd5
+  // fixext 4 -- 0xd6
+  // fixext 8 -- 0xd7
+  // fixext 16 -- 0xd8
+  // ext 8 -- 0xc7
+  // ext 16 -- 0xc8
+  // ext 32 -- 0xc9
+  function ext(encoder, value) {
+    var buffer = value.buffer;
+    var length = buffer.length;
+    var type = extmap[length] || ((length < 0xFF) ? 0xc7 : (length <= 0xFFFF) ? 0xc8 : 0xc9);
+    token[type](encoder, length);
+    uint8[value.type](encoder);
+    encoder.send(buffer);
+  }
+
+  // fixmap -- 0x80 - 0x8f
+  // map 16 -- 0xde
+  // map 32 -- 0xdf
+  function obj_to_map(encoder, value) {
+    var keys = Object.keys(value);
+    var length = keys.length;
+    var type = (length < 16) ? (0x80 + length) : (length <= 0xFFFF) ? 0xde : 0xdf;
+    token[type](encoder, length);
+
+    var encode = encoder.codec.encode;
+    keys.forEach(function(key) {
+      encode(encoder, key);
+      encode(encoder, value[key]);
+    });
+  }
+
+  // fixmap -- 0x80 - 0x8f
+  // map 16 -- 0xde
+  // map 32 -- 0xdf
+  function map_to_map(encoder, value) {
+    if (!(value instanceof Map)) return obj_to_map(encoder, value);
+
+    var length = value.size;
+    var type = (length < 16) ? (0x80 + length) : (length <= 0xFFFF) ? 0xde : 0xdf;
+    token[type](encoder, length);
+
+    var encode = encoder.codec.encode;
+    value.forEach(function(val, key, m) {
+      encode(encoder, key);
+      encode(encoder, val);
+    });
+  }
+
+  // raw 16 -- 0xda
+  // raw 32 -- 0xdb
+  // fixraw -- 0xa0 - 0xbf
+  function raw(encoder, value) {
+    var length = value.length;
+    var type = (length < 32) ? (0xa0 + length) : (length <= 0xFFFF) ? 0xda : 0xdb;
+    token[type](encoder, length);
+    encoder.send(value);
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/msgpack-lite/lib/write-uint8.js":
+/*!******************************************************!*\
+  !*** ./node_modules/msgpack-lite/lib/write-uint8.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+// write-unit8.js
+
+var constant = exports.uint8 = new Array(256);
+
+for (var i = 0x00; i <= 0xFF; i++) {
+  constant[i] = write0(i);
+}
+
+function write0(type) {
+  return function(encoder) {
+    var offset = encoder.reserve(1);
+    encoder.buffer[offset] = type;
+  };
+}
+
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__("./Game/main.js");
+/******/ 	
+/******/ })()
+;
