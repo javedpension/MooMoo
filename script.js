@@ -2349,7 +2349,7 @@ const buildingTypes = [{
     weapon: false,
     isItem: true,
     ///img: makeImage("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/moomoorocktransparent.svg?v=1735932074001"),
-    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/bcb2c609-6efd-4c0b-8eb7-183d579cc793/mill.svg?v=1735857620463"),
+    img: (0,_Render_functions_makeImage__WEBPACK_IMPORTED_MODULE_0__["default"])("https://cdn.glitch.global/e49fe696-c9b4-419e-a714-b115548faabe/tribalmills.svg?v=1736198814623"),
     hitResistance: 120
 }];
 
